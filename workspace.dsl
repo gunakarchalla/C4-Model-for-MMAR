@@ -55,7 +55,77 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             }
 
             APIServer = container "MMAR API Server" "Backend server providing REST APIs for MMAR clients" "Express.js/Node.js" "API_Server" {
-                // API components would go here if we had more information
+                // Controller layer
+                metaObjectsController = component "Metamodel Objects Controller" "Handles REST API requests for base metamodel objects" "TypeScript, Express.js"
+                metaClassesController = component "Metamodel Classes Controller" "Handles REST API requests for metamodel classes" "TypeScript, Express.js"
+                metaRelationClassesController = component "Metamodel Relation Classes Controller" "Handles REST API requests for relation classes" "TypeScript, Express.js"
+                metaAttributesController = component "Metamodel Attributes Controller" "Handles REST API requests for metamodel attributes" "TypeScript, Express.js"
+                metaPortsController = component "Metamodel Ports Controller" "Handles REST API requests for metamodel ports" "TypeScript, Express.js" 
+                metaSceneTypesController = component "Metamodel Scene Types Controller" "Handles REST API requests for scene types" "TypeScript, Express.js"
+                metaFilesController = component "Metamodel Files Controller" "Handles REST API requests for file operations" "TypeScript, Express.js"
+                usersController = component "Users Controller" "Handles REST API requests for user management" "TypeScript, Express.js"
+                userGroupsController = component "User Groups Controller" "Handles REST API requests for user group management" "TypeScript, Express.js"
+                
+                // Data access layer
+                metaObjectsConnection = component "Metamodel Objects Connection" "Implements CRUD operations for metamodel objects" "TypeScript, PostgreSQL client"
+                metaClassesConnection = component "Metamodel Classes Connection" "Implements CRUD operations for metamodel classes" "TypeScript, PostgreSQL client"
+                metaRelationClassesConnection = component "Metamodel Relation Classes Connection" "Implements CRUD operations for relation classes" "TypeScript, PostgreSQL client"
+                metaAttributesConnection = component "Metamodel Attributes Connection" "Implements CRUD operations for attributes" "TypeScript, PostgreSQL client"
+                metaPortsConnection = component "Metamodel Ports Connection" "Implements CRUD operations for ports" "TypeScript, PostgreSQL client"
+                metaSceneTypesConnection = component "Metamodel Scene Types Connection" "Implements CRUD operations for scene types" "TypeScript, PostgreSQL client"
+                metaFilesConnection = component "Metamodel Files Connection" "Implements CRUD operations for files" "TypeScript, PostgreSQL client"
+                usersConnection = component "Users Connection" "Implements CRUD operations for users" "TypeScript, PostgreSQL client"
+                
+                // Service layer
+                imageService = component "Image Service" "Handles image processing like compression" "TypeScript, Sharp"
+                objectFilterService = component "Object Filter Service" "Filters response objects based on query parameters" "TypeScript"
+                authService = component "Authentication Service" "Handles user authentication and authorization" "TypeScript, JWT"
+                databaseService = component "Database Connection Service" "Manages database connection pools" "TypeScript, pg"
+                
+                // Middleware
+                errorHandlerMiddleware = component "Error Handler Middleware" "Processes and formats API errors" "TypeScript, Express.js"
+                authMiddleware = component "Authentication Middleware" "Verifies user authentication tokens" "TypeScript, Express.js"
+                
+                // Controller to Connection relationships
+                metaObjectsController -> metaObjectsConnection "Performs CRUD operations via"
+                metaClassesController -> metaClassesConnection "Delegates data management to"
+                metaRelationClassesController -> metaRelationClassesConnection "Persists relation class data through"
+                metaAttributesController -> metaAttributesConnection "Manages attribute data via"
+                metaPortsController -> metaPortsConnection "Handles port persistence through"
+                metaSceneTypesController -> metaSceneTypesConnection "Stores scene type data using"
+                metaFilesController -> metaFilesConnection "Persists file metadata and content with"
+                usersController -> usersConnection "Manages user accounts through"
+                userGroupsController -> usersConnection "Administers group memberships via"
+
+                // Controllers to Service relationships
+                metaFilesController -> imageService "Processes and optimizes images with"
+                metaObjectsController -> objectFilterService "Applies response filtering using"
+                metaClassesController -> objectFilterService "Tailors response content via"
+                metaRelationClassesController -> objectFilterService "Customizes response fields with"
+                metaAttributesController -> objectFilterService "Formats attribute responses through"
+                metaPortsController -> objectFilterService "Selectively exposes port data using"
+                metaSceneTypesController -> objectFilterService "Filters scene type responses via"
+
+                // Connection to Service relationships
+                metaObjectsConnection -> databaseService "Executes SQL queries through"
+                metaClassesConnection -> databaseService "Manages database connections via"
+                metaRelationClassesConnection -> databaseService "Runs transactions using"
+                metaAttributesConnection -> databaseService "Acquires connection pools from"
+                metaPortsConnection -> databaseService "Executes parameterized queries via"
+                metaSceneTypesConnection -> databaseService "Performs database operations through"
+                metaFilesConnection -> databaseService "Stores binary data using"
+                usersConnection -> databaseService "Retrieves user records from"
+
+                // Middleware relationships
+                authMiddleware -> authService "Validates authentication tokens with"
+                usersController -> authMiddleware "Secures endpoints using"
+                metaObjectsController -> errorHandlerMiddleware "Delegates error processing to"
+                metaClassesController -> errorHandlerMiddleware "Centralizes error handling with"
+                metaRelationClassesController -> errorHandlerMiddleware "Formats error responses via"
+                metaAttributesController -> errorHandlerMiddleware "Standardizes error outputs through"
+                metaPortsController -> errorHandlerMiddleware "Reports operational failures to"
+                metaSceneTypesController -> errorHandlerMiddleware "Processes exceptions with"
+                metaFilesController -> errorHandlerMiddleware "Handles upload/download errors through"
             }
 
             Database = container "MMAR Database" "Database for persisting metamodels, models, and logs" "PostgreSQL" "Database"
@@ -65,7 +135,6 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             }
 
             // Container Relationships
-            // MetamodelingClient -> APIServer "Uses API for metamodel operations"
             VizRepClient -> APIServer "Uses API for visualization config ops"
             ModelingClient -> APIServer "Uses API for model operations"
             APIServer -> Database "Reads/Writes metamodels, models, logs"
@@ -73,6 +142,7 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             VizRepClient -> GlobalDS "Embedded data definitions"
             ModelingClient -> GlobalDS "Embedded data definitions"
             backendService -> APIServer "Uses API for metamodel operations"
+            APIServer -> GlobalDS "Uses for data structures"
         }
 
 
@@ -96,11 +166,18 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             description "The MMAR platform consists of three main clients (Modeling, Metamodeling, and VizRep) that connect to a common backend server. The server provides REST APIs for metamodel and model operations, while the database stores all relevant data."
         }
 
-        component MetamodelingClient "ComponentDiagram" {
+        component MetamodelingClient "MetamodelingClientComponents" {
             include *
             autoLayout lr
             title "Component Diagram: MMAR Metamodeling Client"
             description "The MMAR Metamodeling Client consists of various components for managing selected objects, communicating with the backend, and providing a rich user interface for metamodel design."
+        }
+        
+        component APIServer "APIServerComponents" {
+            include *
+            autoLayout tb
+            title "Component Diagram: MMAR API Server"
+            description "The MMAR API Server consists of controllers that handle HTTP requests, connection classes for database operations, and shared services. The architecture follows a layered design with controllers, data access, and service layers."
         }
 
         theme default
