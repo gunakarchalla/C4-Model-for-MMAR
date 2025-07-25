@@ -1,5 +1,4 @@
 workspace "MMAR Architecture" "C4 model for MMAR Platform" {
-    // !include container.dsl
     model {
         // People (external users)
         Creator = person "Creator" "Metamodel designer who defines new modeling languages (metamodels)."
@@ -15,15 +14,15 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
 
             MetamodelingClient = container "MMAR Metamodeling Client" "Desktop/Web Client for metamodel design" "Aurelia/TypeScript/Node.js" "MetamodelingClient" {
                 // Core services
-                selectedObjectService = component "Selected Object Service" "Manages the currently selected object and publishes events when selection changes" "TypeScript, Aurelia"
+                mmSelectedObjectService = component "Selected Object Service" "Manages the currently selected object and publishes events when selection changes" "TypeScript, Aurelia"
                 backendService = component "Backend Service" "Handles communication with the backend server" "TypeScript, HttpClient"
                 helperService = component "Helper Service" "Provides utility functions for file conversion and other tasks" "TypeScript"
                 userService = component "User Service" "Manages user authentication and information" "TypeScript"
                     
                 // UI Components
-                leftNav = component "Left Navigation" "Navigation tree for browsing model objects" "TypeScript, Aurelia"
-                middleBody = component "Middle Body" "Main content area for displaying and editing objects" "TypeScript, Aurelia"
-                rightNav = component "Right Navigation" "Context-specific navigation and options" "TypeScript, Aurelia"
+                mmLeftNav = component "Left Navigation" "Navigation tree for browsing model objects" "TypeScript, Aurelia"
+                mmMiddleBody = component "Middle Body" "Main content area for displaying and editing objects" "TypeScript, Aurelia"
+                mmRightNav = component "Right Navigation" "Context-specific navigation and options" "TypeScript, Aurelia"
                     
                 // Middle Body Components
                 generalTab = component "General Tab" "Tab displaying general properties of objects" "TypeScript, Aurelia"
@@ -34,20 +33,20 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
                 generalTabRelationclass = component "General Tab RelationClass" "Component for displaying and editing relation class objects" "TypeScript, Aurelia"
                     
                 // File-specific Components
-                dialogUploadFile = component "Dialog Upload File" "Dialog for uploading and replacing files" "TypeScript, Aurelia"
+                mmDialogUploadFile = component "Dialog Upload File" "Dialog for uploading and replacing files" "TypeScript, Aurelia"
                     
                 // Relationships between components
-                leftNav -> selectedObjectService "Updates selected object"
-                middleBody -> selectedObjectService "Observes selected object"
-                generalTab -> selectedObjectService "Reads selected object properties"
+                mmLeftNav -> mmSelectedObjectService "Updates selected object"
+                mmMiddleBody -> mmSelectedObjectService "Observes selected object"
+                generalTab -> mmSelectedObjectService "Reads selected object properties"
                 generalTabFile -> helperService "Uses for file conversion"
-                generalTabFile -> selectedObjectService "Reads file data"
-                dialogUploadFile -> helperService "Uses for file conversion"
-                dialogUploadFile -> selectedObjectService "Updates file data"
-                backendService -> selectedObjectService "Updates object collections"
+                generalTabFile -> mmSelectedObjectService "Reads file data"
+                mmDialogUploadFile -> helperService "Uses for file conversion"
+                mmDialogUploadFile -> mmSelectedObjectService "Updates file data"
+                backendService -> mmSelectedObjectService "Updates object collections"
                     
                 // Service interactions
-                selectedObjectService -> backendService "Requests object data"
+                mmSelectedObjectService -> backendService "Requests object data"
             }
 
             VizRepClient = container "MMAR VizRep Client" "Client for visual representation design of metamodel elements" "Aurelia/TypeScript/Three.js/Node.js" "VizRepClient" {
