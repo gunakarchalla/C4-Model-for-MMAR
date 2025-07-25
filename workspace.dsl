@@ -108,7 +108,114 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             }
 
             VizRepClient = container "MMAR VizRep Client" "Client for visual representation design of metamodel elements" "Aurelia/TypeScript/Three.js/Node.js" "VizRepClient" {
-                // Components for visualization design would go here
+                // Core Services
+                vFetchHelperService = component "FetchHelper Service" "Handles communication with the backend server" "TypeScript"
+                vLoggerService = component "Logger Service" "Centralized logging system for tracking operations and errors" "TypeScript"
+                vInstanceUtilityService = component "Instance Utility Service" "Manages VizRep instances and their operations" "TypeScript"
+                vMetaUtilityService = component "Meta Utility Service" "Provides utilities for working with metamodel elements" "TypeScript"
+                expressionUtilityService = component "Expression Utility Service" "Evaluates and processes dynamic expressions" "TypeScript"
+                vDialogHelperService = component "Dialog Helper Service" "Manages dialog creation and interaction" "TypeScript"
+                lineUpdateService = component "Line Update Service" "Manages updates to connection lines between objects" "TypeScript"
+    
+                // State Management
+                vGlobalSelectedObjectService = component "Global Selected Object Service" "Manages the currently selected object state" "TypeScript"
+                globalStateObjectService = component "Global State Object Service" "Manages application state and state transitions" "TypeScript"
+                globalClassObjectService = component "Global Class Object Service" "Manages metamodel class definitions" "TypeScript"
+                globalRelationClassObjectService = component "Global Relation Class Object Service" "Manages relation class definitions" "TypeScript"
+    
+                // 3D Visualization Services
+                graphicContextService = component "Graphic Context Service" "Manages 3D scene and rendering context" "TypeScript, Three.js"
+                rayHelperService = component "Ray Helper Service" "Handles raycasting for 3D object selection" "TypeScript, Three.js"
+                animatorService = component "Animator Service" "Manages animations and transitions" "TypeScript"
+                transformControlService = component "Transform Control Service" "Handles 3D object transformation controls" "TypeScript, Three.js"
+    
+                // Interaction Handlers
+                interactionHandlerService = component "Interaction Handler Service" "Coordinates user interactions with 3D objects" "TypeScript"
+                mouseObjectService = component "Mouse Object Service" "Handles mouse interactions and events" "TypeScript"
+                keyboardHandlerService = component "Keyboard Handler Service" "Manages keyboard shortcuts and events" "TypeScript"
+                resizeService = component "Resize Service" "Handles application resizing events" "TypeScript"
+                instanceCreationService = component "Instance Creation Handler" "Manages the creation of new object instances" "TypeScript"
+    
+                // UI Components
+                vThreeCanvas = component "Three Canvas" "3D canvas for visualization design" "TypeScript, Three.js, Aurelia"
+                vLeftNav = component "Left Navigation" "Navigation panel for browsing metamodel elements" "TypeScript, Aurelia"
+                vRightNav = component "Right Navigation" "Panel for VizRep properties and options" "TypeScript, Aurelia"
+                vTopNavBar = component "Top Navigation Bar" "Main application navigation and actions" "TypeScript, Aurelia"
+                vMiddleBody = component "Middle Body" "Main content area for designing visual representations" "TypeScript, Aurelia"
+                vAttributeWindow = component "Attribute Window" "Window for editing object attributes" "TypeScript, Aurelia"
+                codeEditor = component "Code Editor" "Editor for VizRep scripts and expressions" "TypeScript, Aurelia"
+                objectList = component "Object List" "List of metamodel objects for visualization" "TypeScript, Aurelia"
+                vLogWindow = component "Log Window" "Window displaying application logs" "TypeScript, Aurelia"
+                vStateWindow = component "State Window" "Window for managing state transitions" "TypeScript, Aurelia"
+                toolbarContainer = component "Toolbar Container" "Container for tool buttons and actions" "TypeScript, Aurelia"
+                mainBodyTabBar = component "Main Body Tab Bar" "Navigation tabs for main content area" "TypeScript, Aurelia"
+                objectCard = component "Object Card" "Card representation of individual objects" "TypeScript, Aurelia"
+                previewButtons = component "Preview Buttons" "Buttons for previewing visual representations" "TypeScript, Aurelia"
+                menuEntry = component "Menu Entry" "Menu item component" "TypeScript, Aurelia"
+    
+                // Dialogs
+                vDialogAttributeWindow = component "Dialog Attribute Window" "Dialog for editing attributes" "TypeScript, Aurelia"
+                dialogLoadingWindow = component "Dialog Loading Window" "Dialog showing loading progress" "TypeScript, Aurelia"
+                userManagementDialog = component "User Management Dialog" "Dialog for managing user permissions" "TypeScript, Aurelia"
+    
+                // Initializers
+                initiator = component "Initiator" "Handles application initialization" "TypeScript"
+                sceneInitiator = component "Scene Initiator" "Initializes 3D scene and objects" "TypeScript"
+                arInitiator = component "AR Initiator" "Initializes augmented reality features" "TypeScript"
+    
+                // Core Service Relationships
+                vFetchHelperService -> vLoggerService "Logs API requests and responses"
+                vInstanceUtilityService -> vFetchHelperService "Makes API requests for instance operations"
+                vMetaUtilityService -> vFetchHelperService "Retrieves metamodel definitions"
+                expressionUtilityService -> vLoggerService "Logs expression evaluation results"
+                lineUpdateService -> graphicContextService "Updates visual connection lines"
+    
+                // State Management Relationships
+                vGlobalSelectedObjectService -> vLoggerService "Logs selection changes"
+                globalStateObjectService -> vLoggerService "Logs state transitions"
+                globalClassObjectService -> vFetchHelperService "Retrieves class definitions"
+                globalRelationClassObjectService -> vFetchHelperService "Retrieves relation class definitions"
+    
+                // 3D Services Relationships
+                graphicContextService -> vThreeCanvas "Renders 3D scene to"
+                rayHelperService -> graphicContextService "Performs raycasting on scene objects"
+                animatorService -> graphicContextService "Animates scene objects"
+                transformControlService -> graphicContextService "Adds transform controls to scene"
+    
+                // Interaction Handlers Relationships
+                interactionHandlerService -> vGlobalSelectedObjectService "Updates selected object state"
+                interactionHandlerService -> rayHelperService "Uses for 3D object selection"
+                mouseObjectService -> interactionHandlerService "Delegates mouse events to"
+                keyboardHandlerService -> interactionHandlerService "Delegates keyboard events to"
+                resizeService -> graphicContextService "Resizes 3D viewport"
+                instanceCreationService -> vInstanceUtilityService "Creates instances using"
+    
+                // UI Component Relationships
+                vThreeCanvas -> mouseObjectService "Captures mouse events for"
+                vThreeCanvas -> keyboardHandlerService "Captures keyboard events for"
+                vLeftNav -> vGlobalSelectedObjectService "Updates selected object"
+                vRightNav -> vAttributeWindow "Opens attribute editing for selected object"
+                vMiddleBody -> vThreeCanvas "Contains and manages"
+                vAttributeWindow -> vInstanceUtilityService "Updates object attributes using"
+                codeEditor -> expressionUtilityService "Uses to evaluate expressions"
+                objectList -> vGlobalSelectedObjectService "Updates selected object"
+                mainBodyTabBar -> vMiddleBody "Controls content shown in"
+                objectCard -> vGlobalSelectedObjectService "Displays data from selected object"
+    
+                // Dialog Relationships
+                vDialogAttributeWindow -> vInstanceUtilityService "Updates attributes using"
+                vDialogHelperService -> vDialogAttributeWindow "Creates and manages"
+                vDialogHelperService -> dialogLoadingWindow "Creates and manages"
+                vDialogHelperService -> userManagementDialog "Creates and manages"
+    
+                // Initializer Relationships
+                initiator -> vFetchHelperService "Initializes API connection"
+                initiator -> globalStateObjectService "Sets up initial application state"
+                initiator -> globalClassObjectService "Loads initial class definitions"
+                initiator -> globalRelationClassObjectService "Loads initial relation class definitions"
+                sceneInitiator -> graphicContextService "Sets up 3D scene"
+                sceneInitiator -> vThreeCanvas "Configures canvas for rendering"
+                arInitiator -> graphicContextService "Extends scene with AR capabilities"
             }
 
             APIServer = container "MMAR API Server" "Backend server providing REST APIs for MMAR clients" "Express.js/Node.js" "API_Server" {
@@ -354,6 +461,13 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             autoLayout tb
             title "Component Diagram: MMAR Global Data Structure"
             description "The MMAR Global Data Structure library defines domain models for both metamodels and model instances. It provides type definitions that are used consistently across all MMAR components."
+        }
+
+        component VizRepClient "VizRepClientComponents" {
+            include *
+            autoLayout tb
+            title "Component Diagram: MMAR VizRep Client"
+            description "The MMAR VizRep Client provides components for designing visual representations of metamodel elements, including 3D visualization, interaction handling, and state management."
         }
 
         theme default
