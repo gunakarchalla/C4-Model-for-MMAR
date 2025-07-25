@@ -8,8 +8,66 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
         // Software Systems (high-level)
         MMAR = softwareSystem "MMAR" "Toolset for designing & managing metamodels & models." {
             ModelingClient = container "MMAR Modeling Client" "Client for model creation based on metamodels" "Aurelia/TypeScript/Three.js/Node.js" "ModelingClient" {
+                // Core Services
+                fetchHelperService = component "FetchHelper Service" "Handles communication with the backend server" "TypeScript"
+                loggerService = component "Logger Service" "Centralized logging system for tracking operations and errors" "TypeScript"
+                instanceUtilityService = component "Instance Utility Service" "Manages model instances and their operations" "TypeScript"
+                metaUtilityService = component "Meta Utility Service" "Provides utilities for working with metamodel elements" "TypeScript"
+                hybridAlgorithmsService = component "Hybrid Algorithms Service" "Handles execution of special algorithms across instances" "TypeScript"
+                mSelectedObjectService = component "Global Selected Object Service" "Manages the currently selected object and its state" "TypeScript"
+                stateObjectService = component "Global State Object Service" "Manages application state and state transitions" "TypeScript"
+                dialogHelperService = component "Dialog Helper Service" "Manages dialog creation and interaction" "TypeScript"
                 
+                // UI Components
+                mLeftNav = component "Left Navigation" "Navigation panel for browsing model objects" "TypeScript, Aurelia"
+                mMiddleBody = component "Middle Body" "Main content area for displaying and editing 3D models" "TypeScript, Aurelia"
+                mRightNav = component "Right Navigation" "Panel for context-specific options and properties" "TypeScript, Aurelia"
+                topNavBar = component "Top Navigation Bar" "Main application navigation and actions" "TypeScript, Aurelia"
+                attributeWindow = component "Attribute Window" "Window for editing object attributes" "TypeScript, Aurelia"
+                threeCanvas = component "Three Canvas" "3D canvas for model visualization and interaction" "TypeScript, Three.js"
+                logWindow = component "Log Window" "Window displaying application logs and messages" "TypeScript, Aurelia"
+                stateWindow = component "State Window" "Window for managing state transitions" "TypeScript, Aurelia"
+                classButtonGroup = component "Class Button Group" "UI component for selecting classes" "TypeScript, Aurelia"
+                relationClassButtonGroup = component "Relation Class Button Group" "UI component for selecting relation classes" "TypeScript, Aurelia"
                 
+                // Dialog Components
+                mDialogUploadFile = component "Dialog Upload File" "Dialog for uploading files to the model" "TypeScript, Aurelia"
+                dialogUploadImage = component "Dialog Upload Image" "Dialog for uploading images" "TypeScript, Aurelia"
+                dialogUploadGltf = component "Dialog Upload GLTF" "Dialog for uploading 3D models" "TypeScript, Aurelia"
+                dialogAttributeWindow = component "Dialog Attribute Window" "Dialog for editing attributes" "TypeScript, Aurelia"
+                dialogReferenceAttribute = component "Dialog Reference Attribute" "Dialog for editing reference attributes" "TypeScript, Aurelia"
+                dialogTableAttribute = component "Dialog Table Attribute" "Dialog for editing table attributes" "TypeScript, Aurelia"
+                dialogCreateNewScene = component "Dialog Create New Scene" "Dialog for creating new scenes" "TypeScript, Aurelia"
+                dialogCopyScene = component "Dialog Copy Scene" "Dialog for copying scenes" "TypeScript, Aurelia"
+                dialogSaveAs = component "Dialog Save As" "Dialog for saving models" "TypeScript, Aurelia"
+                dialogImportModel = component "Dialog Import Model" "Dialog for importing models" "TypeScript, Aurelia"
+                dialogImportMetamodel = component "Dialog Import Metamodel" "Dialog for importing metamodels" "TypeScript, Aurelia"
+                dialogAlgorithm = component "Dialog Algorithm" "Dialog for configuring and running algorithms" "TypeScript, Aurelia"
+                
+                // Service relationships
+                hybridAlgorithmsService -> instanceUtilityService "Uses to apply algorithms to instances"
+                
+                // UI to Service relationships
+                attributeWindow -> hybridAlgorithmsService "Triggers algorithm checks when attributes change"
+                attributeWindow -> instanceUtilityService "Retrieves and updates instance attributes"
+                attributeWindow -> metaUtilityService "Validates attribute constraints"
+                attributeWindow -> fetchHelperService "Saves attribute changes to server"
+                threeCanvas -> hybridAlgorithmsService "Updates algorithm-computed attributes"
+                mLeftNav -> mSelectedObjectService "Updates currently selected object"
+                mMiddleBody -> threeCanvas "Contains for 3D visualization"
+                mRightNav -> stateObjectService "Displays and manages state options"
+                
+                // Dialog relationships
+                mDialogUploadFile -> fetchHelperService "Uploads files to server"
+                dialogAttributeWindow -> hybridAlgorithmsService "Checks algorithms after attribute changes"
+                dialogReferenceAttribute -> hybridAlgorithmsService "Checks algorithms after reference changes"
+                dialogCreateNewScene -> instanceUtilityService "Creates new scene instances"
+                dialogCreateNewScene -> metaUtilityService "Retrieves scene type definitions"
+                dialogCopyScene -> hybridAlgorithmsService "Runs algorithms on copied scene"
+                dialogImportModel -> fetchHelperService "Imports model from server"
+                attributeWindow -> mDialogUploadFile "Opens for file attribute editing"
+                attributeWindow -> dialogReferenceAttribute "Opens for reference attribute editing"
+                attributeWindow -> dialogTableAttribute "Opens for table attribute editing"
             }
 
             MetamodelingClient = container "MMAR Metamodeling Client" "Desktop/Web Client for metamodel design" "Aurelia/TypeScript/Node.js" "MetamodelingClient" {
@@ -142,6 +200,9 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             ModelingClient -> GlobalDS "Embedded data definitions"
             backendService -> APIServer "Uses API for metamodel operations"
             APIServer -> GlobalDS "Uses for data structures"
+            fetchHelperService -> APIServer "Makes API requests for model operations"
+            instanceUtilityService -> GlobalDS "Uses for model instance data structures"
+            metaUtilityService -> GlobalDS "Uses for metamodel data structures"
         }
 
 

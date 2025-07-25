@@ -4,7 +4,7 @@
   "documentation" : { },
   "id" : 1,
   "lastModifiedAgent" : "structurizr-ui",
-  "lastModifiedDate" : "2025-07-25T12:15:33Z",
+  "lastModifiedDate" : "2025-07-25T12:24:02Z",
   "model" : {
     "people" : [ {
       "description" : "Metamodel designer who defines new modeling languages (metamodels).",
@@ -16,20 +16,20 @@
       },
       "relationships" : [ {
         "description" : "uses to design visualization of metamodel elements",
-        "destinationId" : "27",
-        "id" : "96",
+        "destinationId" : "76",
+        "id" : "148",
         "sourceId" : "1",
         "tags" : "Relationship"
       }, {
         "description" : "uses to design visualization of metamodel elements",
         "destinationId" : "3",
-        "id" : "97",
-        "linkedRelationshipId" : "96",
+        "id" : "149",
+        "linkedRelationshipId" : "148",
         "sourceId" : "1"
       }, {
         "description" : "uses to create and manage metamodels",
-        "destinationId" : "5",
-        "id" : "98",
+        "destinationId" : "54",
+        "id" : "150",
         "sourceId" : "1",
         "tags" : "Relationship"
       } ],
@@ -45,20 +45,468 @@
       "relationships" : [ {
         "description" : "uses to create models based on metamodels",
         "destinationId" : "4",
-        "id" : "99",
+        "id" : "151",
         "sourceId" : "2",
         "tags" : "Relationship"
       }, {
         "description" : "uses to create models based on metamodels",
         "destinationId" : "3",
-        "id" : "100",
-        "linkedRelationshipId" : "99",
+        "id" : "152",
+        "linkedRelationshipId" : "151",
         "sourceId" : "2"
       } ],
       "tags" : "Element,Person"
     } ],
     "softwareSystems" : [ {
       "containers" : [ {
+        "components" : [ {
+          "description" : "Handles communication with the backend server",
+          "documentation" : { },
+          "id" : "5",
+          "name" : "FetchHelper Service",
+          "properties" : {
+            "structurizr.dsl.identifier" : "fetchhelperservice"
+          },
+          "relationships" : [ {
+            "description" : "Makes API requests for model operations",
+            "destinationId" : "77",
+            "id" : "145",
+            "sourceId" : "5",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript"
+        }, {
+          "description" : "Centralized logging system for tracking operations and errors",
+          "documentation" : { },
+          "id" : "6",
+          "name" : "Logger Service",
+          "properties" : {
+            "structurizr.dsl.identifier" : "loggerservice"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript"
+        }, {
+          "description" : "Manages model instances and their operations",
+          "documentation" : { },
+          "id" : "7",
+          "name" : "Instance Utility Service",
+          "properties" : {
+            "structurizr.dsl.identifier" : "instanceutilityservice"
+          },
+          "relationships" : [ {
+            "description" : "Uses for model instance data structures",
+            "destinationId" : "135",
+            "id" : "146",
+            "sourceId" : "7",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript"
+        }, {
+          "description" : "Provides utilities for working with metamodel elements",
+          "documentation" : { },
+          "id" : "8",
+          "name" : "Meta Utility Service",
+          "properties" : {
+            "structurizr.dsl.identifier" : "metautilityservice"
+          },
+          "relationships" : [ {
+            "description" : "Uses for metamodel data structures",
+            "destinationId" : "135",
+            "id" : "147",
+            "sourceId" : "8",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript"
+        }, {
+          "description" : "Handles execution of special algorithms across instances",
+          "documentation" : { },
+          "id" : "9",
+          "name" : "Hybrid Algorithms Service",
+          "properties" : {
+            "structurizr.dsl.identifier" : "hybridalgorithmsservice"
+          },
+          "relationships" : [ {
+            "description" : "Uses to apply algorithms to instances",
+            "destinationId" : "7",
+            "id" : "35",
+            "sourceId" : "9",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript"
+        }, {
+          "description" : "Manages the currently selected object and its state",
+          "documentation" : { },
+          "id" : "10",
+          "name" : "Global Selected Object Service",
+          "properties" : {
+            "structurizr.dsl.identifier" : "mselectedobjectservice"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript"
+        }, {
+          "description" : "Manages application state and state transitions",
+          "documentation" : { },
+          "id" : "11",
+          "name" : "Global State Object Service",
+          "properties" : {
+            "structurizr.dsl.identifier" : "stateobjectservice"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript"
+        }, {
+          "description" : "Manages dialog creation and interaction",
+          "documentation" : { },
+          "id" : "12",
+          "name" : "Dialog Helper Service",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dialoghelperservice"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript"
+        }, {
+          "description" : "Navigation panel for browsing model objects",
+          "documentation" : { },
+          "id" : "13",
+          "name" : "Left Navigation",
+          "properties" : {
+            "structurizr.dsl.identifier" : "mleftnav"
+          },
+          "relationships" : [ {
+            "description" : "Updates currently selected object",
+            "destinationId" : "10",
+            "id" : "41",
+            "sourceId" : "13",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Main content area for displaying and editing 3D models",
+          "documentation" : { },
+          "id" : "14",
+          "name" : "Middle Body",
+          "properties" : {
+            "structurizr.dsl.identifier" : "mmiddlebody"
+          },
+          "relationships" : [ {
+            "description" : "Contains for 3D visualization",
+            "destinationId" : "18",
+            "id" : "42",
+            "sourceId" : "14",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Panel for context-specific options and properties",
+          "documentation" : { },
+          "id" : "15",
+          "name" : "Right Navigation",
+          "properties" : {
+            "structurizr.dsl.identifier" : "mrightnav"
+          },
+          "relationships" : [ {
+            "description" : "Displays and manages state options",
+            "destinationId" : "11",
+            "id" : "43",
+            "sourceId" : "15",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Main application navigation and actions",
+          "documentation" : { },
+          "id" : "16",
+          "name" : "Top Navigation Bar",
+          "properties" : {
+            "structurizr.dsl.identifier" : "topnavbar"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Window for editing object attributes",
+          "documentation" : { },
+          "id" : "17",
+          "name" : "Attribute Window",
+          "properties" : {
+            "structurizr.dsl.identifier" : "attributewindow"
+          },
+          "relationships" : [ {
+            "description" : "Triggers algorithm checks when attributes change",
+            "destinationId" : "9",
+            "id" : "36",
+            "sourceId" : "17",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Retrieves and updates instance attributes",
+            "destinationId" : "7",
+            "id" : "37",
+            "sourceId" : "17",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Validates attribute constraints",
+            "destinationId" : "8",
+            "id" : "38",
+            "sourceId" : "17",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Saves attribute changes to server",
+            "destinationId" : "5",
+            "id" : "39",
+            "sourceId" : "17",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Opens for file attribute editing",
+            "destinationId" : "23",
+            "id" : "51",
+            "sourceId" : "17",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Opens for reference attribute editing",
+            "destinationId" : "27",
+            "id" : "52",
+            "sourceId" : "17",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Opens for table attribute editing",
+            "destinationId" : "28",
+            "id" : "53",
+            "sourceId" : "17",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "3D canvas for model visualization and interaction",
+          "documentation" : { },
+          "id" : "18",
+          "name" : "Three Canvas",
+          "properties" : {
+            "structurizr.dsl.identifier" : "threecanvas"
+          },
+          "relationships" : [ {
+            "description" : "Updates algorithm-computed attributes",
+            "destinationId" : "9",
+            "id" : "40",
+            "sourceId" : "18",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Three.js"
+        }, {
+          "description" : "Window displaying application logs and messages",
+          "documentation" : { },
+          "id" : "19",
+          "name" : "Log Window",
+          "properties" : {
+            "structurizr.dsl.identifier" : "logwindow"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Window for managing state transitions",
+          "documentation" : { },
+          "id" : "20",
+          "name" : "State Window",
+          "properties" : {
+            "structurizr.dsl.identifier" : "statewindow"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "UI component for selecting classes",
+          "documentation" : { },
+          "id" : "21",
+          "name" : "Class Button Group",
+          "properties" : {
+            "structurizr.dsl.identifier" : "classbuttongroup"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "UI component for selecting relation classes",
+          "documentation" : { },
+          "id" : "22",
+          "name" : "Relation Class Button Group",
+          "properties" : {
+            "structurizr.dsl.identifier" : "relationclassbuttongroup"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Dialog for uploading files to the model",
+          "documentation" : { },
+          "id" : "23",
+          "name" : "Dialog Upload File",
+          "properties" : {
+            "structurizr.dsl.identifier" : "mdialoguploadfile"
+          },
+          "relationships" : [ {
+            "description" : "Uploads files to server",
+            "destinationId" : "5",
+            "id" : "44",
+            "sourceId" : "23",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Dialog for uploading images",
+          "documentation" : { },
+          "id" : "24",
+          "name" : "Dialog Upload Image",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dialoguploadimage"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Dialog for uploading 3D models",
+          "documentation" : { },
+          "id" : "25",
+          "name" : "Dialog Upload GLTF",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dialoguploadgltf"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Dialog for editing attributes",
+          "documentation" : { },
+          "id" : "26",
+          "name" : "Dialog Attribute Window",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dialogattributewindow"
+          },
+          "relationships" : [ {
+            "description" : "Checks algorithms after attribute changes",
+            "destinationId" : "9",
+            "id" : "45",
+            "sourceId" : "26",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Dialog for editing reference attributes",
+          "documentation" : { },
+          "id" : "27",
+          "name" : "Dialog Reference Attribute",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dialogreferenceattribute"
+          },
+          "relationships" : [ {
+            "description" : "Checks algorithms after reference changes",
+            "destinationId" : "9",
+            "id" : "46",
+            "sourceId" : "27",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Dialog for editing table attributes",
+          "documentation" : { },
+          "id" : "28",
+          "name" : "Dialog Table Attribute",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dialogtableattribute"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Dialog for creating new scenes",
+          "documentation" : { },
+          "id" : "29",
+          "name" : "Dialog Create New Scene",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dialogcreatenewscene"
+          },
+          "relationships" : [ {
+            "description" : "Creates new scene instances",
+            "destinationId" : "7",
+            "id" : "47",
+            "sourceId" : "29",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Retrieves scene type definitions",
+            "destinationId" : "8",
+            "id" : "48",
+            "sourceId" : "29",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Dialog for copying scenes",
+          "documentation" : { },
+          "id" : "30",
+          "name" : "Dialog Copy Scene",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dialogcopyscene"
+          },
+          "relationships" : [ {
+            "description" : "Runs algorithms on copied scene",
+            "destinationId" : "9",
+            "id" : "49",
+            "sourceId" : "30",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Dialog for saving models",
+          "documentation" : { },
+          "id" : "31",
+          "name" : "Dialog Save As",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dialogsaveas"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Dialog for importing models",
+          "documentation" : { },
+          "id" : "32",
+          "name" : "Dialog Import Model",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dialogimportmodel"
+          },
+          "relationships" : [ {
+            "description" : "Imports model from server",
+            "destinationId" : "5",
+            "id" : "50",
+            "sourceId" : "32",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Dialog for importing metamodels",
+          "documentation" : { },
+          "id" : "33",
+          "name" : "Dialog Import Metamodel",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dialogimportmetamodel"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Dialog for configuring and running algorithms",
+          "documentation" : { },
+          "id" : "34",
+          "name" : "Dialog Algorithm",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dialogalgorithm"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        } ],
         "description" : "Client for model creation based on metamodels",
         "documentation" : { },
         "id" : "4",
@@ -68,14 +516,14 @@
         },
         "relationships" : [ {
           "description" : "Uses API for model operations",
-          "destinationId" : "28",
-          "id" : "88",
+          "destinationId" : "77",
+          "id" : "137",
           "sourceId" : "4",
           "tags" : "Relationship"
         }, {
           "description" : "Embedded data definitions",
-          "destinationId" : "86",
-          "id" : "92",
+          "destinationId" : "135",
+          "id" : "141",
           "sourceId" : "4",
           "tags" : "Relationship"
         } ],
@@ -85,16 +533,16 @@
         "components" : [ {
           "description" : "Manages the currently selected object and publishes events when selection changes",
           "documentation" : { },
-          "id" : "6",
+          "id" : "55",
           "name" : "Selected Object Service",
           "properties" : {
             "structurizr.dsl.identifier" : "mmselectedobjectservice"
           },
           "relationships" : [ {
             "description" : "Requests object data",
-            "destinationId" : "7",
-            "id" : "26",
-            "sourceId" : "6",
+            "destinationId" : "56",
+            "id" : "75",
+            "sourceId" : "55",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -102,22 +550,22 @@
         }, {
           "description" : "Handles communication with the backend server",
           "documentation" : { },
-          "id" : "7",
+          "id" : "56",
           "name" : "Backend Service",
           "properties" : {
             "structurizr.dsl.identifier" : "backendservice"
           },
           "relationships" : [ {
             "description" : "Updates object collections",
-            "destinationId" : "6",
-            "id" : "25",
-            "sourceId" : "7",
+            "destinationId" : "55",
+            "id" : "74",
+            "sourceId" : "56",
             "tags" : "Relationship"
           }, {
             "description" : "Uses API for metamodel operations",
-            "destinationId" : "28",
-            "id" : "93",
-            "sourceId" : "7",
+            "destinationId" : "77",
+            "id" : "142",
+            "sourceId" : "56",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -125,7 +573,7 @@
         }, {
           "description" : "Provides utility functions for file conversion and other tasks",
           "documentation" : { },
-          "id" : "8",
+          "id" : "57",
           "name" : "Helper Service",
           "properties" : {
             "structurizr.dsl.identifier" : "helperservice"
@@ -135,7 +583,7 @@
         }, {
           "description" : "Manages user authentication and information",
           "documentation" : { },
-          "id" : "9",
+          "id" : "58",
           "name" : "User Service",
           "properties" : {
             "structurizr.dsl.identifier" : "userservice"
@@ -145,16 +593,16 @@
         }, {
           "description" : "Navigation tree for browsing model objects",
           "documentation" : { },
-          "id" : "10",
+          "id" : "59",
           "name" : "Left Navigation",
           "properties" : {
             "structurizr.dsl.identifier" : "mmleftnav"
           },
           "relationships" : [ {
             "description" : "Updates selected object",
-            "destinationId" : "6",
-            "id" : "18",
-            "sourceId" : "10",
+            "destinationId" : "55",
+            "id" : "67",
+            "sourceId" : "59",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -162,16 +610,16 @@
         }, {
           "description" : "Main content area for displaying and editing objects",
           "documentation" : { },
-          "id" : "11",
+          "id" : "60",
           "name" : "Middle Body",
           "properties" : {
             "structurizr.dsl.identifier" : "mmmiddlebody"
           },
           "relationships" : [ {
             "description" : "Observes selected object",
-            "destinationId" : "6",
-            "id" : "19",
-            "sourceId" : "11",
+            "destinationId" : "55",
+            "id" : "68",
+            "sourceId" : "60",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -179,7 +627,7 @@
         }, {
           "description" : "Context-specific navigation and options",
           "documentation" : { },
-          "id" : "12",
+          "id" : "61",
           "name" : "Right Navigation",
           "properties" : {
             "structurizr.dsl.identifier" : "mmrightnav"
@@ -189,16 +637,16 @@
         }, {
           "description" : "Tab displaying general properties of objects",
           "documentation" : { },
-          "id" : "13",
+          "id" : "62",
           "name" : "General Tab",
           "properties" : {
             "structurizr.dsl.identifier" : "generaltab"
           },
           "relationships" : [ {
             "description" : "Reads selected object properties",
-            "destinationId" : "6",
-            "id" : "20",
-            "sourceId" : "13",
+            "destinationId" : "55",
+            "id" : "69",
+            "sourceId" : "62",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -206,7 +654,7 @@
         }, {
           "description" : "Component for displaying and editing class objects",
           "documentation" : { },
-          "id" : "14",
+          "id" : "63",
           "name" : "General Tab Class",
           "properties" : {
             "structurizr.dsl.identifier" : "generaltabclass"
@@ -216,22 +664,22 @@
         }, {
           "description" : "Component for displaying and editing file objects",
           "documentation" : { },
-          "id" : "15",
+          "id" : "64",
           "name" : "General Tab File",
           "properties" : {
             "structurizr.dsl.identifier" : "generaltabfile"
           },
           "relationships" : [ {
             "description" : "Uses for file conversion",
-            "destinationId" : "8",
-            "id" : "21",
-            "sourceId" : "15",
+            "destinationId" : "57",
+            "id" : "70",
+            "sourceId" : "64",
             "tags" : "Relationship"
           }, {
             "description" : "Reads file data",
-            "destinationId" : "6",
-            "id" : "22",
-            "sourceId" : "15",
+            "destinationId" : "55",
+            "id" : "71",
+            "sourceId" : "64",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -239,7 +687,7 @@
         }, {
           "description" : "Component for displaying and editing relation class objects",
           "documentation" : { },
-          "id" : "16",
+          "id" : "65",
           "name" : "General Tab RelationClass",
           "properties" : {
             "structurizr.dsl.identifier" : "generaltabrelationclass"
@@ -249,22 +697,22 @@
         }, {
           "description" : "Dialog for uploading and replacing files",
           "documentation" : { },
-          "id" : "17",
+          "id" : "66",
           "name" : "Dialog Upload File",
           "properties" : {
             "structurizr.dsl.identifier" : "mmdialoguploadfile"
           },
           "relationships" : [ {
             "description" : "Uses for file conversion",
-            "destinationId" : "8",
-            "id" : "23",
-            "sourceId" : "17",
+            "destinationId" : "57",
+            "id" : "72",
+            "sourceId" : "66",
             "tags" : "Relationship"
           }, {
             "description" : "Updates file data",
-            "destinationId" : "6",
-            "id" : "24",
-            "sourceId" : "17",
+            "destinationId" : "55",
+            "id" : "73",
+            "sourceId" : "66",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -272,45 +720,45 @@
         } ],
         "description" : "Desktop/Web Client for metamodel design",
         "documentation" : { },
-        "id" : "5",
+        "id" : "54",
         "name" : "MMAR Metamodeling Client",
         "properties" : {
           "structurizr.dsl.identifier" : "metamodelingclient"
         },
         "relationships" : [ {
           "description" : "Embedded data definitions",
-          "destinationId" : "86",
-          "id" : "90",
-          "sourceId" : "5",
+          "destinationId" : "135",
+          "id" : "139",
+          "sourceId" : "54",
           "tags" : "Relationship"
         }, {
           "description" : "Uses API for metamodel operations",
-          "destinationId" : "28",
-          "id" : "94",
-          "linkedRelationshipId" : "93",
-          "sourceId" : "5"
+          "destinationId" : "77",
+          "id" : "143",
+          "linkedRelationshipId" : "142",
+          "sourceId" : "54"
         } ],
         "tags" : "Element,Container,MetamodelingClient",
         "technology" : "Aurelia/TypeScript/Node.js"
       }, {
         "description" : "Client for visual representation design of metamodel elements",
         "documentation" : { },
-        "id" : "27",
+        "id" : "76",
         "name" : "MMAR VizRep Client",
         "properties" : {
           "structurizr.dsl.identifier" : "vizrepclient"
         },
         "relationships" : [ {
           "description" : "Uses API for visualization config ops",
-          "destinationId" : "28",
-          "id" : "87",
-          "sourceId" : "27",
+          "destinationId" : "77",
+          "id" : "136",
+          "sourceId" : "76",
           "tags" : "Relationship"
         }, {
           "description" : "Embedded data definitions",
-          "destinationId" : "86",
-          "id" : "91",
-          "sourceId" : "27",
+          "destinationId" : "135",
+          "id" : "140",
+          "sourceId" : "76",
           "tags" : "Relationship"
         } ],
         "tags" : "Element,Container,VizRepClient",
@@ -319,28 +767,28 @@
         "components" : [ {
           "description" : "Handles REST API requests for base metamodel objects",
           "documentation" : { },
-          "id" : "29",
+          "id" : "78",
           "name" : "Metamodel Objects Controller",
           "properties" : {
             "structurizr.dsl.identifier" : "metaobjectscontroller"
           },
           "relationships" : [ {
             "description" : "Performs CRUD operations via",
-            "destinationId" : "38",
-            "id" : "52",
-            "sourceId" : "29",
+            "destinationId" : "87",
+            "id" : "101",
+            "sourceId" : "78",
             "tags" : "Relationship"
           }, {
             "description" : "Applies response filtering using",
-            "destinationId" : "47",
-            "id" : "62",
-            "sourceId" : "29",
+            "destinationId" : "96",
+            "id" : "111",
+            "sourceId" : "78",
             "tags" : "Relationship"
           }, {
             "description" : "Delegates error processing to",
-            "destinationId" : "50",
-            "id" : "78",
-            "sourceId" : "29",
+            "destinationId" : "99",
+            "id" : "127",
+            "sourceId" : "78",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -348,28 +796,28 @@
         }, {
           "description" : "Handles REST API requests for metamodel classes",
           "documentation" : { },
-          "id" : "30",
+          "id" : "79",
           "name" : "Metamodel Classes Controller",
           "properties" : {
             "structurizr.dsl.identifier" : "metaclassescontroller"
           },
           "relationships" : [ {
             "description" : "Delegates data management to",
-            "destinationId" : "39",
-            "id" : "53",
-            "sourceId" : "30",
+            "destinationId" : "88",
+            "id" : "102",
+            "sourceId" : "79",
             "tags" : "Relationship"
           }, {
             "description" : "Tailors response content via",
-            "destinationId" : "47",
-            "id" : "63",
-            "sourceId" : "30",
+            "destinationId" : "96",
+            "id" : "112",
+            "sourceId" : "79",
             "tags" : "Relationship"
           }, {
             "description" : "Centralizes error handling with",
-            "destinationId" : "50",
-            "id" : "79",
-            "sourceId" : "30",
+            "destinationId" : "99",
+            "id" : "128",
+            "sourceId" : "79",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -377,28 +825,28 @@
         }, {
           "description" : "Handles REST API requests for relation classes",
           "documentation" : { },
-          "id" : "31",
+          "id" : "80",
           "name" : "Metamodel Relation Classes Controller",
           "properties" : {
             "structurizr.dsl.identifier" : "metarelationclassescontroller"
           },
           "relationships" : [ {
             "description" : "Persists relation class data through",
-            "destinationId" : "40",
-            "id" : "54",
-            "sourceId" : "31",
+            "destinationId" : "89",
+            "id" : "103",
+            "sourceId" : "80",
             "tags" : "Relationship"
           }, {
             "description" : "Customizes response fields with",
-            "destinationId" : "47",
-            "id" : "64",
-            "sourceId" : "31",
+            "destinationId" : "96",
+            "id" : "113",
+            "sourceId" : "80",
             "tags" : "Relationship"
           }, {
             "description" : "Formats error responses via",
-            "destinationId" : "50",
-            "id" : "80",
-            "sourceId" : "31",
+            "destinationId" : "99",
+            "id" : "129",
+            "sourceId" : "80",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -406,28 +854,28 @@
         }, {
           "description" : "Handles REST API requests for metamodel attributes",
           "documentation" : { },
-          "id" : "32",
+          "id" : "81",
           "name" : "Metamodel Attributes Controller",
           "properties" : {
             "structurizr.dsl.identifier" : "metaattributescontroller"
           },
           "relationships" : [ {
             "description" : "Manages attribute data via",
-            "destinationId" : "41",
-            "id" : "55",
-            "sourceId" : "32",
+            "destinationId" : "90",
+            "id" : "104",
+            "sourceId" : "81",
             "tags" : "Relationship"
           }, {
             "description" : "Formats attribute responses through",
-            "destinationId" : "47",
-            "id" : "65",
-            "sourceId" : "32",
+            "destinationId" : "96",
+            "id" : "114",
+            "sourceId" : "81",
             "tags" : "Relationship"
           }, {
             "description" : "Standardizes error outputs through",
-            "destinationId" : "50",
-            "id" : "81",
-            "sourceId" : "32",
+            "destinationId" : "99",
+            "id" : "130",
+            "sourceId" : "81",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -435,28 +883,28 @@
         }, {
           "description" : "Handles REST API requests for metamodel ports",
           "documentation" : { },
-          "id" : "33",
+          "id" : "82",
           "name" : "Metamodel Ports Controller",
           "properties" : {
             "structurizr.dsl.identifier" : "metaportscontroller"
           },
           "relationships" : [ {
             "description" : "Handles port persistence through",
-            "destinationId" : "42",
-            "id" : "56",
-            "sourceId" : "33",
+            "destinationId" : "91",
+            "id" : "105",
+            "sourceId" : "82",
             "tags" : "Relationship"
           }, {
             "description" : "Selectively exposes port data using",
-            "destinationId" : "47",
-            "id" : "66",
-            "sourceId" : "33",
+            "destinationId" : "96",
+            "id" : "115",
+            "sourceId" : "82",
             "tags" : "Relationship"
           }, {
             "description" : "Reports operational failures to",
-            "destinationId" : "50",
-            "id" : "82",
-            "sourceId" : "33",
+            "destinationId" : "99",
+            "id" : "131",
+            "sourceId" : "82",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -464,28 +912,28 @@
         }, {
           "description" : "Handles REST API requests for scene types",
           "documentation" : { },
-          "id" : "34",
+          "id" : "83",
           "name" : "Metamodel Scene Types Controller",
           "properties" : {
             "structurizr.dsl.identifier" : "metascenetypescontroller"
           },
           "relationships" : [ {
             "description" : "Stores scene type data using",
-            "destinationId" : "43",
-            "id" : "57",
-            "sourceId" : "34",
+            "destinationId" : "92",
+            "id" : "106",
+            "sourceId" : "83",
             "tags" : "Relationship"
           }, {
             "description" : "Filters scene type responses via",
-            "destinationId" : "47",
-            "id" : "67",
-            "sourceId" : "34",
+            "destinationId" : "96",
+            "id" : "116",
+            "sourceId" : "83",
             "tags" : "Relationship"
           }, {
             "description" : "Processes exceptions with",
-            "destinationId" : "50",
-            "id" : "83",
-            "sourceId" : "34",
+            "destinationId" : "99",
+            "id" : "132",
+            "sourceId" : "83",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -493,28 +941,28 @@
         }, {
           "description" : "Handles REST API requests for file operations",
           "documentation" : { },
-          "id" : "35",
+          "id" : "84",
           "name" : "Metamodel Files Controller",
           "properties" : {
             "structurizr.dsl.identifier" : "metafilescontroller"
           },
           "relationships" : [ {
             "description" : "Persists file metadata and content with",
-            "destinationId" : "44",
-            "id" : "58",
-            "sourceId" : "35",
+            "destinationId" : "93",
+            "id" : "107",
+            "sourceId" : "84",
             "tags" : "Relationship"
           }, {
             "description" : "Processes and optimizes images with",
-            "destinationId" : "46",
-            "id" : "61",
-            "sourceId" : "35",
+            "destinationId" : "95",
+            "id" : "110",
+            "sourceId" : "84",
             "tags" : "Relationship"
           }, {
             "description" : "Handles upload/download errors through",
-            "destinationId" : "50",
-            "id" : "84",
-            "sourceId" : "35",
+            "destinationId" : "99",
+            "id" : "133",
+            "sourceId" : "84",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -522,22 +970,22 @@
         }, {
           "description" : "Handles REST API requests for user management",
           "documentation" : { },
-          "id" : "36",
+          "id" : "85",
           "name" : "Users Controller",
           "properties" : {
             "structurizr.dsl.identifier" : "userscontroller"
           },
           "relationships" : [ {
             "description" : "Manages user accounts through",
-            "destinationId" : "45",
-            "id" : "59",
-            "sourceId" : "36",
+            "destinationId" : "94",
+            "id" : "108",
+            "sourceId" : "85",
             "tags" : "Relationship"
           }, {
             "description" : "Secures endpoints using",
-            "destinationId" : "51",
-            "id" : "77",
-            "sourceId" : "36",
+            "destinationId" : "100",
+            "id" : "126",
+            "sourceId" : "85",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -545,16 +993,16 @@
         }, {
           "description" : "Handles REST API requests for user group management",
           "documentation" : { },
-          "id" : "37",
+          "id" : "86",
           "name" : "User Groups Controller",
           "properties" : {
             "structurizr.dsl.identifier" : "usergroupscontroller"
           },
           "relationships" : [ {
             "description" : "Administers group memberships via",
-            "destinationId" : "45",
-            "id" : "60",
-            "sourceId" : "37",
+            "destinationId" : "94",
+            "id" : "109",
+            "sourceId" : "86",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -562,16 +1010,16 @@
         }, {
           "description" : "Implements CRUD operations for metamodel objects",
           "documentation" : { },
-          "id" : "38",
+          "id" : "87",
           "name" : "Metamodel Objects Connection",
           "properties" : {
             "structurizr.dsl.identifier" : "metaobjectsconnection"
           },
           "relationships" : [ {
             "description" : "Executes SQL queries through",
-            "destinationId" : "49",
-            "id" : "68",
-            "sourceId" : "38",
+            "destinationId" : "98",
+            "id" : "117",
+            "sourceId" : "87",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -579,16 +1027,16 @@
         }, {
           "description" : "Implements CRUD operations for metamodel classes",
           "documentation" : { },
-          "id" : "39",
+          "id" : "88",
           "name" : "Metamodel Classes Connection",
           "properties" : {
             "structurizr.dsl.identifier" : "metaclassesconnection"
           },
           "relationships" : [ {
             "description" : "Manages database connections via",
-            "destinationId" : "49",
-            "id" : "69",
-            "sourceId" : "39",
+            "destinationId" : "98",
+            "id" : "118",
+            "sourceId" : "88",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -596,16 +1044,16 @@
         }, {
           "description" : "Implements CRUD operations for relation classes",
           "documentation" : { },
-          "id" : "40",
+          "id" : "89",
           "name" : "Metamodel Relation Classes Connection",
           "properties" : {
             "structurizr.dsl.identifier" : "metarelationclassesconnection"
           },
           "relationships" : [ {
             "description" : "Runs transactions using",
-            "destinationId" : "49",
-            "id" : "70",
-            "sourceId" : "40",
+            "destinationId" : "98",
+            "id" : "119",
+            "sourceId" : "89",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -613,16 +1061,16 @@
         }, {
           "description" : "Implements CRUD operations for attributes",
           "documentation" : { },
-          "id" : "41",
+          "id" : "90",
           "name" : "Metamodel Attributes Connection",
           "properties" : {
             "structurizr.dsl.identifier" : "metaattributesconnection"
           },
           "relationships" : [ {
             "description" : "Acquires connection pools from",
-            "destinationId" : "49",
-            "id" : "71",
-            "sourceId" : "41",
+            "destinationId" : "98",
+            "id" : "120",
+            "sourceId" : "90",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -630,16 +1078,16 @@
         }, {
           "description" : "Implements CRUD operations for ports",
           "documentation" : { },
-          "id" : "42",
+          "id" : "91",
           "name" : "Metamodel Ports Connection",
           "properties" : {
             "structurizr.dsl.identifier" : "metaportsconnection"
           },
           "relationships" : [ {
             "description" : "Executes parameterized queries via",
-            "destinationId" : "49",
-            "id" : "72",
-            "sourceId" : "42",
+            "destinationId" : "98",
+            "id" : "121",
+            "sourceId" : "91",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -647,16 +1095,16 @@
         }, {
           "description" : "Implements CRUD operations for scene types",
           "documentation" : { },
-          "id" : "43",
+          "id" : "92",
           "name" : "Metamodel Scene Types Connection",
           "properties" : {
             "structurizr.dsl.identifier" : "metascenetypesconnection"
           },
           "relationships" : [ {
             "description" : "Performs database operations through",
-            "destinationId" : "49",
-            "id" : "73",
-            "sourceId" : "43",
+            "destinationId" : "98",
+            "id" : "122",
+            "sourceId" : "92",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -664,16 +1112,16 @@
         }, {
           "description" : "Implements CRUD operations for files",
           "documentation" : { },
-          "id" : "44",
+          "id" : "93",
           "name" : "Metamodel Files Connection",
           "properties" : {
             "structurizr.dsl.identifier" : "metafilesconnection"
           },
           "relationships" : [ {
             "description" : "Stores binary data using",
-            "destinationId" : "49",
-            "id" : "74",
-            "sourceId" : "44",
+            "destinationId" : "98",
+            "id" : "123",
+            "sourceId" : "93",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -681,16 +1129,16 @@
         }, {
           "description" : "Implements CRUD operations for users",
           "documentation" : { },
-          "id" : "45",
+          "id" : "94",
           "name" : "Users Connection",
           "properties" : {
             "structurizr.dsl.identifier" : "usersconnection"
           },
           "relationships" : [ {
             "description" : "Retrieves user records from",
-            "destinationId" : "49",
-            "id" : "75",
-            "sourceId" : "45",
+            "destinationId" : "98",
+            "id" : "124",
+            "sourceId" : "94",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -698,7 +1146,7 @@
         }, {
           "description" : "Handles image processing like compression",
           "documentation" : { },
-          "id" : "46",
+          "id" : "95",
           "name" : "Image Service",
           "properties" : {
             "structurizr.dsl.identifier" : "imageservice"
@@ -708,7 +1156,7 @@
         }, {
           "description" : "Filters response objects based on query parameters",
           "documentation" : { },
-          "id" : "47",
+          "id" : "96",
           "name" : "Object Filter Service",
           "properties" : {
             "structurizr.dsl.identifier" : "objectfilterservice"
@@ -718,7 +1166,7 @@
         }, {
           "description" : "Handles user authentication and authorization",
           "documentation" : { },
-          "id" : "48",
+          "id" : "97",
           "name" : "Authentication Service",
           "properties" : {
             "structurizr.dsl.identifier" : "authservice"
@@ -728,7 +1176,7 @@
         }, {
           "description" : "Manages database connection pools",
           "documentation" : { },
-          "id" : "49",
+          "id" : "98",
           "name" : "Database Connection Service",
           "properties" : {
             "structurizr.dsl.identifier" : "databaseservice"
@@ -738,7 +1186,7 @@
         }, {
           "description" : "Processes and formats API errors",
           "documentation" : { },
-          "id" : "50",
+          "id" : "99",
           "name" : "Error Handler Middleware",
           "properties" : {
             "structurizr.dsl.identifier" : "errorhandlermiddleware"
@@ -748,16 +1196,16 @@
         }, {
           "description" : "Verifies user authentication tokens",
           "documentation" : { },
-          "id" : "51",
+          "id" : "100",
           "name" : "Authentication Middleware",
           "properties" : {
             "structurizr.dsl.identifier" : "authmiddleware"
           },
           "relationships" : [ {
             "description" : "Validates authentication tokens with",
-            "destinationId" : "48",
-            "id" : "76",
-            "sourceId" : "51",
+            "destinationId" : "97",
+            "id" : "125",
+            "sourceId" : "100",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component",
@@ -765,22 +1213,22 @@
         } ],
         "description" : "Backend server providing REST APIs for MMAR clients",
         "documentation" : { },
-        "id" : "28",
+        "id" : "77",
         "name" : "MMAR API Server",
         "properties" : {
           "structurizr.dsl.identifier" : "apiserver"
         },
         "relationships" : [ {
           "description" : "Reads/Writes metamodels, models, logs",
-          "destinationId" : "85",
-          "id" : "89",
-          "sourceId" : "28",
+          "destinationId" : "134",
+          "id" : "138",
+          "sourceId" : "77",
           "tags" : "Relationship"
         }, {
           "description" : "Uses for data structures",
-          "destinationId" : "86",
-          "id" : "95",
-          "sourceId" : "28",
+          "destinationId" : "135",
+          "id" : "144",
+          "sourceId" : "77",
           "tags" : "Relationship"
         } ],
         "tags" : "Element,Container,API_Server",
@@ -788,7 +1236,7 @@
       }, {
         "description" : "Database for persisting metamodels, models, and logs",
         "documentation" : { },
-        "id" : "85",
+        "id" : "134",
         "name" : "MMAR Database",
         "properties" : {
           "structurizr.dsl.identifier" : "database"
@@ -798,7 +1246,7 @@
       }, {
         "description" : "Shared data model library (domain classes for models/metamodels)",
         "documentation" : { },
-        "id" : "86",
+        "id" : "135",
         "name" : "Global Data Structure Library",
         "properties" : {
           "structurizr.dsl.identifier" : "globalds"
@@ -819,7 +1267,7 @@
   },
   "name" : "MMAR Architecture",
   "properties" : {
-    "structurizr.dsl" : "d29ya3NwYWNlICJNTUFSIEFyY2hpdGVjdHVyZSIgIkM0IG1vZGVsIGZvciBNTUFSIFBsYXRmb3JtIiB7CiAgICBtb2RlbCB7CiAgICAgICAgLy8gUGVvcGxlIChleHRlcm5hbCB1c2VycykKICAgICAgICBDcmVhdG9yID0gcGVyc29uICJDcmVhdG9yIiAiTWV0YW1vZGVsIGRlc2lnbmVyIHdobyBkZWZpbmVzIG5ldyBtb2RlbGluZyBsYW5ndWFnZXMgKG1ldGFtb2RlbHMpLiIKICAgICAgICBFbmRfVXNlciA9IHBlcnNvbiAiRW5kIFVzZXIiICJNb2RlbCBkZXNpZ25lciB3aG8gY3JlYXRlcyBtb2RlbHMgYmFzZWQgb24gZGVmaW5lZCBtZXRhbW9kZWxzLiIKICAgICAgICAKCiAgICAgICAgLy8gU29mdHdhcmUgU3lzdGVtcyAoaGlnaC1sZXZlbCkKICAgICAgICBNTUFSID0gc29mdHdhcmVTeXN0ZW0gIk1NQVIiICJUb29sc2V0IGZvciBkZXNpZ25pbmcgJiBtYW5hZ2luZyBtZXRhbW9kZWxzICYgbW9kZWxzLiIgewogICAgICAgICAgICBNb2RlbGluZ0NsaWVudCA9IGNvbnRhaW5lciAiTU1BUiBNb2RlbGluZyBDbGllbnQiICJDbGllbnQgZm9yIG1vZGVsIGNyZWF0aW9uIGJhc2VkIG9uIG1ldGFtb2RlbHMiICJBdXJlbGlhL1R5cGVTY3JpcHQvVGhyZWUuanMvTm9kZS5qcyIgIk1vZGVsaW5nQ2xpZW50IiB7CiAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIAogICAgICAgICAgICB9CgogICAgICAgICAgICBNZXRhbW9kZWxpbmdDbGllbnQgPSBjb250YWluZXIgIk1NQVIgTWV0YW1vZGVsaW5nIENsaWVudCIgIkRlc2t0b3AvV2ViIENsaWVudCBmb3IgbWV0YW1vZGVsIGRlc2lnbiIgIkF1cmVsaWEvVHlwZVNjcmlwdC9Ob2RlLmpzIiAiTWV0YW1vZGVsaW5nQ2xpZW50IiB7CiAgICAgICAgICAgICAgICAvLyBDb3JlIHNlcnZpY2VzCiAgICAgICAgICAgICAgICBtbVNlbGVjdGVkT2JqZWN0U2VydmljZSA9IGNvbXBvbmVudCAiU2VsZWN0ZWQgT2JqZWN0IFNlcnZpY2UiICJNYW5hZ2VzIHRoZSBjdXJyZW50bHkgc2VsZWN0ZWQgb2JqZWN0IGFuZCBwdWJsaXNoZXMgZXZlbnRzIHdoZW4gc2VsZWN0aW9uIGNoYW5nZXMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgYmFja2VuZFNlcnZpY2UgPSBjb21wb25lbnQgIkJhY2tlbmQgU2VydmljZSIgIkhhbmRsZXMgY29tbXVuaWNhdGlvbiB3aXRoIHRoZSBiYWNrZW5kIHNlcnZlciIgIlR5cGVTY3JpcHQsIEh0dHBDbGllbnQiCiAgICAgICAgICAgICAgICBoZWxwZXJTZXJ2aWNlID0gY29tcG9uZW50ICJIZWxwZXIgU2VydmljZSIgIlByb3ZpZGVzIHV0aWxpdHkgZnVuY3Rpb25zIGZvciBmaWxlIGNvbnZlcnNpb24gYW5kIG90aGVyIHRhc2tzIiAiVHlwZVNjcmlwdCIKICAgICAgICAgICAgICAgIHVzZXJTZXJ2aWNlID0gY29tcG9uZW50ICJVc2VyIFNlcnZpY2UiICJNYW5hZ2VzIHVzZXIgYXV0aGVudGljYXRpb24gYW5kIGluZm9ybWF0aW9uIiAiVHlwZVNjcmlwdCIKICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIC8vIFVJIENvbXBvbmVudHMKICAgICAgICAgICAgICAgIG1tTGVmdE5hdiA9IGNvbXBvbmVudCAiTGVmdCBOYXZpZ2F0aW9uIiAiTmF2aWdhdGlvbiB0cmVlIGZvciBicm93c2luZyBtb2RlbCBvYmplY3RzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIG1tTWlkZGxlQm9keSA9IGNvbXBvbmVudCAiTWlkZGxlIEJvZHkiICJNYWluIGNvbnRlbnQgYXJlYSBmb3IgZGlzcGxheWluZyBhbmQgZWRpdGluZyBvYmplY3RzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIG1tUmlnaHROYXYgPSBjb21wb25lbnQgIlJpZ2h0IE5hdmlnYXRpb24iICJDb250ZXh0LXNwZWNpZmljIG5hdmlnYXRpb24gYW5kIG9wdGlvbnMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgLy8gTWlkZGxlIEJvZHkgQ29tcG9uZW50cwogICAgICAgICAgICAgICAgZ2VuZXJhbFRhYiA9IGNvbXBvbmVudCAiR2VuZXJhbCBUYWIiICJUYWIgZGlzcGxheWluZyBnZW5lcmFsIHByb3BlcnRpZXMgb2Ygb2JqZWN0cyIgIlR5cGVTY3JpcHQsIEF1cmVsaWEiCiAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAvLyBPYmplY3Qtc3BlY2lmaWMgQ29tcG9uZW50cwogICAgICAgICAgICAgICAgZ2VuZXJhbFRhYkNsYXNzID0gY29tcG9uZW50ICJHZW5lcmFsIFRhYiBDbGFzcyIgIkNvbXBvbmVudCBmb3IgZGlzcGxheWluZyBhbmQgZWRpdGluZyBjbGFzcyBvYmplY3RzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIGdlbmVyYWxUYWJGaWxlID0gY29tcG9uZW50ICJHZW5lcmFsIFRhYiBGaWxlIiAiQ29tcG9uZW50IGZvciBkaXNwbGF5aW5nIGFuZCBlZGl0aW5nIGZpbGUgb2JqZWN0cyIgIlR5cGVTY3JpcHQsIEF1cmVsaWEiCiAgICAgICAgICAgICAgICBnZW5lcmFsVGFiUmVsYXRpb25jbGFzcyA9IGNvbXBvbmVudCAiR2VuZXJhbCBUYWIgUmVsYXRpb25DbGFzcyIgIkNvbXBvbmVudCBmb3IgZGlzcGxheWluZyBhbmQgZWRpdGluZyByZWxhdGlvbiBjbGFzcyBvYmplY3RzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIC8vIEZpbGUtc3BlY2lmaWMgQ29tcG9uZW50cwogICAgICAgICAgICAgICAgbW1EaWFsb2dVcGxvYWRGaWxlID0gY29tcG9uZW50ICJEaWFsb2cgVXBsb2FkIEZpbGUiICJEaWFsb2cgZm9yIHVwbG9hZGluZyBhbmQgcmVwbGFjaW5nIGZpbGVzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIC8vIFJlbGF0aW9uc2hpcHMgYmV0d2VlbiBjb21wb25lbnRzCiAgICAgICAgICAgICAgICBtbUxlZnROYXYgLT4gbW1TZWxlY3RlZE9iamVjdFNlcnZpY2UgIlVwZGF0ZXMgc2VsZWN0ZWQgb2JqZWN0IgogICAgICAgICAgICAgICAgbW1NaWRkbGVCb2R5IC0+IG1tU2VsZWN0ZWRPYmplY3RTZXJ2aWNlICJPYnNlcnZlcyBzZWxlY3RlZCBvYmplY3QiCiAgICAgICAgICAgICAgICBnZW5lcmFsVGFiIC0+IG1tU2VsZWN0ZWRPYmplY3RTZXJ2aWNlICJSZWFkcyBzZWxlY3RlZCBvYmplY3QgcHJvcGVydGllcyIKICAgICAgICAgICAgICAgIGdlbmVyYWxUYWJGaWxlIC0+IGhlbHBlclNlcnZpY2UgIlVzZXMgZm9yIGZpbGUgY29udmVyc2lvbiIKICAgICAgICAgICAgICAgIGdlbmVyYWxUYWJGaWxlIC0+IG1tU2VsZWN0ZWRPYmplY3RTZXJ2aWNlICJSZWFkcyBmaWxlIGRhdGEiCiAgICAgICAgICAgICAgICBtbURpYWxvZ1VwbG9hZEZpbGUgLT4gaGVscGVyU2VydmljZSAiVXNlcyBmb3IgZmlsZSBjb252ZXJzaW9uIgogICAgICAgICAgICAgICAgbW1EaWFsb2dVcGxvYWRGaWxlIC0+IG1tU2VsZWN0ZWRPYmplY3RTZXJ2aWNlICJVcGRhdGVzIGZpbGUgZGF0YSIKICAgICAgICAgICAgICAgIGJhY2tlbmRTZXJ2aWNlIC0+IG1tU2VsZWN0ZWRPYmplY3RTZXJ2aWNlICJVcGRhdGVzIG9iamVjdCBjb2xsZWN0aW9ucyIKICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIC8vIFNlcnZpY2UgaW50ZXJhY3Rpb25zCiAgICAgICAgICAgICAgICBtbVNlbGVjdGVkT2JqZWN0U2VydmljZSAtPiBiYWNrZW5kU2VydmljZSAiUmVxdWVzdHMgb2JqZWN0IGRhdGEiCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIFZpelJlcENsaWVudCA9IGNvbnRhaW5lciAiTU1BUiBWaXpSZXAgQ2xpZW50IiAiQ2xpZW50IGZvciB2aXN1YWwgcmVwcmVzZW50YXRpb24gZGVzaWduIG9mIG1ldGFtb2RlbCBlbGVtZW50cyIgIkF1cmVsaWEvVHlwZVNjcmlwdC9UaHJlZS5qcy9Ob2RlLmpzIiAiVml6UmVwQ2xpZW50IiB7CiAgICAgICAgICAgICAgICAvLyBDb21wb25lbnRzIGZvciB2aXN1YWxpemF0aW9uIGRlc2lnbiB3b3VsZCBnbyBoZXJlCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIEFQSVNlcnZlciA9IGNvbnRhaW5lciAiTU1BUiBBUEkgU2VydmVyIiAiQmFja2VuZCBzZXJ2ZXIgcHJvdmlkaW5nIFJFU1QgQVBJcyBmb3IgTU1BUiBjbGllbnRzIiAiRXhwcmVzcy5qcy9Ob2RlLmpzIiAiQVBJX1NlcnZlciIgewogICAgICAgICAgICAgICAgLy8gQ29udHJvbGxlciBsYXllcgogICAgICAgICAgICAgICAgbWV0YU9iamVjdHNDb250cm9sbGVyID0gY29tcG9uZW50ICJNZXRhbW9kZWwgT2JqZWN0cyBDb250cm9sbGVyIiAiSGFuZGxlcyBSRVNUIEFQSSByZXF1ZXN0cyBmb3IgYmFzZSBtZXRhbW9kZWwgb2JqZWN0cyIgIlR5cGVTY3JpcHQsIEV4cHJlc3MuanMiCiAgICAgICAgICAgICAgICBtZXRhQ2xhc3Nlc0NvbnRyb2xsZXIgPSBjb21wb25lbnQgIk1ldGFtb2RlbCBDbGFzc2VzIENvbnRyb2xsZXIiICJIYW5kbGVzIFJFU1QgQVBJIHJlcXVlc3RzIGZvciBtZXRhbW9kZWwgY2xhc3NlcyIgIlR5cGVTY3JpcHQsIEV4cHJlc3MuanMiCiAgICAgICAgICAgICAgICBtZXRhUmVsYXRpb25DbGFzc2VzQ29udHJvbGxlciA9IGNvbXBvbmVudCAiTWV0YW1vZGVsIFJlbGF0aW9uIENsYXNzZXMgQ29udHJvbGxlciIgIkhhbmRsZXMgUkVTVCBBUEkgcmVxdWVzdHMgZm9yIHJlbGF0aW9uIGNsYXNzZXMiICJUeXBlU2NyaXB0LCBFeHByZXNzLmpzIgogICAgICAgICAgICAgICAgbWV0YUF0dHJpYnV0ZXNDb250cm9sbGVyID0gY29tcG9uZW50ICJNZXRhbW9kZWwgQXR0cmlidXRlcyBDb250cm9sbGVyIiAiSGFuZGxlcyBSRVNUIEFQSSByZXF1ZXN0cyBmb3IgbWV0YW1vZGVsIGF0dHJpYnV0ZXMiICJUeXBlU2NyaXB0LCBFeHByZXNzLmpzIgogICAgICAgICAgICAgICAgbWV0YVBvcnRzQ29udHJvbGxlciA9IGNvbXBvbmVudCAiTWV0YW1vZGVsIFBvcnRzIENvbnRyb2xsZXIiICJIYW5kbGVzIFJFU1QgQVBJIHJlcXVlc3RzIGZvciBtZXRhbW9kZWwgcG9ydHMiICJUeXBlU2NyaXB0LCBFeHByZXNzLmpzIiAKICAgICAgICAgICAgICAgIG1ldGFTY2VuZVR5cGVzQ29udHJvbGxlciA9IGNvbXBvbmVudCAiTWV0YW1vZGVsIFNjZW5lIFR5cGVzIENvbnRyb2xsZXIiICJIYW5kbGVzIFJFU1QgQVBJIHJlcXVlc3RzIGZvciBzY2VuZSB0eXBlcyIgIlR5cGVTY3JpcHQsIEV4cHJlc3MuanMiCiAgICAgICAgICAgICAgICBtZXRhRmlsZXNDb250cm9sbGVyID0gY29tcG9uZW50ICJNZXRhbW9kZWwgRmlsZXMgQ29udHJvbGxlciIgIkhhbmRsZXMgUkVTVCBBUEkgcmVxdWVzdHMgZm9yIGZpbGUgb3BlcmF0aW9ucyIgIlR5cGVTY3JpcHQsIEV4cHJlc3MuanMiCiAgICAgICAgICAgICAgICB1c2Vyc0NvbnRyb2xsZXIgPSBjb21wb25lbnQgIlVzZXJzIENvbnRyb2xsZXIiICJIYW5kbGVzIFJFU1QgQVBJIHJlcXVlc3RzIGZvciB1c2VyIG1hbmFnZW1lbnQiICJUeXBlU2NyaXB0LCBFeHByZXNzLmpzIgogICAgICAgICAgICAgICAgdXNlckdyb3Vwc0NvbnRyb2xsZXIgPSBjb21wb25lbnQgIlVzZXIgR3JvdXBzIENvbnRyb2xsZXIiICJIYW5kbGVzIFJFU1QgQVBJIHJlcXVlc3RzIGZvciB1c2VyIGdyb3VwIG1hbmFnZW1lbnQiICJUeXBlU2NyaXB0LCBFeHByZXNzLmpzIgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAvLyBEYXRhIGFjY2VzcyBsYXllcgogICAgICAgICAgICAgICAgbWV0YU9iamVjdHNDb25uZWN0aW9uID0gY29tcG9uZW50ICJNZXRhbW9kZWwgT2JqZWN0cyBDb25uZWN0aW9uIiAiSW1wbGVtZW50cyBDUlVEIG9wZXJhdGlvbnMgZm9yIG1ldGFtb2RlbCBvYmplY3RzIiAiVHlwZVNjcmlwdCwgUG9zdGdyZVNRTCBjbGllbnQiCiAgICAgICAgICAgICAgICBtZXRhQ2xhc3Nlc0Nvbm5lY3Rpb24gPSBjb21wb25lbnQgIk1ldGFtb2RlbCBDbGFzc2VzIENvbm5lY3Rpb24iICJJbXBsZW1lbnRzIENSVUQgb3BlcmF0aW9ucyBmb3IgbWV0YW1vZGVsIGNsYXNzZXMiICJUeXBlU2NyaXB0LCBQb3N0Z3JlU1FMIGNsaWVudCIKICAgICAgICAgICAgICAgIG1ldGFSZWxhdGlvbkNsYXNzZXNDb25uZWN0aW9uID0gY29tcG9uZW50ICJNZXRhbW9kZWwgUmVsYXRpb24gQ2xhc3NlcyBDb25uZWN0aW9uIiAiSW1wbGVtZW50cyBDUlVEIG9wZXJhdGlvbnMgZm9yIHJlbGF0aW9uIGNsYXNzZXMiICJUeXBlU2NyaXB0LCBQb3N0Z3JlU1FMIGNsaWVudCIKICAgICAgICAgICAgICAgIG1ldGFBdHRyaWJ1dGVzQ29ubmVjdGlvbiA9IGNvbXBvbmVudCAiTWV0YW1vZGVsIEF0dHJpYnV0ZXMgQ29ubmVjdGlvbiIgIkltcGxlbWVudHMgQ1JVRCBvcGVyYXRpb25zIGZvciBhdHRyaWJ1dGVzIiAiVHlwZVNjcmlwdCwgUG9zdGdyZVNRTCBjbGllbnQiCiAgICAgICAgICAgICAgICBtZXRhUG9ydHNDb25uZWN0aW9uID0gY29tcG9uZW50ICJNZXRhbW9kZWwgUG9ydHMgQ29ubmVjdGlvbiIgIkltcGxlbWVudHMgQ1JVRCBvcGVyYXRpb25zIGZvciBwb3J0cyIgIlR5cGVTY3JpcHQsIFBvc3RncmVTUUwgY2xpZW50IgogICAgICAgICAgICAgICAgbWV0YVNjZW5lVHlwZXNDb25uZWN0aW9uID0gY29tcG9uZW50ICJNZXRhbW9kZWwgU2NlbmUgVHlwZXMgQ29ubmVjdGlvbiIgIkltcGxlbWVudHMgQ1JVRCBvcGVyYXRpb25zIGZvciBzY2VuZSB0eXBlcyIgIlR5cGVTY3JpcHQsIFBvc3RncmVTUUwgY2xpZW50IgogICAgICAgICAgICAgICAgbWV0YUZpbGVzQ29ubmVjdGlvbiA9IGNvbXBvbmVudCAiTWV0YW1vZGVsIEZpbGVzIENvbm5lY3Rpb24iICJJbXBsZW1lbnRzIENSVUQgb3BlcmF0aW9ucyBmb3IgZmlsZXMiICJUeXBlU2NyaXB0LCBQb3N0Z3JlU1FMIGNsaWVudCIKICAgICAgICAgICAgICAgIHVzZXJzQ29ubmVjdGlvbiA9IGNvbXBvbmVudCAiVXNlcnMgQ29ubmVjdGlvbiIgIkltcGxlbWVudHMgQ1JVRCBvcGVyYXRpb25zIGZvciB1c2VycyIgIlR5cGVTY3JpcHQsIFBvc3RncmVTUUwgY2xpZW50IgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAvLyBTZXJ2aWNlIGxheWVyCiAgICAgICAgICAgICAgICBpbWFnZVNlcnZpY2UgPSBjb21wb25lbnQgIkltYWdlIFNlcnZpY2UiICJIYW5kbGVzIGltYWdlIHByb2Nlc3NpbmcgbGlrZSBjb21wcmVzc2lvbiIgIlR5cGVTY3JpcHQsIFNoYXJwIgogICAgICAgICAgICAgICAgb2JqZWN0RmlsdGVyU2VydmljZSA9IGNvbXBvbmVudCAiT2JqZWN0IEZpbHRlciBTZXJ2aWNlIiAiRmlsdGVycyByZXNwb25zZSBvYmplY3RzIGJhc2VkIG9uIHF1ZXJ5IHBhcmFtZXRlcnMiICJUeXBlU2NyaXB0IgogICAgICAgICAgICAgICAgYXV0aFNlcnZpY2UgPSBjb21wb25lbnQgIkF1dGhlbnRpY2F0aW9uIFNlcnZpY2UiICJIYW5kbGVzIHVzZXIgYXV0aGVudGljYXRpb24gYW5kIGF1dGhvcml6YXRpb24iICJUeXBlU2NyaXB0LCBKV1QiCiAgICAgICAgICAgICAgICBkYXRhYmFzZVNlcnZpY2UgPSBjb21wb25lbnQgIkRhdGFiYXNlIENvbm5lY3Rpb24gU2VydmljZSIgIk1hbmFnZXMgZGF0YWJhc2UgY29ubmVjdGlvbiBwb29scyIgIlR5cGVTY3JpcHQsIHBnIgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAvLyBNaWRkbGV3YXJlCiAgICAgICAgICAgICAgICBlcnJvckhhbmRsZXJNaWRkbGV3YXJlID0gY29tcG9uZW50ICJFcnJvciBIYW5kbGVyIE1pZGRsZXdhcmUiICJQcm9jZXNzZXMgYW5kIGZvcm1hdHMgQVBJIGVycm9ycyIgIlR5cGVTY3JpcHQsIEV4cHJlc3MuanMiCiAgICAgICAgICAgICAgICBhdXRoTWlkZGxld2FyZSA9IGNvbXBvbmVudCAiQXV0aGVudGljYXRpb24gTWlkZGxld2FyZSIgIlZlcmlmaWVzIHVzZXIgYXV0aGVudGljYXRpb24gdG9rZW5zIiAiVHlwZVNjcmlwdCwgRXhwcmVzcy5qcyIKICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgLy8gQ29udHJvbGxlciB0byBDb25uZWN0aW9uIHJlbGF0aW9uc2hpcHMKICAgICAgICAgICAgICAgIG1ldGFPYmplY3RzQ29udHJvbGxlciAtPiBtZXRhT2JqZWN0c0Nvbm5lY3Rpb24gIlBlcmZvcm1zIENSVUQgb3BlcmF0aW9ucyB2aWEiCiAgICAgICAgICAgICAgICBtZXRhQ2xhc3Nlc0NvbnRyb2xsZXIgLT4gbWV0YUNsYXNzZXNDb25uZWN0aW9uICJEZWxlZ2F0ZXMgZGF0YSBtYW5hZ2VtZW50IHRvIgogICAgICAgICAgICAgICAgbWV0YVJlbGF0aW9uQ2xhc3Nlc0NvbnRyb2xsZXIgLT4gbWV0YVJlbGF0aW9uQ2xhc3Nlc0Nvbm5lY3Rpb24gIlBlcnNpc3RzIHJlbGF0aW9uIGNsYXNzIGRhdGEgdGhyb3VnaCIKICAgICAgICAgICAgICAgIG1ldGFBdHRyaWJ1dGVzQ29udHJvbGxlciAtPiBtZXRhQXR0cmlidXRlc0Nvbm5lY3Rpb24gIk1hbmFnZXMgYXR0cmlidXRlIGRhdGEgdmlhIgogICAgICAgICAgICAgICAgbWV0YVBvcnRzQ29udHJvbGxlciAtPiBtZXRhUG9ydHNDb25uZWN0aW9uICJIYW5kbGVzIHBvcnQgcGVyc2lzdGVuY2UgdGhyb3VnaCIKICAgICAgICAgICAgICAgIG1ldGFTY2VuZVR5cGVzQ29udHJvbGxlciAtPiBtZXRhU2NlbmVUeXBlc0Nvbm5lY3Rpb24gIlN0b3JlcyBzY2VuZSB0eXBlIGRhdGEgdXNpbmciCiAgICAgICAgICAgICAgICBtZXRhRmlsZXNDb250cm9sbGVyIC0+IG1ldGFGaWxlc0Nvbm5lY3Rpb24gIlBlcnNpc3RzIGZpbGUgbWV0YWRhdGEgYW5kIGNvbnRlbnQgd2l0aCIKICAgICAgICAgICAgICAgIHVzZXJzQ29udHJvbGxlciAtPiB1c2Vyc0Nvbm5lY3Rpb24gIk1hbmFnZXMgdXNlciBhY2NvdW50cyB0aHJvdWdoIgogICAgICAgICAgICAgICAgdXNlckdyb3Vwc0NvbnRyb2xsZXIgLT4gdXNlcnNDb25uZWN0aW9uICJBZG1pbmlzdGVycyBncm91cCBtZW1iZXJzaGlwcyB2aWEiCgogICAgICAgICAgICAgICAgLy8gQ29udHJvbGxlcnMgdG8gU2VydmljZSByZWxhdGlvbnNoaXBzCiAgICAgICAgICAgICAgICBtZXRhRmlsZXNDb250cm9sbGVyIC0+IGltYWdlU2VydmljZSAiUHJvY2Vzc2VzIGFuZCBvcHRpbWl6ZXMgaW1hZ2VzIHdpdGgiCiAgICAgICAgICAgICAgICBtZXRhT2JqZWN0c0NvbnRyb2xsZXIgLT4gb2JqZWN0RmlsdGVyU2VydmljZSAiQXBwbGllcyByZXNwb25zZSBmaWx0ZXJpbmcgdXNpbmciCiAgICAgICAgICAgICAgICBtZXRhQ2xhc3Nlc0NvbnRyb2xsZXIgLT4gb2JqZWN0RmlsdGVyU2VydmljZSAiVGFpbG9ycyByZXNwb25zZSBjb250ZW50IHZpYSIKICAgICAgICAgICAgICAgIG1ldGFSZWxhdGlvbkNsYXNzZXNDb250cm9sbGVyIC0+IG9iamVjdEZpbHRlclNlcnZpY2UgIkN1c3RvbWl6ZXMgcmVzcG9uc2UgZmllbGRzIHdpdGgiCiAgICAgICAgICAgICAgICBtZXRhQXR0cmlidXRlc0NvbnRyb2xsZXIgLT4gb2JqZWN0RmlsdGVyU2VydmljZSAiRm9ybWF0cyBhdHRyaWJ1dGUgcmVzcG9uc2VzIHRocm91Z2giCiAgICAgICAgICAgICAgICBtZXRhUG9ydHNDb250cm9sbGVyIC0+IG9iamVjdEZpbHRlclNlcnZpY2UgIlNlbGVjdGl2ZWx5IGV4cG9zZXMgcG9ydCBkYXRhIHVzaW5nIgogICAgICAgICAgICAgICAgbWV0YVNjZW5lVHlwZXNDb250cm9sbGVyIC0+IG9iamVjdEZpbHRlclNlcnZpY2UgIkZpbHRlcnMgc2NlbmUgdHlwZSByZXNwb25zZXMgdmlhIgoKICAgICAgICAgICAgICAgIC8vIENvbm5lY3Rpb24gdG8gU2VydmljZSByZWxhdGlvbnNoaXBzCiAgICAgICAgICAgICAgICBtZXRhT2JqZWN0c0Nvbm5lY3Rpb24gLT4gZGF0YWJhc2VTZXJ2aWNlICJFeGVjdXRlcyBTUUwgcXVlcmllcyB0aHJvdWdoIgogICAgICAgICAgICAgICAgbWV0YUNsYXNzZXNDb25uZWN0aW9uIC0+IGRhdGFiYXNlU2VydmljZSAiTWFuYWdlcyBkYXRhYmFzZSBjb25uZWN0aW9ucyB2aWEiCiAgICAgICAgICAgICAgICBtZXRhUmVsYXRpb25DbGFzc2VzQ29ubmVjdGlvbiAtPiBkYXRhYmFzZVNlcnZpY2UgIlJ1bnMgdHJhbnNhY3Rpb25zIHVzaW5nIgogICAgICAgICAgICAgICAgbWV0YUF0dHJpYnV0ZXNDb25uZWN0aW9uIC0+IGRhdGFiYXNlU2VydmljZSAiQWNxdWlyZXMgY29ubmVjdGlvbiBwb29scyBmcm9tIgogICAgICAgICAgICAgICAgbWV0YVBvcnRzQ29ubmVjdGlvbiAtPiBkYXRhYmFzZVNlcnZpY2UgIkV4ZWN1dGVzIHBhcmFtZXRlcml6ZWQgcXVlcmllcyB2aWEiCiAgICAgICAgICAgICAgICBtZXRhU2NlbmVUeXBlc0Nvbm5lY3Rpb24gLT4gZGF0YWJhc2VTZXJ2aWNlICJQZXJmb3JtcyBkYXRhYmFzZSBvcGVyYXRpb25zIHRocm91Z2giCiAgICAgICAgICAgICAgICBtZXRhRmlsZXNDb25uZWN0aW9uIC0+IGRhdGFiYXNlU2VydmljZSAiU3RvcmVzIGJpbmFyeSBkYXRhIHVzaW5nIgogICAgICAgICAgICAgICAgdXNlcnNDb25uZWN0aW9uIC0+IGRhdGFiYXNlU2VydmljZSAiUmV0cmlldmVzIHVzZXIgcmVjb3JkcyBmcm9tIgoKICAgICAgICAgICAgICAgIC8vIE1pZGRsZXdhcmUgcmVsYXRpb25zaGlwcwogICAgICAgICAgICAgICAgYXV0aE1pZGRsZXdhcmUgLT4gYXV0aFNlcnZpY2UgIlZhbGlkYXRlcyBhdXRoZW50aWNhdGlvbiB0b2tlbnMgd2l0aCIKICAgICAgICAgICAgICAgIHVzZXJzQ29udHJvbGxlciAtPiBhdXRoTWlkZGxld2FyZSAiU2VjdXJlcyBlbmRwb2ludHMgdXNpbmciCiAgICAgICAgICAgICAgICBtZXRhT2JqZWN0c0NvbnRyb2xsZXIgLT4gZXJyb3JIYW5kbGVyTWlkZGxld2FyZSAiRGVsZWdhdGVzIGVycm9yIHByb2Nlc3NpbmcgdG8iCiAgICAgICAgICAgICAgICBtZXRhQ2xhc3Nlc0NvbnRyb2xsZXIgLT4gZXJyb3JIYW5kbGVyTWlkZGxld2FyZSAiQ2VudHJhbGl6ZXMgZXJyb3IgaGFuZGxpbmcgd2l0aCIKICAgICAgICAgICAgICAgIG1ldGFSZWxhdGlvbkNsYXNzZXNDb250cm9sbGVyIC0+IGVycm9ySGFuZGxlck1pZGRsZXdhcmUgIkZvcm1hdHMgZXJyb3IgcmVzcG9uc2VzIHZpYSIKICAgICAgICAgICAgICAgIG1ldGFBdHRyaWJ1dGVzQ29udHJvbGxlciAtPiBlcnJvckhhbmRsZXJNaWRkbGV3YXJlICJTdGFuZGFyZGl6ZXMgZXJyb3Igb3V0cHV0cyB0aHJvdWdoIgogICAgICAgICAgICAgICAgbWV0YVBvcnRzQ29udHJvbGxlciAtPiBlcnJvckhhbmRsZXJNaWRkbGV3YXJlICJSZXBvcnRzIG9wZXJhdGlvbmFsIGZhaWx1cmVzIHRvIgogICAgICAgICAgICAgICAgbWV0YVNjZW5lVHlwZXNDb250cm9sbGVyIC0+IGVycm9ySGFuZGxlck1pZGRsZXdhcmUgIlByb2Nlc3NlcyBleGNlcHRpb25zIHdpdGgiCiAgICAgICAgICAgICAgICBtZXRhRmlsZXNDb250cm9sbGVyIC0+IGVycm9ySGFuZGxlck1pZGRsZXdhcmUgIkhhbmRsZXMgdXBsb2FkL2Rvd25sb2FkIGVycm9ycyB0aHJvdWdoIgogICAgICAgICAgICB9CgogICAgICAgICAgICBEYXRhYmFzZSA9IGNvbnRhaW5lciAiTU1BUiBEYXRhYmFzZSIgIkRhdGFiYXNlIGZvciBwZXJzaXN0aW5nIG1ldGFtb2RlbHMsIG1vZGVscywgYW5kIGxvZ3MiICJQb3N0Z3JlU1FMIiAiRGF0YWJhc2UiCgogICAgICAgICAgICBHbG9iYWxEUyA9IGNvbnRhaW5lciAiR2xvYmFsIERhdGEgU3RydWN0dXJlIExpYnJhcnkiICJTaGFyZWQgZGF0YSBtb2RlbCBsaWJyYXJ5IChkb21haW4gY2xhc3NlcyBmb3IgbW9kZWxzL21ldGFtb2RlbHMpIiAiVHlwZVNjcmlwdCIgIkdsb2JhbERTIiB7CiAgICAgICAgICAgICAgICAvLyBHbG9iYWwgZGF0YSBzdHJ1Y3R1cmUgY29tcG9uZW50cyB3b3VsZCBnbyBoZXJlIGlmIHdlIGhhZCBtb3JlIGluZm9ybWF0aW9uCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIC8vIENvbnRhaW5lciBSZWxhdGlvbnNoaXBzCiAgICAgICAgICAgIFZpelJlcENsaWVudCAtPiBBUElTZXJ2ZXIgIlVzZXMgQVBJIGZvciB2aXN1YWxpemF0aW9uIGNvbmZpZyBvcHMiCiAgICAgICAgICAgIE1vZGVsaW5nQ2xpZW50IC0+IEFQSVNlcnZlciAiVXNlcyBBUEkgZm9yIG1vZGVsIG9wZXJhdGlvbnMiCiAgICAgICAgICAgIEFQSVNlcnZlciAtPiBEYXRhYmFzZSAiUmVhZHMvV3JpdGVzIG1ldGFtb2RlbHMsIG1vZGVscywgbG9ncyIKICAgICAgICAgICAgTWV0YW1vZGVsaW5nQ2xpZW50IC0+IEdsb2JhbERTICJFbWJlZGRlZCBkYXRhIGRlZmluaXRpb25zIgogICAgICAgICAgICBWaXpSZXBDbGllbnQgLT4gR2xvYmFsRFMgIkVtYmVkZGVkIGRhdGEgZGVmaW5pdGlvbnMiCiAgICAgICAgICAgIE1vZGVsaW5nQ2xpZW50IC0+IEdsb2JhbERTICJFbWJlZGRlZCBkYXRhIGRlZmluaXRpb25zIgogICAgICAgICAgICBiYWNrZW5kU2VydmljZSAtPiBBUElTZXJ2ZXIgIlVzZXMgQVBJIGZvciBtZXRhbW9kZWwgb3BlcmF0aW9ucyIKICAgICAgICAgICAgQVBJU2VydmVyIC0+IEdsb2JhbERTICJVc2VzIGZvciBkYXRhIHN0cnVjdHVyZXMiCiAgICAgICAgfQoKCiAgICAgICAgLy8gU29mdHdhcmUgU3lzdGVtIFJlbGF0aW9uc2hpcHMKICAgICAgICBDcmVhdG9yIC0+IFZpelJlcENsaWVudCAidXNlcyB0byBkZXNpZ24gdmlzdWFsaXphdGlvbiBvZiBtZXRhbW9kZWwgZWxlbWVudHMiCiAgICAgICAgQ3JlYXRvciAtPiBNZXRhbW9kZWxpbmdDbGllbnQgInVzZXMgdG8gY3JlYXRlIGFuZCBtYW5hZ2UgbWV0YW1vZGVscyIKICAgICAgICBFbmRfVXNlciAtPiBNb2RlbGluZ0NsaWVudCAidXNlcyB0byBjcmVhdGUgbW9kZWxzIGJhc2VkIG9uIG1ldGFtb2RlbHMiCiAgICAgICAgCiAgICB9CiAgICB2aWV3cyB7CiAgICAgICAgc3lzdGVtQ29udGV4dCBNTUFSICJTeXN0ZW1Db250ZXh0RGlhZ3JhbSIgewogICAgICAgICAgICBpbmNsdWRlICogCiAgICAgICAgICAgIGF1dG9MYXlvdXQgbHIKICAgICAgICAgICAgdGl0bGUgIlN5c3RlbSBDb250ZXh0OiBNTUFSIE1ldGFtb2RlbGluZyB2cy4gTW9kZWxpbmcgU3lzdGVtcyIKICAgICAgICAgICAgZGVzY3JpcHRpb24gIkNyZWF0b3JzIGFuZCBFbmQgVXNlcnMgaW50ZXJhY3Qgd2l0aCB0d28gZmFjZXRzIG9mIHRoZSBNTUFSIHBsYXRmb3JtLiBDcmVhdG9ycyBkZXNpZ24gbWV0YW1vZGVscyAoYW5kIHRoZWlyIHZpc3VhbCByZXByZXNlbnRhdGlvbnMpIHVzaW5nIHRoZSBNZXRhbW9kZWxpbmcgU3lzdGVtLCB3aGlsZSBFbmQgVXNlcnMgY3JlYXRlIG1vZGVscyB1c2luZyB0aGUgTW9kZWxpbmcgU3lzdGVtLiBCb3RoIHN5c3RlbXMgcmVseSBvbiBhIGNvbW1vbiBNTUFSIFNlcnZlciBhbmQgRGF0YWJhc2UgYmFja2VuZC4iCiAgICAgICAgfQogICAgICAgIGNvbnRhaW5lciBNTUFSICJDb250YWluZXJEaWFncmFtIiB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgICAgICAvLyBhdXRvTGF5b3V0IGxyCiAgICAgICAgICAgIHRpdGxlICJDb250YWluZXIgRGlhZ3JhbTogTU1BUiBDbGllbnRzLCBCYWNrZW5kIGFuZCBEYXRhYmFzZSIKICAgICAgICAgICAgZGVzY3JpcHRpb24gIlRoZSBNTUFSIHBsYXRmb3JtIGNvbnNpc3RzIG9mIHRocmVlIG1haW4gY2xpZW50cyAoTW9kZWxpbmcsIE1ldGFtb2RlbGluZywgYW5kIFZpelJlcCkgdGhhdCBjb25uZWN0IHRvIGEgY29tbW9uIGJhY2tlbmQgc2VydmVyLiBUaGUgc2VydmVyIHByb3ZpZGVzIFJFU1QgQVBJcyBmb3IgbWV0YW1vZGVsIGFuZCBtb2RlbCBvcGVyYXRpb25zLCB3aGlsZSB0aGUgZGF0YWJhc2Ugc3RvcmVzIGFsbCByZWxldmFudCBkYXRhLiIKICAgICAgICB9CgogICAgICAgIGNvbXBvbmVudCBNZXRhbW9kZWxpbmdDbGllbnQgIk1ldGFtb2RlbGluZ0NsaWVudENvbXBvbmVudHMiIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9MYXlvdXQgbHIKICAgICAgICAgICAgdGl0bGUgIkNvbXBvbmVudCBEaWFncmFtOiBNTUFSIE1ldGFtb2RlbGluZyBDbGllbnQiCiAgICAgICAgICAgIGRlc2NyaXB0aW9uICJUaGUgTU1BUiBNZXRhbW9kZWxpbmcgQ2xpZW50IGNvbnNpc3RzIG9mIHZhcmlvdXMgY29tcG9uZW50cyBmb3IgbWFuYWdpbmcgc2VsZWN0ZWQgb2JqZWN0cywgY29tbXVuaWNhdGluZyB3aXRoIHRoZSBiYWNrZW5kLCBhbmQgcHJvdmlkaW5nIGEgcmljaCB1c2VyIGludGVyZmFjZSBmb3IgbWV0YW1vZGVsIGRlc2lnbi4iCiAgICAgICAgfQogICAgICAgIAogICAgICAgIGNvbXBvbmVudCBBUElTZXJ2ZXIgIkFQSVNlcnZlckNvbXBvbmVudHMiIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9MYXlvdXQgdGIKICAgICAgICAgICAgdGl0bGUgIkNvbXBvbmVudCBEaWFncmFtOiBNTUFSIEFQSSBTZXJ2ZXIiCiAgICAgICAgICAgIGRlc2NyaXB0aW9uICJUaGUgTU1BUiBBUEkgU2VydmVyIGNvbnNpc3RzIG9mIGNvbnRyb2xsZXJzIHRoYXQgaGFuZGxlIEhUVFAgcmVxdWVzdHMsIGNvbm5lY3Rpb24gY2xhc3NlcyBmb3IgZGF0YWJhc2Ugb3BlcmF0aW9ucywgYW5kIHNoYXJlZCBzZXJ2aWNlcy4gVGhlIGFyY2hpdGVjdHVyZSBmb2xsb3dzIGEgbGF5ZXJlZCBkZXNpZ24gd2l0aCBjb250cm9sbGVycywgZGF0YSBhY2Nlc3MsIGFuZCBzZXJ2aWNlIGxheWVycy4iCiAgICAgICAgfQoKICAgICAgICB0aGVtZSBkZWZhdWx0CiAgICAgICAgCiAgICAgICAgc3R5bGVzIHsKICAgICAgICAgICAgZWxlbWVudCAiUGVyc29uIiB7CiAgICAgICAgICAgICAgICBzaGFwZSBQZXJzb24KICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJTb2Z0d2FyZSBTeXN0ZW0iIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzExNjhiZAogICAgICAgICAgICAgICAgY29sb3IgI2ZmZmZmZgogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIkNvbnRhaW5lciIgewogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjNDM4ZGQ1CiAgICAgICAgICAgICAgICBjb2xvciAjZmZmZmZmCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiQ29tcG9uZW50IiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICM4NWJiZjAKICAgICAgICAgICAgICAgIGNvbG9yICMwMDAwMDAKICAgICAgICAgICAgfQoKICAgICAgICAgICAgZWxlbWVudCAiRGF0YWJhc2UiIHsKICAgICAgICAgICAgICAgIHNoYXBlIEN5bGluZGVyCiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICM4NWJiZjAKICAgICAgICAgICAgICAgIGNvbG9yICMwMDAwMDAKICAgICAgICAgICAgfQoKICAgICAgICAgICAgZWxlbWVudCAiQVBJX1NlcnZlciIgewogICAgICAgICAgICAgICAgc2hhcGUgUGlwZQogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjODViYmYwCiAgICAgICAgICAgICAgICBjb2xvciAjMDAwMDAwCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIGVsZW1lbnQgIkdsb2JhbERTIiB7CiAgICAgICAgICAgICAgICBzaGFwZSBDb21wb25lbnQKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzg1YmJmMAogICAgICAgICAgICAgICAgY29sb3IgIzAwMDAwMAogICAgICAgICAgICB9CgogICAgICAgICAgICBlbGVtZW50ICJNZXRhbW9kZWxpbmdDbGllbnQiIHsKICAgICAgICAgICAgICAgIHNoYXBlIFdlYkJyb3dzZXIKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgI2YwYWQ0ZQogICAgICAgICAgICAgICAgY29sb3IgI2ZmZmZmZgogICAgICAgICAgICB9CgogICAgICAgICAgICBlbGVtZW50ICJNb2RlbGluZ0NsaWVudCIgewogICAgICAgICAgICAgICAgc2hhcGUgV2ViQnJvd3NlcgogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjNWJjMGRlCiAgICAgICAgICAgICAgICBjb2xvciAjZmZmZmZmCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIGVsZW1lbnQgIlZpelJlcENsaWVudCIgewogICAgICAgICAgICAgICAgc2hhcGUgV2ViQnJvd3NlcgogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjZDk1MzRmCiAgICAgICAgICAgICAgICBjb2xvciAjZmZmZmZmCiAgICAgICAgICAgIH0KICAgICAgICB9CgogICAgfQp9"
+    "structurizr.dsl" : "d29ya3NwYWNlICJNTUFSIEFyY2hpdGVjdHVyZSIgIkM0IG1vZGVsIGZvciBNTUFSIFBsYXRmb3JtIiB7CiAgICBtb2RlbCB7CiAgICAgICAgLy8gUGVvcGxlIChleHRlcm5hbCB1c2VycykKICAgICAgICBDcmVhdG9yID0gcGVyc29uICJDcmVhdG9yIiAiTWV0YW1vZGVsIGRlc2lnbmVyIHdobyBkZWZpbmVzIG5ldyBtb2RlbGluZyBsYW5ndWFnZXMgKG1ldGFtb2RlbHMpLiIKICAgICAgICBFbmRfVXNlciA9IHBlcnNvbiAiRW5kIFVzZXIiICJNb2RlbCBkZXNpZ25lciB3aG8gY3JlYXRlcyBtb2RlbHMgYmFzZWQgb24gZGVmaW5lZCBtZXRhbW9kZWxzLiIKICAgICAgICAKCiAgICAgICAgLy8gU29mdHdhcmUgU3lzdGVtcyAoaGlnaC1sZXZlbCkKICAgICAgICBNTUFSID0gc29mdHdhcmVTeXN0ZW0gIk1NQVIiICJUb29sc2V0IGZvciBkZXNpZ25pbmcgJiBtYW5hZ2luZyBtZXRhbW9kZWxzICYgbW9kZWxzLiIgewogICAgICAgICAgICBNb2RlbGluZ0NsaWVudCA9IGNvbnRhaW5lciAiTU1BUiBNb2RlbGluZyBDbGllbnQiICJDbGllbnQgZm9yIG1vZGVsIGNyZWF0aW9uIGJhc2VkIG9uIG1ldGFtb2RlbHMiICJBdXJlbGlhL1R5cGVTY3JpcHQvVGhyZWUuanMvTm9kZS5qcyIgIk1vZGVsaW5nQ2xpZW50IiB7CiAgICAgICAgICAgICAgICAvLyBDb3JlIFNlcnZpY2VzCiAgICAgICAgICAgICAgICBmZXRjaEhlbHBlclNlcnZpY2UgPSBjb21wb25lbnQgIkZldGNoSGVscGVyIFNlcnZpY2UiICJIYW5kbGVzIGNvbW11bmljYXRpb24gd2l0aCB0aGUgYmFja2VuZCBzZXJ2ZXIiICJUeXBlU2NyaXB0IgogICAgICAgICAgICAgICAgbG9nZ2VyU2VydmljZSA9IGNvbXBvbmVudCAiTG9nZ2VyIFNlcnZpY2UiICJDZW50cmFsaXplZCBsb2dnaW5nIHN5c3RlbSBmb3IgdHJhY2tpbmcgb3BlcmF0aW9ucyBhbmQgZXJyb3JzIiAiVHlwZVNjcmlwdCIKICAgICAgICAgICAgICAgIGluc3RhbmNlVXRpbGl0eVNlcnZpY2UgPSBjb21wb25lbnQgIkluc3RhbmNlIFV0aWxpdHkgU2VydmljZSIgIk1hbmFnZXMgbW9kZWwgaW5zdGFuY2VzIGFuZCB0aGVpciBvcGVyYXRpb25zIiAiVHlwZVNjcmlwdCIKICAgICAgICAgICAgICAgIG1ldGFVdGlsaXR5U2VydmljZSA9IGNvbXBvbmVudCAiTWV0YSBVdGlsaXR5IFNlcnZpY2UiICJQcm92aWRlcyB1dGlsaXRpZXMgZm9yIHdvcmtpbmcgd2l0aCBtZXRhbW9kZWwgZWxlbWVudHMiICJUeXBlU2NyaXB0IgogICAgICAgICAgICAgICAgaHlicmlkQWxnb3JpdGhtc1NlcnZpY2UgPSBjb21wb25lbnQgIkh5YnJpZCBBbGdvcml0aG1zIFNlcnZpY2UiICJIYW5kbGVzIGV4ZWN1dGlvbiBvZiBzcGVjaWFsIGFsZ29yaXRobXMgYWNyb3NzIGluc3RhbmNlcyIgIlR5cGVTY3JpcHQiCiAgICAgICAgICAgICAgICBtU2VsZWN0ZWRPYmplY3RTZXJ2aWNlID0gY29tcG9uZW50ICJHbG9iYWwgU2VsZWN0ZWQgT2JqZWN0IFNlcnZpY2UiICJNYW5hZ2VzIHRoZSBjdXJyZW50bHkgc2VsZWN0ZWQgb2JqZWN0IGFuZCBpdHMgc3RhdGUiICJUeXBlU2NyaXB0IgogICAgICAgICAgICAgICAgc3RhdGVPYmplY3RTZXJ2aWNlID0gY29tcG9uZW50ICJHbG9iYWwgU3RhdGUgT2JqZWN0IFNlcnZpY2UiICJNYW5hZ2VzIGFwcGxpY2F0aW9uIHN0YXRlIGFuZCBzdGF0ZSB0cmFuc2l0aW9ucyIgIlR5cGVTY3JpcHQiCiAgICAgICAgICAgICAgICBkaWFsb2dIZWxwZXJTZXJ2aWNlID0gY29tcG9uZW50ICJEaWFsb2cgSGVscGVyIFNlcnZpY2UiICJNYW5hZ2VzIGRpYWxvZyBjcmVhdGlvbiBhbmQgaW50ZXJhY3Rpb24iICJUeXBlU2NyaXB0IgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAvLyBVSSBDb21wb25lbnRzCiAgICAgICAgICAgICAgICBtTGVmdE5hdiA9IGNvbXBvbmVudCAiTGVmdCBOYXZpZ2F0aW9uIiAiTmF2aWdhdGlvbiBwYW5lbCBmb3IgYnJvd3NpbmcgbW9kZWwgb2JqZWN0cyIgIlR5cGVTY3JpcHQsIEF1cmVsaWEiCiAgICAgICAgICAgICAgICBtTWlkZGxlQm9keSA9IGNvbXBvbmVudCAiTWlkZGxlIEJvZHkiICJNYWluIGNvbnRlbnQgYXJlYSBmb3IgZGlzcGxheWluZyBhbmQgZWRpdGluZyAzRCBtb2RlbHMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgbVJpZ2h0TmF2ID0gY29tcG9uZW50ICJSaWdodCBOYXZpZ2F0aW9uIiAiUGFuZWwgZm9yIGNvbnRleHQtc3BlY2lmaWMgb3B0aW9ucyBhbmQgcHJvcGVydGllcyIgIlR5cGVTY3JpcHQsIEF1cmVsaWEiCiAgICAgICAgICAgICAgICB0b3BOYXZCYXIgPSBjb21wb25lbnQgIlRvcCBOYXZpZ2F0aW9uIEJhciIgIk1haW4gYXBwbGljYXRpb24gbmF2aWdhdGlvbiBhbmQgYWN0aW9ucyIgIlR5cGVTY3JpcHQsIEF1cmVsaWEiCiAgICAgICAgICAgICAgICBhdHRyaWJ1dGVXaW5kb3cgPSBjb21wb25lbnQgIkF0dHJpYnV0ZSBXaW5kb3ciICJXaW5kb3cgZm9yIGVkaXRpbmcgb2JqZWN0IGF0dHJpYnV0ZXMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgdGhyZWVDYW52YXMgPSBjb21wb25lbnQgIlRocmVlIENhbnZhcyIgIjNEIGNhbnZhcyBmb3IgbW9kZWwgdmlzdWFsaXphdGlvbiBhbmQgaW50ZXJhY3Rpb24iICJUeXBlU2NyaXB0LCBUaHJlZS5qcyIKICAgICAgICAgICAgICAgIGxvZ1dpbmRvdyA9IGNvbXBvbmVudCAiTG9nIFdpbmRvdyIgIldpbmRvdyBkaXNwbGF5aW5nIGFwcGxpY2F0aW9uIGxvZ3MgYW5kIG1lc3NhZ2VzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIHN0YXRlV2luZG93ID0gY29tcG9uZW50ICJTdGF0ZSBXaW5kb3ciICJXaW5kb3cgZm9yIG1hbmFnaW5nIHN0YXRlIHRyYW5zaXRpb25zIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIGNsYXNzQnV0dG9uR3JvdXAgPSBjb21wb25lbnQgIkNsYXNzIEJ1dHRvbiBHcm91cCIgIlVJIGNvbXBvbmVudCBmb3Igc2VsZWN0aW5nIGNsYXNzZXMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgcmVsYXRpb25DbGFzc0J1dHRvbkdyb3VwID0gY29tcG9uZW50ICJSZWxhdGlvbiBDbGFzcyBCdXR0b24gR3JvdXAiICJVSSBjb21wb25lbnQgZm9yIHNlbGVjdGluZyByZWxhdGlvbiBjbGFzc2VzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgLy8gRGlhbG9nIENvbXBvbmVudHMKICAgICAgICAgICAgICAgIG1EaWFsb2dVcGxvYWRGaWxlID0gY29tcG9uZW50ICJEaWFsb2cgVXBsb2FkIEZpbGUiICJEaWFsb2cgZm9yIHVwbG9hZGluZyBmaWxlcyB0byB0aGUgbW9kZWwiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgZGlhbG9nVXBsb2FkSW1hZ2UgPSBjb21wb25lbnQgIkRpYWxvZyBVcGxvYWQgSW1hZ2UiICJEaWFsb2cgZm9yIHVwbG9hZGluZyBpbWFnZXMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgZGlhbG9nVXBsb2FkR2x0ZiA9IGNvbXBvbmVudCAiRGlhbG9nIFVwbG9hZCBHTFRGIiAiRGlhbG9nIGZvciB1cGxvYWRpbmcgM0QgbW9kZWxzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIGRpYWxvZ0F0dHJpYnV0ZVdpbmRvdyA9IGNvbXBvbmVudCAiRGlhbG9nIEF0dHJpYnV0ZSBXaW5kb3ciICJEaWFsb2cgZm9yIGVkaXRpbmcgYXR0cmlidXRlcyIgIlR5cGVTY3JpcHQsIEF1cmVsaWEiCiAgICAgICAgICAgICAgICBkaWFsb2dSZWZlcmVuY2VBdHRyaWJ1dGUgPSBjb21wb25lbnQgIkRpYWxvZyBSZWZlcmVuY2UgQXR0cmlidXRlIiAiRGlhbG9nIGZvciBlZGl0aW5nIHJlZmVyZW5jZSBhdHRyaWJ1dGVzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIGRpYWxvZ1RhYmxlQXR0cmlidXRlID0gY29tcG9uZW50ICJEaWFsb2cgVGFibGUgQXR0cmlidXRlIiAiRGlhbG9nIGZvciBlZGl0aW5nIHRhYmxlIGF0dHJpYnV0ZXMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgZGlhbG9nQ3JlYXRlTmV3U2NlbmUgPSBjb21wb25lbnQgIkRpYWxvZyBDcmVhdGUgTmV3IFNjZW5lIiAiRGlhbG9nIGZvciBjcmVhdGluZyBuZXcgc2NlbmVzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIGRpYWxvZ0NvcHlTY2VuZSA9IGNvbXBvbmVudCAiRGlhbG9nIENvcHkgU2NlbmUiICJEaWFsb2cgZm9yIGNvcHlpbmcgc2NlbmVzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIGRpYWxvZ1NhdmVBcyA9IGNvbXBvbmVudCAiRGlhbG9nIFNhdmUgQXMiICJEaWFsb2cgZm9yIHNhdmluZyBtb2RlbHMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgZGlhbG9nSW1wb3J0TW9kZWwgPSBjb21wb25lbnQgIkRpYWxvZyBJbXBvcnQgTW9kZWwiICJEaWFsb2cgZm9yIGltcG9ydGluZyBtb2RlbHMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgZGlhbG9nSW1wb3J0TWV0YW1vZGVsID0gY29tcG9uZW50ICJEaWFsb2cgSW1wb3J0IE1ldGFtb2RlbCIgIkRpYWxvZyBmb3IgaW1wb3J0aW5nIG1ldGFtb2RlbHMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgZGlhbG9nQWxnb3JpdGhtID0gY29tcG9uZW50ICJEaWFsb2cgQWxnb3JpdGhtIiAiRGlhbG9nIGZvciBjb25maWd1cmluZyBhbmQgcnVubmluZyBhbGdvcml0aG1zIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgLy8gU2VydmljZSByZWxhdGlvbnNoaXBzCiAgICAgICAgICAgICAgICBoeWJyaWRBbGdvcml0aG1zU2VydmljZSAtPiBpbnN0YW5jZVV0aWxpdHlTZXJ2aWNlICJVc2VzIHRvIGFwcGx5IGFsZ29yaXRobXMgdG8gaW5zdGFuY2VzIgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAvLyBVSSB0byBTZXJ2aWNlIHJlbGF0aW9uc2hpcHMKICAgICAgICAgICAgICAgIGF0dHJpYnV0ZVdpbmRvdyAtPiBoeWJyaWRBbGdvcml0aG1zU2VydmljZSAiVHJpZ2dlcnMgYWxnb3JpdGhtIGNoZWNrcyB3aGVuIGF0dHJpYnV0ZXMgY2hhbmdlIgogICAgICAgICAgICAgICAgYXR0cmlidXRlV2luZG93IC0+IGluc3RhbmNlVXRpbGl0eVNlcnZpY2UgIlJldHJpZXZlcyBhbmQgdXBkYXRlcyBpbnN0YW5jZSBhdHRyaWJ1dGVzIgogICAgICAgICAgICAgICAgYXR0cmlidXRlV2luZG93IC0+IG1ldGFVdGlsaXR5U2VydmljZSAiVmFsaWRhdGVzIGF0dHJpYnV0ZSBjb25zdHJhaW50cyIKICAgICAgICAgICAgICAgIGF0dHJpYnV0ZVdpbmRvdyAtPiBmZXRjaEhlbHBlclNlcnZpY2UgIlNhdmVzIGF0dHJpYnV0ZSBjaGFuZ2VzIHRvIHNlcnZlciIKICAgICAgICAgICAgICAgIHRocmVlQ2FudmFzIC0+IGh5YnJpZEFsZ29yaXRobXNTZXJ2aWNlICJVcGRhdGVzIGFsZ29yaXRobS1jb21wdXRlZCBhdHRyaWJ1dGVzIgogICAgICAgICAgICAgICAgbUxlZnROYXYgLT4gbVNlbGVjdGVkT2JqZWN0U2VydmljZSAiVXBkYXRlcyBjdXJyZW50bHkgc2VsZWN0ZWQgb2JqZWN0IgogICAgICAgICAgICAgICAgbU1pZGRsZUJvZHkgLT4gdGhyZWVDYW52YXMgIkNvbnRhaW5zIGZvciAzRCB2aXN1YWxpemF0aW9uIgogICAgICAgICAgICAgICAgbVJpZ2h0TmF2IC0+IHN0YXRlT2JqZWN0U2VydmljZSAiRGlzcGxheXMgYW5kIG1hbmFnZXMgc3RhdGUgb3B0aW9ucyIKICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgLy8gRGlhbG9nIHJlbGF0aW9uc2hpcHMKICAgICAgICAgICAgICAgIG1EaWFsb2dVcGxvYWRGaWxlIC0+IGZldGNoSGVscGVyU2VydmljZSAiVXBsb2FkcyBmaWxlcyB0byBzZXJ2ZXIiCiAgICAgICAgICAgICAgICBkaWFsb2dBdHRyaWJ1dGVXaW5kb3cgLT4gaHlicmlkQWxnb3JpdGhtc1NlcnZpY2UgIkNoZWNrcyBhbGdvcml0aG1zIGFmdGVyIGF0dHJpYnV0ZSBjaGFuZ2VzIgogICAgICAgICAgICAgICAgZGlhbG9nUmVmZXJlbmNlQXR0cmlidXRlIC0+IGh5YnJpZEFsZ29yaXRobXNTZXJ2aWNlICJDaGVja3MgYWxnb3JpdGhtcyBhZnRlciByZWZlcmVuY2UgY2hhbmdlcyIKICAgICAgICAgICAgICAgIGRpYWxvZ0NyZWF0ZU5ld1NjZW5lIC0+IGluc3RhbmNlVXRpbGl0eVNlcnZpY2UgIkNyZWF0ZXMgbmV3IHNjZW5lIGluc3RhbmNlcyIKICAgICAgICAgICAgICAgIGRpYWxvZ0NyZWF0ZU5ld1NjZW5lIC0+IG1ldGFVdGlsaXR5U2VydmljZSAiUmV0cmlldmVzIHNjZW5lIHR5cGUgZGVmaW5pdGlvbnMiCiAgICAgICAgICAgICAgICBkaWFsb2dDb3B5U2NlbmUgLT4gaHlicmlkQWxnb3JpdGhtc1NlcnZpY2UgIlJ1bnMgYWxnb3JpdGhtcyBvbiBjb3BpZWQgc2NlbmUiCiAgICAgICAgICAgICAgICBkaWFsb2dJbXBvcnRNb2RlbCAtPiBmZXRjaEhlbHBlclNlcnZpY2UgIkltcG9ydHMgbW9kZWwgZnJvbSBzZXJ2ZXIiCiAgICAgICAgICAgICAgICBhdHRyaWJ1dGVXaW5kb3cgLT4gbURpYWxvZ1VwbG9hZEZpbGUgIk9wZW5zIGZvciBmaWxlIGF0dHJpYnV0ZSBlZGl0aW5nIgogICAgICAgICAgICAgICAgYXR0cmlidXRlV2luZG93IC0+IGRpYWxvZ1JlZmVyZW5jZUF0dHJpYnV0ZSAiT3BlbnMgZm9yIHJlZmVyZW5jZSBhdHRyaWJ1dGUgZWRpdGluZyIKICAgICAgICAgICAgICAgIGF0dHJpYnV0ZVdpbmRvdyAtPiBkaWFsb2dUYWJsZUF0dHJpYnV0ZSAiT3BlbnMgZm9yIHRhYmxlIGF0dHJpYnV0ZSBlZGl0aW5nIgogICAgICAgICAgICB9CgogICAgICAgICAgICBNZXRhbW9kZWxpbmdDbGllbnQgPSBjb250YWluZXIgIk1NQVIgTWV0YW1vZGVsaW5nIENsaWVudCIgIkRlc2t0b3AvV2ViIENsaWVudCBmb3IgbWV0YW1vZGVsIGRlc2lnbiIgIkF1cmVsaWEvVHlwZVNjcmlwdC9Ob2RlLmpzIiAiTWV0YW1vZGVsaW5nQ2xpZW50IiB7CiAgICAgICAgICAgICAgICAvLyBDb3JlIHNlcnZpY2VzCiAgICAgICAgICAgICAgICBtbVNlbGVjdGVkT2JqZWN0U2VydmljZSA9IGNvbXBvbmVudCAiU2VsZWN0ZWQgT2JqZWN0IFNlcnZpY2UiICJNYW5hZ2VzIHRoZSBjdXJyZW50bHkgc2VsZWN0ZWQgb2JqZWN0IGFuZCBwdWJsaXNoZXMgZXZlbnRzIHdoZW4gc2VsZWN0aW9uIGNoYW5nZXMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgYmFja2VuZFNlcnZpY2UgPSBjb21wb25lbnQgIkJhY2tlbmQgU2VydmljZSIgIkhhbmRsZXMgY29tbXVuaWNhdGlvbiB3aXRoIHRoZSBiYWNrZW5kIHNlcnZlciIgIlR5cGVTY3JpcHQsIEh0dHBDbGllbnQiCiAgICAgICAgICAgICAgICBoZWxwZXJTZXJ2aWNlID0gY29tcG9uZW50ICJIZWxwZXIgU2VydmljZSIgIlByb3ZpZGVzIHV0aWxpdHkgZnVuY3Rpb25zIGZvciBmaWxlIGNvbnZlcnNpb24gYW5kIG90aGVyIHRhc2tzIiAiVHlwZVNjcmlwdCIKICAgICAgICAgICAgICAgIHVzZXJTZXJ2aWNlID0gY29tcG9uZW50ICJVc2VyIFNlcnZpY2UiICJNYW5hZ2VzIHVzZXIgYXV0aGVudGljYXRpb24gYW5kIGluZm9ybWF0aW9uIiAiVHlwZVNjcmlwdCIKICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIC8vIFVJIENvbXBvbmVudHMKICAgICAgICAgICAgICAgIG1tTGVmdE5hdiA9IGNvbXBvbmVudCAiTGVmdCBOYXZpZ2F0aW9uIiAiTmF2aWdhdGlvbiB0cmVlIGZvciBicm93c2luZyBtb2RlbCBvYmplY3RzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIG1tTWlkZGxlQm9keSA9IGNvbXBvbmVudCAiTWlkZGxlIEJvZHkiICJNYWluIGNvbnRlbnQgYXJlYSBmb3IgZGlzcGxheWluZyBhbmQgZWRpdGluZyBvYmplY3RzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIG1tUmlnaHROYXYgPSBjb21wb25lbnQgIlJpZ2h0IE5hdmlnYXRpb24iICJDb250ZXh0LXNwZWNpZmljIG5hdmlnYXRpb24gYW5kIG9wdGlvbnMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgLy8gTWlkZGxlIEJvZHkgQ29tcG9uZW50cwogICAgICAgICAgICAgICAgZ2VuZXJhbFRhYiA9IGNvbXBvbmVudCAiR2VuZXJhbCBUYWIiICJUYWIgZGlzcGxheWluZyBnZW5lcmFsIHByb3BlcnRpZXMgb2Ygb2JqZWN0cyIgIlR5cGVTY3JpcHQsIEF1cmVsaWEiCiAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAvLyBPYmplY3Qtc3BlY2lmaWMgQ29tcG9uZW50cwogICAgICAgICAgICAgICAgZ2VuZXJhbFRhYkNsYXNzID0gY29tcG9uZW50ICJHZW5lcmFsIFRhYiBDbGFzcyIgIkNvbXBvbmVudCBmb3IgZGlzcGxheWluZyBhbmQgZWRpdGluZyBjbGFzcyBvYmplY3RzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIGdlbmVyYWxUYWJGaWxlID0gY29tcG9uZW50ICJHZW5lcmFsIFRhYiBGaWxlIiAiQ29tcG9uZW50IGZvciBkaXNwbGF5aW5nIGFuZCBlZGl0aW5nIGZpbGUgb2JqZWN0cyIgIlR5cGVTY3JpcHQsIEF1cmVsaWEiCiAgICAgICAgICAgICAgICBnZW5lcmFsVGFiUmVsYXRpb25jbGFzcyA9IGNvbXBvbmVudCAiR2VuZXJhbCBUYWIgUmVsYXRpb25DbGFzcyIgIkNvbXBvbmVudCBmb3IgZGlzcGxheWluZyBhbmQgZWRpdGluZyByZWxhdGlvbiBjbGFzcyBvYmplY3RzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIC8vIEZpbGUtc3BlY2lmaWMgQ29tcG9uZW50cwogICAgICAgICAgICAgICAgbW1EaWFsb2dVcGxvYWRGaWxlID0gY29tcG9uZW50ICJEaWFsb2cgVXBsb2FkIEZpbGUiICJEaWFsb2cgZm9yIHVwbG9hZGluZyBhbmQgcmVwbGFjaW5nIGZpbGVzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIC8vIFJlbGF0aW9uc2hpcHMgYmV0d2VlbiBjb21wb25lbnRzCiAgICAgICAgICAgICAgICBtbUxlZnROYXYgLT4gbW1TZWxlY3RlZE9iamVjdFNlcnZpY2UgIlVwZGF0ZXMgc2VsZWN0ZWQgb2JqZWN0IgogICAgICAgICAgICAgICAgbW1NaWRkbGVCb2R5IC0+IG1tU2VsZWN0ZWRPYmplY3RTZXJ2aWNlICJPYnNlcnZlcyBzZWxlY3RlZCBvYmplY3QiCiAgICAgICAgICAgICAgICBnZW5lcmFsVGFiIC0+IG1tU2VsZWN0ZWRPYmplY3RTZXJ2aWNlICJSZWFkcyBzZWxlY3RlZCBvYmplY3QgcHJvcGVydGllcyIKICAgICAgICAgICAgICAgIGdlbmVyYWxUYWJGaWxlIC0+IGhlbHBlclNlcnZpY2UgIlVzZXMgZm9yIGZpbGUgY29udmVyc2lvbiIKICAgICAgICAgICAgICAgIGdlbmVyYWxUYWJGaWxlIC0+IG1tU2VsZWN0ZWRPYmplY3RTZXJ2aWNlICJSZWFkcyBmaWxlIGRhdGEiCiAgICAgICAgICAgICAgICBtbURpYWxvZ1VwbG9hZEZpbGUgLT4gaGVscGVyU2VydmljZSAiVXNlcyBmb3IgZmlsZSBjb252ZXJzaW9uIgogICAgICAgICAgICAgICAgbW1EaWFsb2dVcGxvYWRGaWxlIC0+IG1tU2VsZWN0ZWRPYmplY3RTZXJ2aWNlICJVcGRhdGVzIGZpbGUgZGF0YSIKICAgICAgICAgICAgICAgIGJhY2tlbmRTZXJ2aWNlIC0+IG1tU2VsZWN0ZWRPYmplY3RTZXJ2aWNlICJVcGRhdGVzIG9iamVjdCBjb2xsZWN0aW9ucyIKICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIC8vIFNlcnZpY2UgaW50ZXJhY3Rpb25zCiAgICAgICAgICAgICAgICBtbVNlbGVjdGVkT2JqZWN0U2VydmljZSAtPiBiYWNrZW5kU2VydmljZSAiUmVxdWVzdHMgb2JqZWN0IGRhdGEiCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIFZpelJlcENsaWVudCA9IGNvbnRhaW5lciAiTU1BUiBWaXpSZXAgQ2xpZW50IiAiQ2xpZW50IGZvciB2aXN1YWwgcmVwcmVzZW50YXRpb24gZGVzaWduIG9mIG1ldGFtb2RlbCBlbGVtZW50cyIgIkF1cmVsaWEvVHlwZVNjcmlwdC9UaHJlZS5qcy9Ob2RlLmpzIiAiVml6UmVwQ2xpZW50IiB7CiAgICAgICAgICAgICAgICAvLyBDb21wb25lbnRzIGZvciB2aXN1YWxpemF0aW9uIGRlc2lnbiB3b3VsZCBnbyBoZXJlCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIEFQSVNlcnZlciA9IGNvbnRhaW5lciAiTU1BUiBBUEkgU2VydmVyIiAiQmFja2VuZCBzZXJ2ZXIgcHJvdmlkaW5nIFJFU1QgQVBJcyBmb3IgTU1BUiBjbGllbnRzIiAiRXhwcmVzcy5qcy9Ob2RlLmpzIiAiQVBJX1NlcnZlciIgewogICAgICAgICAgICAgICAgLy8gQ29udHJvbGxlciBsYXllcgogICAgICAgICAgICAgICAgbWV0YU9iamVjdHNDb250cm9sbGVyID0gY29tcG9uZW50ICJNZXRhbW9kZWwgT2JqZWN0cyBDb250cm9sbGVyIiAiSGFuZGxlcyBSRVNUIEFQSSByZXF1ZXN0cyBmb3IgYmFzZSBtZXRhbW9kZWwgb2JqZWN0cyIgIlR5cGVTY3JpcHQsIEV4cHJlc3MuanMiCiAgICAgICAgICAgICAgICBtZXRhQ2xhc3Nlc0NvbnRyb2xsZXIgPSBjb21wb25lbnQgIk1ldGFtb2RlbCBDbGFzc2VzIENvbnRyb2xsZXIiICJIYW5kbGVzIFJFU1QgQVBJIHJlcXVlc3RzIGZvciBtZXRhbW9kZWwgY2xhc3NlcyIgIlR5cGVTY3JpcHQsIEV4cHJlc3MuanMiCiAgICAgICAgICAgICAgICBtZXRhUmVsYXRpb25DbGFzc2VzQ29udHJvbGxlciA9IGNvbXBvbmVudCAiTWV0YW1vZGVsIFJlbGF0aW9uIENsYXNzZXMgQ29udHJvbGxlciIgIkhhbmRsZXMgUkVTVCBBUEkgcmVxdWVzdHMgZm9yIHJlbGF0aW9uIGNsYXNzZXMiICJUeXBlU2NyaXB0LCBFeHByZXNzLmpzIgogICAgICAgICAgICAgICAgbWV0YUF0dHJpYnV0ZXNDb250cm9sbGVyID0gY29tcG9uZW50ICJNZXRhbW9kZWwgQXR0cmlidXRlcyBDb250cm9sbGVyIiAiSGFuZGxlcyBSRVNUIEFQSSByZXF1ZXN0cyBmb3IgbWV0YW1vZGVsIGF0dHJpYnV0ZXMiICJUeXBlU2NyaXB0LCBFeHByZXNzLmpzIgogICAgICAgICAgICAgICAgbWV0YVBvcnRzQ29udHJvbGxlciA9IGNvbXBvbmVudCAiTWV0YW1vZGVsIFBvcnRzIENvbnRyb2xsZXIiICJIYW5kbGVzIFJFU1QgQVBJIHJlcXVlc3RzIGZvciBtZXRhbW9kZWwgcG9ydHMiICJUeXBlU2NyaXB0LCBFeHByZXNzLmpzIiAKICAgICAgICAgICAgICAgIG1ldGFTY2VuZVR5cGVzQ29udHJvbGxlciA9IGNvbXBvbmVudCAiTWV0YW1vZGVsIFNjZW5lIFR5cGVzIENvbnRyb2xsZXIiICJIYW5kbGVzIFJFU1QgQVBJIHJlcXVlc3RzIGZvciBzY2VuZSB0eXBlcyIgIlR5cGVTY3JpcHQsIEV4cHJlc3MuanMiCiAgICAgICAgICAgICAgICBtZXRhRmlsZXNDb250cm9sbGVyID0gY29tcG9uZW50ICJNZXRhbW9kZWwgRmlsZXMgQ29udHJvbGxlciIgIkhhbmRsZXMgUkVTVCBBUEkgcmVxdWVzdHMgZm9yIGZpbGUgb3BlcmF0aW9ucyIgIlR5cGVTY3JpcHQsIEV4cHJlc3MuanMiCiAgICAgICAgICAgICAgICB1c2Vyc0NvbnRyb2xsZXIgPSBjb21wb25lbnQgIlVzZXJzIENvbnRyb2xsZXIiICJIYW5kbGVzIFJFU1QgQVBJIHJlcXVlc3RzIGZvciB1c2VyIG1hbmFnZW1lbnQiICJUeXBlU2NyaXB0LCBFeHByZXNzLmpzIgogICAgICAgICAgICAgICAgdXNlckdyb3Vwc0NvbnRyb2xsZXIgPSBjb21wb25lbnQgIlVzZXIgR3JvdXBzIENvbnRyb2xsZXIiICJIYW5kbGVzIFJFU1QgQVBJIHJlcXVlc3RzIGZvciB1c2VyIGdyb3VwIG1hbmFnZW1lbnQiICJUeXBlU2NyaXB0LCBFeHByZXNzLmpzIgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAvLyBEYXRhIGFjY2VzcyBsYXllcgogICAgICAgICAgICAgICAgbWV0YU9iamVjdHNDb25uZWN0aW9uID0gY29tcG9uZW50ICJNZXRhbW9kZWwgT2JqZWN0cyBDb25uZWN0aW9uIiAiSW1wbGVtZW50cyBDUlVEIG9wZXJhdGlvbnMgZm9yIG1ldGFtb2RlbCBvYmplY3RzIiAiVHlwZVNjcmlwdCwgUG9zdGdyZVNRTCBjbGllbnQiCiAgICAgICAgICAgICAgICBtZXRhQ2xhc3Nlc0Nvbm5lY3Rpb24gPSBjb21wb25lbnQgIk1ldGFtb2RlbCBDbGFzc2VzIENvbm5lY3Rpb24iICJJbXBsZW1lbnRzIENSVUQgb3BlcmF0aW9ucyBmb3IgbWV0YW1vZGVsIGNsYXNzZXMiICJUeXBlU2NyaXB0LCBQb3N0Z3JlU1FMIGNsaWVudCIKICAgICAgICAgICAgICAgIG1ldGFSZWxhdGlvbkNsYXNzZXNDb25uZWN0aW9uID0gY29tcG9uZW50ICJNZXRhbW9kZWwgUmVsYXRpb24gQ2xhc3NlcyBDb25uZWN0aW9uIiAiSW1wbGVtZW50cyBDUlVEIG9wZXJhdGlvbnMgZm9yIHJlbGF0aW9uIGNsYXNzZXMiICJUeXBlU2NyaXB0LCBQb3N0Z3JlU1FMIGNsaWVudCIKICAgICAgICAgICAgICAgIG1ldGFBdHRyaWJ1dGVzQ29ubmVjdGlvbiA9IGNvbXBvbmVudCAiTWV0YW1vZGVsIEF0dHJpYnV0ZXMgQ29ubmVjdGlvbiIgIkltcGxlbWVudHMgQ1JVRCBvcGVyYXRpb25zIGZvciBhdHRyaWJ1dGVzIiAiVHlwZVNjcmlwdCwgUG9zdGdyZVNRTCBjbGllbnQiCiAgICAgICAgICAgICAgICBtZXRhUG9ydHNDb25uZWN0aW9uID0gY29tcG9uZW50ICJNZXRhbW9kZWwgUG9ydHMgQ29ubmVjdGlvbiIgIkltcGxlbWVudHMgQ1JVRCBvcGVyYXRpb25zIGZvciBwb3J0cyIgIlR5cGVTY3JpcHQsIFBvc3RncmVTUUwgY2xpZW50IgogICAgICAgICAgICAgICAgbWV0YVNjZW5lVHlwZXNDb25uZWN0aW9uID0gY29tcG9uZW50ICJNZXRhbW9kZWwgU2NlbmUgVHlwZXMgQ29ubmVjdGlvbiIgIkltcGxlbWVudHMgQ1JVRCBvcGVyYXRpb25zIGZvciBzY2VuZSB0eXBlcyIgIlR5cGVTY3JpcHQsIFBvc3RncmVTUUwgY2xpZW50IgogICAgICAgICAgICAgICAgbWV0YUZpbGVzQ29ubmVjdGlvbiA9IGNvbXBvbmVudCAiTWV0YW1vZGVsIEZpbGVzIENvbm5lY3Rpb24iICJJbXBsZW1lbnRzIENSVUQgb3BlcmF0aW9ucyBmb3IgZmlsZXMiICJUeXBlU2NyaXB0LCBQb3N0Z3JlU1FMIGNsaWVudCIKICAgICAgICAgICAgICAgIHVzZXJzQ29ubmVjdGlvbiA9IGNvbXBvbmVudCAiVXNlcnMgQ29ubmVjdGlvbiIgIkltcGxlbWVudHMgQ1JVRCBvcGVyYXRpb25zIGZvciB1c2VycyIgIlR5cGVTY3JpcHQsIFBvc3RncmVTUUwgY2xpZW50IgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAvLyBTZXJ2aWNlIGxheWVyCiAgICAgICAgICAgICAgICBpbWFnZVNlcnZpY2UgPSBjb21wb25lbnQgIkltYWdlIFNlcnZpY2UiICJIYW5kbGVzIGltYWdlIHByb2Nlc3NpbmcgbGlrZSBjb21wcmVzc2lvbiIgIlR5cGVTY3JpcHQsIFNoYXJwIgogICAgICAgICAgICAgICAgb2JqZWN0RmlsdGVyU2VydmljZSA9IGNvbXBvbmVudCAiT2JqZWN0IEZpbHRlciBTZXJ2aWNlIiAiRmlsdGVycyByZXNwb25zZSBvYmplY3RzIGJhc2VkIG9uIHF1ZXJ5IHBhcmFtZXRlcnMiICJUeXBlU2NyaXB0IgogICAgICAgICAgICAgICAgYXV0aFNlcnZpY2UgPSBjb21wb25lbnQgIkF1dGhlbnRpY2F0aW9uIFNlcnZpY2UiICJIYW5kbGVzIHVzZXIgYXV0aGVudGljYXRpb24gYW5kIGF1dGhvcml6YXRpb24iICJUeXBlU2NyaXB0LCBKV1QiCiAgICAgICAgICAgICAgICBkYXRhYmFzZVNlcnZpY2UgPSBjb21wb25lbnQgIkRhdGFiYXNlIENvbm5lY3Rpb24gU2VydmljZSIgIk1hbmFnZXMgZGF0YWJhc2UgY29ubmVjdGlvbiBwb29scyIgIlR5cGVTY3JpcHQsIHBnIgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAvLyBNaWRkbGV3YXJlCiAgICAgICAgICAgICAgICBlcnJvckhhbmRsZXJNaWRkbGV3YXJlID0gY29tcG9uZW50ICJFcnJvciBIYW5kbGVyIE1pZGRsZXdhcmUiICJQcm9jZXNzZXMgYW5kIGZvcm1hdHMgQVBJIGVycm9ycyIgIlR5cGVTY3JpcHQsIEV4cHJlc3MuanMiCiAgICAgICAgICAgICAgICBhdXRoTWlkZGxld2FyZSA9IGNvbXBvbmVudCAiQXV0aGVudGljYXRpb24gTWlkZGxld2FyZSIgIlZlcmlmaWVzIHVzZXIgYXV0aGVudGljYXRpb24gdG9rZW5zIiAiVHlwZVNjcmlwdCwgRXhwcmVzcy5qcyIKICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgLy8gQ29udHJvbGxlciB0byBDb25uZWN0aW9uIHJlbGF0aW9uc2hpcHMKICAgICAgICAgICAgICAgIG1ldGFPYmplY3RzQ29udHJvbGxlciAtPiBtZXRhT2JqZWN0c0Nvbm5lY3Rpb24gIlBlcmZvcm1zIENSVUQgb3BlcmF0aW9ucyB2aWEiCiAgICAgICAgICAgICAgICBtZXRhQ2xhc3Nlc0NvbnRyb2xsZXIgLT4gbWV0YUNsYXNzZXNDb25uZWN0aW9uICJEZWxlZ2F0ZXMgZGF0YSBtYW5hZ2VtZW50IHRvIgogICAgICAgICAgICAgICAgbWV0YVJlbGF0aW9uQ2xhc3Nlc0NvbnRyb2xsZXIgLT4gbWV0YVJlbGF0aW9uQ2xhc3Nlc0Nvbm5lY3Rpb24gIlBlcnNpc3RzIHJlbGF0aW9uIGNsYXNzIGRhdGEgdGhyb3VnaCIKICAgICAgICAgICAgICAgIG1ldGFBdHRyaWJ1dGVzQ29udHJvbGxlciAtPiBtZXRhQXR0cmlidXRlc0Nvbm5lY3Rpb24gIk1hbmFnZXMgYXR0cmlidXRlIGRhdGEgdmlhIgogICAgICAgICAgICAgICAgbWV0YVBvcnRzQ29udHJvbGxlciAtPiBtZXRhUG9ydHNDb25uZWN0aW9uICJIYW5kbGVzIHBvcnQgcGVyc2lzdGVuY2UgdGhyb3VnaCIKICAgICAgICAgICAgICAgIG1ldGFTY2VuZVR5cGVzQ29udHJvbGxlciAtPiBtZXRhU2NlbmVUeXBlc0Nvbm5lY3Rpb24gIlN0b3JlcyBzY2VuZSB0eXBlIGRhdGEgdXNpbmciCiAgICAgICAgICAgICAgICBtZXRhRmlsZXNDb250cm9sbGVyIC0+IG1ldGFGaWxlc0Nvbm5lY3Rpb24gIlBlcnNpc3RzIGZpbGUgbWV0YWRhdGEgYW5kIGNvbnRlbnQgd2l0aCIKICAgICAgICAgICAgICAgIHVzZXJzQ29udHJvbGxlciAtPiB1c2Vyc0Nvbm5lY3Rpb24gIk1hbmFnZXMgdXNlciBhY2NvdW50cyB0aHJvdWdoIgogICAgICAgICAgICAgICAgdXNlckdyb3Vwc0NvbnRyb2xsZXIgLT4gdXNlcnNDb25uZWN0aW9uICJBZG1pbmlzdGVycyBncm91cCBtZW1iZXJzaGlwcyB2aWEiCgogICAgICAgICAgICAgICAgLy8gQ29udHJvbGxlcnMgdG8gU2VydmljZSByZWxhdGlvbnNoaXBzCiAgICAgICAgICAgICAgICBtZXRhRmlsZXNDb250cm9sbGVyIC0+IGltYWdlU2VydmljZSAiUHJvY2Vzc2VzIGFuZCBvcHRpbWl6ZXMgaW1hZ2VzIHdpdGgiCiAgICAgICAgICAgICAgICBtZXRhT2JqZWN0c0NvbnRyb2xsZXIgLT4gb2JqZWN0RmlsdGVyU2VydmljZSAiQXBwbGllcyByZXNwb25zZSBmaWx0ZXJpbmcgdXNpbmciCiAgICAgICAgICAgICAgICBtZXRhQ2xhc3Nlc0NvbnRyb2xsZXIgLT4gb2JqZWN0RmlsdGVyU2VydmljZSAiVGFpbG9ycyByZXNwb25zZSBjb250ZW50IHZpYSIKICAgICAgICAgICAgICAgIG1ldGFSZWxhdGlvbkNsYXNzZXNDb250cm9sbGVyIC0+IG9iamVjdEZpbHRlclNlcnZpY2UgIkN1c3RvbWl6ZXMgcmVzcG9uc2UgZmllbGRzIHdpdGgiCiAgICAgICAgICAgICAgICBtZXRhQXR0cmlidXRlc0NvbnRyb2xsZXIgLT4gb2JqZWN0RmlsdGVyU2VydmljZSAiRm9ybWF0cyBhdHRyaWJ1dGUgcmVzcG9uc2VzIHRocm91Z2giCiAgICAgICAgICAgICAgICBtZXRhUG9ydHNDb250cm9sbGVyIC0+IG9iamVjdEZpbHRlclNlcnZpY2UgIlNlbGVjdGl2ZWx5IGV4cG9zZXMgcG9ydCBkYXRhIHVzaW5nIgogICAgICAgICAgICAgICAgbWV0YVNjZW5lVHlwZXNDb250cm9sbGVyIC0+IG9iamVjdEZpbHRlclNlcnZpY2UgIkZpbHRlcnMgc2NlbmUgdHlwZSByZXNwb25zZXMgdmlhIgoKICAgICAgICAgICAgICAgIC8vIENvbm5lY3Rpb24gdG8gU2VydmljZSByZWxhdGlvbnNoaXBzCiAgICAgICAgICAgICAgICBtZXRhT2JqZWN0c0Nvbm5lY3Rpb24gLT4gZGF0YWJhc2VTZXJ2aWNlICJFeGVjdXRlcyBTUUwgcXVlcmllcyB0aHJvdWdoIgogICAgICAgICAgICAgICAgbWV0YUNsYXNzZXNDb25uZWN0aW9uIC0+IGRhdGFiYXNlU2VydmljZSAiTWFuYWdlcyBkYXRhYmFzZSBjb25uZWN0aW9ucyB2aWEiCiAgICAgICAgICAgICAgICBtZXRhUmVsYXRpb25DbGFzc2VzQ29ubmVjdGlvbiAtPiBkYXRhYmFzZVNlcnZpY2UgIlJ1bnMgdHJhbnNhY3Rpb25zIHVzaW5nIgogICAgICAgICAgICAgICAgbWV0YUF0dHJpYnV0ZXNDb25uZWN0aW9uIC0+IGRhdGFiYXNlU2VydmljZSAiQWNxdWlyZXMgY29ubmVjdGlvbiBwb29scyBmcm9tIgogICAgICAgICAgICAgICAgbWV0YVBvcnRzQ29ubmVjdGlvbiAtPiBkYXRhYmFzZVNlcnZpY2UgIkV4ZWN1dGVzIHBhcmFtZXRlcml6ZWQgcXVlcmllcyB2aWEiCiAgICAgICAgICAgICAgICBtZXRhU2NlbmVUeXBlc0Nvbm5lY3Rpb24gLT4gZGF0YWJhc2VTZXJ2aWNlICJQZXJmb3JtcyBkYXRhYmFzZSBvcGVyYXRpb25zIHRocm91Z2giCiAgICAgICAgICAgICAgICBtZXRhRmlsZXNDb25uZWN0aW9uIC0+IGRhdGFiYXNlU2VydmljZSAiU3RvcmVzIGJpbmFyeSBkYXRhIHVzaW5nIgogICAgICAgICAgICAgICAgdXNlcnNDb25uZWN0aW9uIC0+IGRhdGFiYXNlU2VydmljZSAiUmV0cmlldmVzIHVzZXIgcmVjb3JkcyBmcm9tIgoKICAgICAgICAgICAgICAgIC8vIE1pZGRsZXdhcmUgcmVsYXRpb25zaGlwcwogICAgICAgICAgICAgICAgYXV0aE1pZGRsZXdhcmUgLT4gYXV0aFNlcnZpY2UgIlZhbGlkYXRlcyBhdXRoZW50aWNhdGlvbiB0b2tlbnMgd2l0aCIKICAgICAgICAgICAgICAgIHVzZXJzQ29udHJvbGxlciAtPiBhdXRoTWlkZGxld2FyZSAiU2VjdXJlcyBlbmRwb2ludHMgdXNpbmciCiAgICAgICAgICAgICAgICBtZXRhT2JqZWN0c0NvbnRyb2xsZXIgLT4gZXJyb3JIYW5kbGVyTWlkZGxld2FyZSAiRGVsZWdhdGVzIGVycm9yIHByb2Nlc3NpbmcgdG8iCiAgICAgICAgICAgICAgICBtZXRhQ2xhc3Nlc0NvbnRyb2xsZXIgLT4gZXJyb3JIYW5kbGVyTWlkZGxld2FyZSAiQ2VudHJhbGl6ZXMgZXJyb3IgaGFuZGxpbmcgd2l0aCIKICAgICAgICAgICAgICAgIG1ldGFSZWxhdGlvbkNsYXNzZXNDb250cm9sbGVyIC0+IGVycm9ySGFuZGxlck1pZGRsZXdhcmUgIkZvcm1hdHMgZXJyb3IgcmVzcG9uc2VzIHZpYSIKICAgICAgICAgICAgICAgIG1ldGFBdHRyaWJ1dGVzQ29udHJvbGxlciAtPiBlcnJvckhhbmRsZXJNaWRkbGV3YXJlICJTdGFuZGFyZGl6ZXMgZXJyb3Igb3V0cHV0cyB0aHJvdWdoIgogICAgICAgICAgICAgICAgbWV0YVBvcnRzQ29udHJvbGxlciAtPiBlcnJvckhhbmRsZXJNaWRkbGV3YXJlICJSZXBvcnRzIG9wZXJhdGlvbmFsIGZhaWx1cmVzIHRvIgogICAgICAgICAgICAgICAgbWV0YVNjZW5lVHlwZXNDb250cm9sbGVyIC0+IGVycm9ySGFuZGxlck1pZGRsZXdhcmUgIlByb2Nlc3NlcyBleGNlcHRpb25zIHdpdGgiCiAgICAgICAgICAgICAgICBtZXRhRmlsZXNDb250cm9sbGVyIC0+IGVycm9ySGFuZGxlck1pZGRsZXdhcmUgIkhhbmRsZXMgdXBsb2FkL2Rvd25sb2FkIGVycm9ycyB0aHJvdWdoIgogICAgICAgICAgICB9CgogICAgICAgICAgICBEYXRhYmFzZSA9IGNvbnRhaW5lciAiTU1BUiBEYXRhYmFzZSIgIkRhdGFiYXNlIGZvciBwZXJzaXN0aW5nIG1ldGFtb2RlbHMsIG1vZGVscywgYW5kIGxvZ3MiICJQb3N0Z3JlU1FMIiAiRGF0YWJhc2UiCgogICAgICAgICAgICBHbG9iYWxEUyA9IGNvbnRhaW5lciAiR2xvYmFsIERhdGEgU3RydWN0dXJlIExpYnJhcnkiICJTaGFyZWQgZGF0YSBtb2RlbCBsaWJyYXJ5IChkb21haW4gY2xhc3NlcyBmb3IgbW9kZWxzL21ldGFtb2RlbHMpIiAiVHlwZVNjcmlwdCIgIkdsb2JhbERTIiB7CiAgICAgICAgICAgICAgICAvLyBHbG9iYWwgZGF0YSBzdHJ1Y3R1cmUgY29tcG9uZW50cyB3b3VsZCBnbyBoZXJlIGlmIHdlIGhhZCBtb3JlIGluZm9ybWF0aW9uCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIC8vIENvbnRhaW5lciBSZWxhdGlvbnNoaXBzCiAgICAgICAgICAgIFZpelJlcENsaWVudCAtPiBBUElTZXJ2ZXIgIlVzZXMgQVBJIGZvciB2aXN1YWxpemF0aW9uIGNvbmZpZyBvcHMiCiAgICAgICAgICAgIE1vZGVsaW5nQ2xpZW50IC0+IEFQSVNlcnZlciAiVXNlcyBBUEkgZm9yIG1vZGVsIG9wZXJhdGlvbnMiCiAgICAgICAgICAgIEFQSVNlcnZlciAtPiBEYXRhYmFzZSAiUmVhZHMvV3JpdGVzIG1ldGFtb2RlbHMsIG1vZGVscywgbG9ncyIKICAgICAgICAgICAgTWV0YW1vZGVsaW5nQ2xpZW50IC0+IEdsb2JhbERTICJFbWJlZGRlZCBkYXRhIGRlZmluaXRpb25zIgogICAgICAgICAgICBWaXpSZXBDbGllbnQgLT4gR2xvYmFsRFMgIkVtYmVkZGVkIGRhdGEgZGVmaW5pdGlvbnMiCiAgICAgICAgICAgIE1vZGVsaW5nQ2xpZW50IC0+IEdsb2JhbERTICJFbWJlZGRlZCBkYXRhIGRlZmluaXRpb25zIgogICAgICAgICAgICBiYWNrZW5kU2VydmljZSAtPiBBUElTZXJ2ZXIgIlVzZXMgQVBJIGZvciBtZXRhbW9kZWwgb3BlcmF0aW9ucyIKICAgICAgICAgICAgQVBJU2VydmVyIC0+IEdsb2JhbERTICJVc2VzIGZvciBkYXRhIHN0cnVjdHVyZXMiCiAgICAgICAgICAgIGZldGNoSGVscGVyU2VydmljZSAtPiBBUElTZXJ2ZXIgIk1ha2VzIEFQSSByZXF1ZXN0cyBmb3IgbW9kZWwgb3BlcmF0aW9ucyIKICAgICAgICAgICAgaW5zdGFuY2VVdGlsaXR5U2VydmljZSAtPiBHbG9iYWxEUyAiVXNlcyBmb3IgbW9kZWwgaW5zdGFuY2UgZGF0YSBzdHJ1Y3R1cmVzIgogICAgICAgICAgICBtZXRhVXRpbGl0eVNlcnZpY2UgLT4gR2xvYmFsRFMgIlVzZXMgZm9yIG1ldGFtb2RlbCBkYXRhIHN0cnVjdHVyZXMiCiAgICAgICAgfQoKCiAgICAgICAgLy8gU29mdHdhcmUgU3lzdGVtIFJlbGF0aW9uc2hpcHMKICAgICAgICBDcmVhdG9yIC0+IFZpelJlcENsaWVudCAidXNlcyB0byBkZXNpZ24gdmlzdWFsaXphdGlvbiBvZiBtZXRhbW9kZWwgZWxlbWVudHMiCiAgICAgICAgQ3JlYXRvciAtPiBNZXRhbW9kZWxpbmdDbGllbnQgInVzZXMgdG8gY3JlYXRlIGFuZCBtYW5hZ2UgbWV0YW1vZGVscyIKICAgICAgICBFbmRfVXNlciAtPiBNb2RlbGluZ0NsaWVudCAidXNlcyB0byBjcmVhdGUgbW9kZWxzIGJhc2VkIG9uIG1ldGFtb2RlbHMiCiAgICAgICAgCiAgICB9CiAgICB2aWV3cyB7CiAgICAgICAgc3lzdGVtQ29udGV4dCBNTUFSICJTeXN0ZW1Db250ZXh0RGlhZ3JhbSIgewogICAgICAgICAgICBpbmNsdWRlICogCiAgICAgICAgICAgIGF1dG9MYXlvdXQgbHIKICAgICAgICAgICAgdGl0bGUgIlN5c3RlbSBDb250ZXh0OiBNTUFSIE1ldGFtb2RlbGluZyB2cy4gTW9kZWxpbmcgU3lzdGVtcyIKICAgICAgICAgICAgZGVzY3JpcHRpb24gIkNyZWF0b3JzIGFuZCBFbmQgVXNlcnMgaW50ZXJhY3Qgd2l0aCB0d28gZmFjZXRzIG9mIHRoZSBNTUFSIHBsYXRmb3JtLiBDcmVhdG9ycyBkZXNpZ24gbWV0YW1vZGVscyAoYW5kIHRoZWlyIHZpc3VhbCByZXByZXNlbnRhdGlvbnMpIHVzaW5nIHRoZSBNZXRhbW9kZWxpbmcgU3lzdGVtLCB3aGlsZSBFbmQgVXNlcnMgY3JlYXRlIG1vZGVscyB1c2luZyB0aGUgTW9kZWxpbmcgU3lzdGVtLiBCb3RoIHN5c3RlbXMgcmVseSBvbiBhIGNvbW1vbiBNTUFSIFNlcnZlciBhbmQgRGF0YWJhc2UgYmFja2VuZC4iCiAgICAgICAgfQogICAgICAgIGNvbnRhaW5lciBNTUFSICJDb250YWluZXJEaWFncmFtIiB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgICAgICAvLyBhdXRvTGF5b3V0IGxyCiAgICAgICAgICAgIHRpdGxlICJDb250YWluZXIgRGlhZ3JhbTogTU1BUiBDbGllbnRzLCBCYWNrZW5kIGFuZCBEYXRhYmFzZSIKICAgICAgICAgICAgZGVzY3JpcHRpb24gIlRoZSBNTUFSIHBsYXRmb3JtIGNvbnNpc3RzIG9mIHRocmVlIG1haW4gY2xpZW50cyAoTW9kZWxpbmcsIE1ldGFtb2RlbGluZywgYW5kIFZpelJlcCkgdGhhdCBjb25uZWN0IHRvIGEgY29tbW9uIGJhY2tlbmQgc2VydmVyLiBUaGUgc2VydmVyIHByb3ZpZGVzIFJFU1QgQVBJcyBmb3IgbWV0YW1vZGVsIGFuZCBtb2RlbCBvcGVyYXRpb25zLCB3aGlsZSB0aGUgZGF0YWJhc2Ugc3RvcmVzIGFsbCByZWxldmFudCBkYXRhLiIKICAgICAgICB9CgogICAgICAgIGNvbXBvbmVudCBNZXRhbW9kZWxpbmdDbGllbnQgIk1ldGFtb2RlbGluZ0NsaWVudENvbXBvbmVudHMiIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9MYXlvdXQgbHIKICAgICAgICAgICAgdGl0bGUgIkNvbXBvbmVudCBEaWFncmFtOiBNTUFSIE1ldGFtb2RlbGluZyBDbGllbnQiCiAgICAgICAgICAgIGRlc2NyaXB0aW9uICJUaGUgTU1BUiBNZXRhbW9kZWxpbmcgQ2xpZW50IGNvbnNpc3RzIG9mIHZhcmlvdXMgY29tcG9uZW50cyBmb3IgbWFuYWdpbmcgc2VsZWN0ZWQgb2JqZWN0cywgY29tbXVuaWNhdGluZyB3aXRoIHRoZSBiYWNrZW5kLCBhbmQgcHJvdmlkaW5nIGEgcmljaCB1c2VyIGludGVyZmFjZSBmb3IgbWV0YW1vZGVsIGRlc2lnbi4iCiAgICAgICAgfQogICAgICAgIAogICAgICAgIGNvbXBvbmVudCBBUElTZXJ2ZXIgIkFQSVNlcnZlckNvbXBvbmVudHMiIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9MYXlvdXQgdGIKICAgICAgICAgICAgdGl0bGUgIkNvbXBvbmVudCBEaWFncmFtOiBNTUFSIEFQSSBTZXJ2ZXIiCiAgICAgICAgICAgIGRlc2NyaXB0aW9uICJUaGUgTU1BUiBBUEkgU2VydmVyIGNvbnNpc3RzIG9mIGNvbnRyb2xsZXJzIHRoYXQgaGFuZGxlIEhUVFAgcmVxdWVzdHMsIGNvbm5lY3Rpb24gY2xhc3NlcyBmb3IgZGF0YWJhc2Ugb3BlcmF0aW9ucywgYW5kIHNoYXJlZCBzZXJ2aWNlcy4gVGhlIGFyY2hpdGVjdHVyZSBmb2xsb3dzIGEgbGF5ZXJlZCBkZXNpZ24gd2l0aCBjb250cm9sbGVycywgZGF0YSBhY2Nlc3MsIGFuZCBzZXJ2aWNlIGxheWVycy4iCiAgICAgICAgfQoKICAgICAgICB0aGVtZSBkZWZhdWx0CiAgICAgICAgCiAgICAgICAgc3R5bGVzIHsKICAgICAgICAgICAgZWxlbWVudCAiUGVyc29uIiB7CiAgICAgICAgICAgICAgICBzaGFwZSBQZXJzb24KICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJTb2Z0d2FyZSBTeXN0ZW0iIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzExNjhiZAogICAgICAgICAgICAgICAgY29sb3IgI2ZmZmZmZgogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIkNvbnRhaW5lciIgewogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjNDM4ZGQ1CiAgICAgICAgICAgICAgICBjb2xvciAjZmZmZmZmCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiQ29tcG9uZW50IiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICM4NWJiZjAKICAgICAgICAgICAgICAgIGNvbG9yICMwMDAwMDAKICAgICAgICAgICAgfQoKICAgICAgICAgICAgZWxlbWVudCAiRGF0YWJhc2UiIHsKICAgICAgICAgICAgICAgIHNoYXBlIEN5bGluZGVyCiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICM4NWJiZjAKICAgICAgICAgICAgICAgIGNvbG9yICMwMDAwMDAKICAgICAgICAgICAgfQoKICAgICAgICAgICAgZWxlbWVudCAiQVBJX1NlcnZlciIgewogICAgICAgICAgICAgICAgc2hhcGUgUGlwZQogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjODViYmYwCiAgICAgICAgICAgICAgICBjb2xvciAjMDAwMDAwCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIGVsZW1lbnQgIkdsb2JhbERTIiB7CiAgICAgICAgICAgICAgICBzaGFwZSBDb21wb25lbnQKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzg1YmJmMAogICAgICAgICAgICAgICAgY29sb3IgIzAwMDAwMAogICAgICAgICAgICB9CgogICAgICAgICAgICBlbGVtZW50ICJNZXRhbW9kZWxpbmdDbGllbnQiIHsKICAgICAgICAgICAgICAgIHNoYXBlIFdlYkJyb3dzZXIKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgI2YwYWQ0ZQogICAgICAgICAgICAgICAgY29sb3IgI2ZmZmZmZgogICAgICAgICAgICB9CgogICAgICAgICAgICBlbGVtZW50ICJNb2RlbGluZ0NsaWVudCIgewogICAgICAgICAgICAgICAgc2hhcGUgV2ViQnJvd3NlcgogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjNWJjMGRlCiAgICAgICAgICAgICAgICBjb2xvciAjZmZmZmZmCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIGVsZW1lbnQgIlZpelJlcENsaWVudCIgewogICAgICAgICAgICAgICAgc2hhcGUgV2ViQnJvd3NlcgogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjZDk1MzRmCiAgICAgICAgICAgICAgICBjb2xvciAjZmZmZmZmCiAgICAgICAgICAgIH0KICAgICAgICB9CgogICAgfQp9"
   },
   "views" : {
     "componentViews" : [ {
@@ -832,117 +1280,117 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
-      "containerId" : "5",
+      "containerId" : "54",
       "description" : "The MMAR Metamodeling Client consists of various components for managing selected objects, communicating with the backend, and providing a rich user interface for metamodel design.",
       "dimensions" : {
         "height" : 5611,
         "width" : 3120
       },
       "elements" : [ {
-        "id" : "6",
+        "id" : "55",
         "x" : 970,
-        "y" : 1972
+        "y" : 2572
       }, {
-        "id" : "7",
+        "id" : "56",
         "x" : 1720,
-        "y" : 1972
+        "y" : 2572
       }, {
-        "id" : "8",
+        "id" : "57",
         "x" : 970,
-        "y" : 3772
+        "y" : 4372
       }, {
-        "id" : "9",
-        "x" : 220,
-        "y" : 4972
-      }, {
-        "id" : "10",
+        "id" : "58",
         "x" : 220,
         "y" : 172
       }, {
-        "id" : "11",
+        "id" : "59",
         "x" : 220,
         "y" : 772
       }, {
-        "id" : "12",
+        "id" : "60",
         "x" : 220,
         "y" : 1372
       }, {
-        "id" : "13",
+        "id" : "61",
         "x" : 220,
         "y" : 1972
       }, {
-        "id" : "14",
+        "id" : "62",
         "x" : 220,
         "y" : 2572
       }, {
-        "id" : "15",
+        "id" : "63",
         "x" : 220,
         "y" : 3172
       }, {
-        "id" : "16",
+        "id" : "64",
         "x" : 220,
         "y" : 3772
       }, {
-        "id" : "17",
+        "id" : "65",
         "x" : 220,
         "y" : 4372
       }, {
-        "id" : "28",
+        "id" : "66",
+        "x" : 220,
+        "y" : 4972
+      }, {
+        "id" : "77",
         "x" : 2470,
-        "y" : 1972
+        "y" : 2572
       } ],
       "externalContainerBoundariesVisible" : false,
       "key" : "MetamodelingClientComponents",
       "order" : 3,
       "relationships" : [ {
-        "id" : "18",
-        "vertices" : [ {
-          "x" : 670,
-          "y" : 622
-        } ]
+        "id" : "142"
       }, {
-        "id" : "19",
+        "id" : "67",
         "vertices" : [ {
           "x" : 670,
           "y" : 1222
         } ]
       }, {
-        "id" : "20"
-      }, {
-        "id" : "21"
-      }, {
-        "id" : "22",
+        "id" : "68",
         "vertices" : [ {
           "x" : 670,
-          "y" : 3022
+          "y" : 1822
         } ]
       }, {
-        "id" : "23"
+        "id" : "69"
       }, {
-        "id" : "24",
+        "id" : "70"
+      }, {
+        "id" : "71",
         "vertices" : [ {
           "x" : 670,
-          "y" : 4222
+          "y" : 3622
         } ]
       }, {
-        "id" : "25",
+        "id" : "72"
+      }, {
+        "id" : "73",
+        "vertices" : [ {
+          "x" : 670,
+          "y" : 4822
+        } ]
+      }, {
+        "id" : "74",
         "vertices" : [ {
           "x" : 1570,
-          "y" : 1972
+          "y" : 2572
         } ]
       }, {
-        "id" : "26",
+        "id" : "75",
         "vertices" : [ {
           "x" : 1570,
-          "y" : 2272
+          "y" : 2872
         } ]
-      }, {
-        "id" : "93"
       } ],
       "title" : "Component Diagram: MMAR Metamodeling Client"
     }, {
       "automaticLayout" : {
-        "applied" : true,
+        "applied" : false,
         "edgeSeparation" : 0,
         "implementation" : "Graphviz",
         "nodeSeparation" : 300,
@@ -950,216 +1398,170 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
-      "containerId" : "28",
+      "containerId" : "77",
       "description" : "The MMAR API Server consists of controllers that handle HTTP requests, connection classes for database operations, and shared services. The architecture follows a layered design with controllers, data access, and service layers.",
-      "dimensions" : {
-        "height" : 2011,
-        "width" : 9140
-      },
       "elements" : [ {
-        "id" : "29",
-        "x" : 2470,
-        "y" : 172
+        "id" : "78",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "30",
-        "x" : 4720,
-        "y" : 172
+        "id" : "79",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "31",
-        "x" : 5470,
-        "y" : 172
+        "id" : "80",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "32",
-        "x" : 6220,
-        "y" : 172
+        "id" : "81",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "33",
-        "x" : 3970,
-        "y" : 172
+        "id" : "82",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "34",
-        "x" : 3220,
-        "y" : 172
+        "id" : "83",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "35",
-        "x" : 7720,
-        "y" : 172
+        "id" : "84",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "36",
-        "x" : 220,
-        "y" : 172
+        "id" : "85",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "37",
-        "x" : 970,
-        "y" : 172
+        "id" : "86",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "38",
-        "x" : 1720,
-        "y" : 772
+        "id" : "87",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "39",
-        "x" : 5470,
-        "y" : 772
+        "id" : "88",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "40",
-        "x" : 6220,
-        "y" : 772
+        "id" : "89",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "41",
-        "x" : 6970,
-        "y" : 772
+        "id" : "90",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "42",
-        "x" : 3220,
-        "y" : 772
+        "id" : "91",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "43",
-        "x" : 2470,
-        "y" : 772
+        "id" : "92",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "44",
-        "x" : 7720,
-        "y" : 772
+        "id" : "93",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "45",
-        "x" : 970,
-        "y" : 772
+        "id" : "94",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "46",
-        "x" : 8470,
-        "y" : 772
+        "id" : "95",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "47",
-        "x" : 3970,
-        "y" : 772
+        "id" : "96",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "48",
-        "x" : 220,
-        "y" : 1372
+        "id" : "97",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "49",
-        "x" : 4345,
-        "y" : 1372
+        "id" : "98",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "50",
-        "x" : 4720,
-        "y" : 772
+        "id" : "99",
+        "x" : 0,
+        "y" : 0
       }, {
-        "id" : "51",
-        "x" : 220,
-        "y" : 772
+        "id" : "100",
+        "x" : 0,
+        "y" : 0
       } ],
       "externalContainerBoundariesVisible" : false,
       "key" : "APIServerComponents",
       "order" : 4,
       "relationships" : [ {
-        "id" : "52"
+        "id" : "101"
       }, {
-        "id" : "53"
+        "id" : "102"
       }, {
-        "id" : "54"
+        "id" : "103"
       }, {
-        "id" : "55"
+        "id" : "104"
       }, {
-        "id" : "56"
+        "id" : "105"
       }, {
-        "id" : "57"
+        "id" : "106"
       }, {
-        "id" : "58"
+        "id" : "107"
       }, {
-        "id" : "59"
+        "id" : "108"
       }, {
-        "id" : "60"
+        "id" : "109"
       }, {
-        "id" : "61"
+        "id" : "110"
       }, {
-        "id" : "62"
+        "id" : "111"
       }, {
-        "id" : "63"
+        "id" : "112"
       }, {
-        "id" : "64"
+        "id" : "113"
       }, {
-        "id" : "65",
-        "vertices" : [ {
-          "x" : 6070,
-          "y" : 472
-        }, {
-          "x" : 4570,
-          "y" : 772
-        } ]
+        "id" : "114"
       }, {
-        "id" : "66"
+        "id" : "115"
       }, {
-        "id" : "67"
+        "id" : "116"
       }, {
-        "id" : "68",
-        "vertices" : [ {
-          "x" : 2320,
-          "y" : 1072
-        } ]
+        "id" : "117"
       }, {
-        "id" : "69"
+        "id" : "118"
       }, {
-        "id" : "70",
-        "vertices" : [ {
-          "x" : 6070,
-          "y" : 1072
-        } ]
+        "id" : "119"
       }, {
-        "id" : "71",
-        "vertices" : [ {
-          "x" : 6820,
-          "y" : 1072
-        } ]
+        "id" : "120"
       }, {
-        "id" : "72"
+        "id" : "121"
       }, {
-        "id" : "73",
-        "vertices" : [ {
-          "x" : 3070,
-          "y" : 1072
-        } ]
+        "id" : "122"
       }, {
-        "id" : "74",
-        "vertices" : [ {
-          "x" : 7570,
-          "y" : 1072
-        } ]
+        "id" : "123"
       }, {
-        "id" : "75",
-        "vertices" : [ {
-          "x" : 1570,
-          "y" : 1072
-        } ]
+        "id" : "124"
       }, {
-        "id" : "76"
+        "id" : "125"
       }, {
-        "id" : "77"
+        "id" : "126"
       }, {
-        "id" : "78",
-        "vertices" : [ {
-          "x" : 3070,
-          "y" : 472
-        }, {
-          "x" : 4570,
-          "y" : 772
-        } ]
+        "id" : "127"
       }, {
-        "id" : "79"
+        "id" : "128"
       }, {
-        "id" : "80"
+        "id" : "129"
       }, {
-        "id" : "81"
+        "id" : "130"
       }, {
-        "id" : "82"
+        "id" : "131"
       }, {
-        "id" : "83"
+        "id" : "132"
       }, {
-        "id" : "84",
-        "vertices" : [ {
-          "x" : 5320,
-          "y" : 772
-        } ]
+        "id" : "133"
       } ],
       "title" : "Component Diagram: MMAR API Server"
     } ],
@@ -1237,23 +1639,23 @@
         "x" : 835,
         "y" : 1300
       }, {
-        "id" : "5",
+        "id" : "54",
         "x" : 835,
         "y" : 175
       }, {
-        "id" : "27",
+        "id" : "76",
         "x" : 840,
         "y" : 760
       }, {
-        "id" : "28",
+        "id" : "77",
         "x" : 1995,
         "y" : 1030
       }, {
-        "id" : "85",
+        "id" : "134",
         "x" : 2645,
         "y" : 1020
       }, {
-        "id" : "86",
+        "id" : "135",
         "x" : 1970,
         "y" : 165
       } ],
@@ -1261,27 +1663,27 @@
       "key" : "ContainerDiagram",
       "order" : 2,
       "relationships" : [ {
-        "id" : "87"
+        "id" : "136"
       }, {
-        "id" : "88"
+        "id" : "137"
       }, {
-        "id" : "89"
+        "id" : "138"
       }, {
-        "id" : "90"
+        "id" : "139"
       }, {
-        "id" : "91"
+        "id" : "140"
       }, {
-        "id" : "92"
+        "id" : "141"
       }, {
-        "id" : "94"
+        "id" : "143"
       }, {
-        "id" : "95"
+        "id" : "144"
       }, {
-        "id" : "96"
+        "id" : "148"
       }, {
-        "id" : "98"
+        "id" : "150"
       }, {
-        "id" : "99"
+        "id" : "151"
       } ],
       "softwareSystemId" : "3",
       "title" : "Container Diagram: MMAR Clients, Backend and Database"
@@ -1314,9 +1716,9 @@
       "key" : "SystemContextDiagram",
       "order" : 1,
       "relationships" : [ {
-        "id" : "100"
+        "id" : "149"
       }, {
-        "id" : "97"
+        "id" : "152"
       } ],
       "softwareSystemId" : "3",
       "title" : "System Context: MMAR Metamodeling vs. Modeling Systems"
