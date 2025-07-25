@@ -188,7 +188,96 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             Database = container "MMAR Database" "Database for persisting metamodels, models, and logs" "PostgreSQL" "Database"
 
             GlobalDS = container "Global Data Structure Library" "Shared data model library (domain classes for models/metamodels)" "TypeScript" "GlobalDS" {
-                // Global data structure components would go here if we had more information
+                // Main component
+                dsIndex = component "Data Structure Index" "Main entry point exposing all data structures" "TypeScript"
+                
+                // Instance model components
+                instanceModels = group "Instance Models" {
+                    instanceObjects = component "Instance Objects" "Data structures for model objects" "TypeScript"
+                    instanceClasses = component "Instance Classes" "Data structures for model class instances" "TypeScript"
+                    instanceRelationClasses = component "Instance Relation Classes" "Data structures for model relation instances" "TypeScript"
+                    instanceAttributes = component "Instance Attributes" "Data structures for model attribute instances" "TypeScript"
+                    instancePorts = component "Instance Ports" "Data structures for model port instances" "TypeScript"
+                    instanceRoles = component "Instance Roles" "Data structures for model role assignments" "TypeScript"
+                    instanceScenes = component "Instance Scenes" "Data structures for model scene instances" "TypeScript"
+                    instanceRows = component "Instance Rows" "Data structures for tabular data in models" "TypeScript"
+                }
+                
+                // Meta model components
+                metaModels = group "Meta Models" {
+                    metamodelCore = component "Metamodel Core" "Core metamodel structures and base classes" "TypeScript"
+                    metamodelClasses = component "Metamodel Classes" "Data structures for metamodel class definitions" "TypeScript"
+                    metamodelRelationClasses = component "Metamodel Relation Classes" "Data structures for metamodel relation definitions" "TypeScript"
+                    metamodelAttributes = component "Metamodel Attributes" "Data structures for metamodel attribute definitions" "TypeScript"
+                    metamodelAttributeTypes = component "Metamodel Attribute Types" "Data structures for metamodel attribute type definitions" "TypeScript"
+                    metamodelPorts = component "Metamodel Ports" "Data structures for metamodel port definitions" "TypeScript"
+                    metamodelSceneTypes = component "Metamodel Scene Types" "Data structures for metamodel scene type definitions" "TypeScript"
+                    metamodelRoles = component "Metamodel Roles" "Data structures for metamodel role definitions" "TypeScript"
+                    metamodelUsers = component "Metamodel Users" "Data structures for user management in metamodels" "TypeScript"
+                    metamodelUserGroups = component "Metamodel User Groups" "Data structures for user group management" "TypeScript"
+                    metamodelReferences = component "Metamodel References" "Data structures for references between metamodel elements" "TypeScript"
+                    metamodelRules = component "Metamodel Rules" "Data structures for metamodel validation rules" "TypeScript"
+                    metamodelProcedures = component "Metamodel Procedures" "Data structures for procedural definitions in metamodels" "TypeScript"
+                    metamodelColumns = component "Metamodel Columns" "Data structures for column definitions in metamodels" "TypeScript"
+                    metamodelFiles = component "Metamodel Files" "Data structures for file definitions in metamodels" "TypeScript"
+                    metamodelObjects = component "Metamodel Objects" "Base objects for all metamodel elements" "TypeScript"
+                }
+                
+                // Component relationships - Meta to Meta
+                metamodelCore -> metamodelObjects "Extends base objects"
+                metamodelClasses -> metamodelCore "Inherits from core structures"
+                metamodelRelationClasses -> metamodelCore "Inherits from core structures"
+                metamodelAttributes -> metamodelCore "Inherits from core structures"
+                metamodelPorts -> metamodelCore "Inherits from core structures"
+                metamodelSceneTypes -> metamodelCore "Inherits from core structures"
+                
+                metamodelAttributes -> metamodelAttributeTypes "References for attribute type information"
+                metamodelClasses -> metamodelAttributes "Contains attribute definitions"
+                metamodelRelationClasses -> metamodelAttributes "Contains attribute definitions"
+                metamodelClasses -> metamodelPorts "Defines available connection points"
+                metamodelRelationClasses -> metamodelPorts "References compatible ports"
+                
+                // Component relationships - Instance to Meta
+                instanceObjects -> metamodelObjects "Conforms to definitions in"
+                instanceClasses -> metamodelClasses "Instantiates definitions from"
+                instanceRelationClasses -> metamodelRelationClasses "Instantiates definitions from"
+                instanceAttributes -> metamodelAttributes "Instantiates definitions from"
+                instancePorts -> metamodelPorts "Instantiates definitions from"
+                instanceScenes -> metamodelSceneTypes "Conforms to definitions in"
+                
+                // Component relationships - Instance to Instance
+                instanceObjects -> instanceAttributes "Contains attributes as properties"
+                instanceClasses -> instancePorts "Contains port instances"
+                instanceRelationClasses -> instanceClasses "Connects instances of"
+                instanceScenes -> instanceClasses "Contains instances of"
+                instanceScenes -> instanceRelationClasses "Contains instances of"
+                
+                // Index relationships
+                dsIndex -> instanceObjects "Exports instance object structures"
+                dsIndex -> instanceClasses "Exports instance class structures"
+                dsIndex -> instanceRelationClasses "Exports instance relation class structures"
+                dsIndex -> instanceAttributes "Exports instance attribute structures"
+                dsIndex -> instancePorts "Exports instance port structures"
+                dsIndex -> instanceRoles "Exports instance role structures"
+                dsIndex -> instanceScenes "Exports instance scene structures"
+                dsIndex -> instanceRows "Exports instance row structures"
+
+                dsIndex -> metamodelCore "Exports metamodel core structures"
+                dsIndex -> metamodelClasses "Exports metamodel class structures"
+                dsIndex -> metamodelRelationClasses "Exports metamodel relation class structures"
+                dsIndex -> metamodelAttributes "Exports metamodel attribute structures"
+                dsIndex -> metamodelAttributeTypes "Exports metamodel attribute type structures"
+                dsIndex -> metamodelPorts "Exports metamodel port structures"
+                dsIndex -> metamodelSceneTypes "Exports metamodel scene type structures"
+                dsIndex -> metamodelRoles "Exports metamodel role structures"
+                dsIndex -> metamodelUsers "Exports user data structures"
+                dsIndex -> metamodelUserGroups "Exports user group structures"
+                dsIndex -> metamodelReferences "Exports metamodel reference structures"
+                dsIndex -> metamodelRules "Exports metamodel rule structures"
+                dsIndex -> metamodelProcedures "Exports metamodel procedure structures"
+                dsIndex -> metamodelColumns "Exports metamodel column structures"
+                dsIndex -> metamodelFiles "Exports metamodel file structures"
+                dsIndex -> metamodelObjects "Exports metamodel object structures"
             }
 
             // Container Relationships
@@ -203,6 +292,19 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             fetchHelperService -> APIServer "Makes API requests for model operations"
             instanceUtilityService -> GlobalDS "Uses for model instance data structures"
             metaUtilityService -> GlobalDS "Uses for metamodel data structures"
+            
+            // More specific component relationships with GlobalDS
+            instanceUtilityService -> instanceObjects "Creates and manages model objects"
+            instanceUtilityService -> instanceClasses "Creates and manages class instances"
+            metaUtilityService -> metamodelClasses "Accesses class definitions"
+            metaUtilityService -> metamodelAttributes "Validates attribute constraints"
+            
+            // API Server component relationships with GlobalDS
+            metaObjectsController -> metamodelObjects "Maps API requests to domain objects"
+            metaClassesController -> metamodelClasses "Maps API requests to class definitions"
+            metaRelationClassesController -> metamodelRelationClasses "Maps API requests to relation definitions"
+            metaAttributesController -> metamodelAttributes "Maps API requests to attribute definitions"
+            metaPortsController -> metamodelPorts "Maps API requests to port definitions"
         }
 
 
@@ -245,6 +347,13 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             autoLayout tb
             title "Component Diagram: MMAR Modeling Client"
             description "The MMAR Modeling Client consists of services for model manipulation, UI components for visualization and interaction, and dialog components for specific operations."
+        }
+        
+        component GlobalDS "GlobalDSComponents" {
+            include *
+            autoLayout tb
+            title "Component Diagram: MMAR Global Data Structure"
+            description "The MMAR Global Data Structure library defines domain models for both metamodels and model instances. It provides type definitions that are used consistently across all MMAR components."
         }
 
         theme default
