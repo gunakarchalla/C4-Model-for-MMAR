@@ -239,6 +239,13 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             title "Component Diagram: MMAR API Server"
             description "The MMAR API Server consists of controllers that handle HTTP requests, connection classes for database operations, and shared services. The architecture follows a layered design with controllers, data access, and service layers."
         }
+        
+        component ModelingClient "ModelingClientComponents" {
+            include *
+            autoLayout tb
+            title "Component Diagram: MMAR Modeling Client"
+            description "The MMAR Modeling Client consists of services for model manipulation, UI components for visualization and interaction, and dialog components for specific operations."
+        }
 
         theme default
         
