@@ -1,0 +1,652 @@
+{
+  "configuration" : { },
+  "description" : "C4 model for MMAR Platform",
+  "documentation" : { },
+  "id" : 1,
+  "lastModifiedAgent" : "structurizr-ui",
+  "lastModifiedDate" : "2025-07-25T10:32:06Z",
+  "model" : {
+    "people" : [ {
+      "description" : "Metamodel designer who defines new modeling languages (metamodels).",
+      "id" : "1",
+      "location" : "Unspecified",
+      "name" : "Creator",
+      "properties" : {
+        "structurizr.dsl.identifier" : "creator"
+      },
+      "relationships" : [ {
+        "description" : "uses to design visualization of metamodel elements",
+        "destinationId" : "27",
+        "id" : "39",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      }, {
+        "description" : "uses to design visualization of metamodel elements",
+        "destinationId" : "3",
+        "id" : "40",
+        "linkedRelationshipId" : "39",
+        "sourceId" : "1"
+      }, {
+        "description" : "uses to create and manage metamodels",
+        "destinationId" : "5",
+        "id" : "41",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Model designer who creates models based on defined metamodels.",
+      "id" : "2",
+      "location" : "Unspecified",
+      "name" : "End User",
+      "properties" : {
+        "structurizr.dsl.identifier" : "end_user"
+      },
+      "relationships" : [ {
+        "description" : "uses to create models based on metamodels",
+        "destinationId" : "4",
+        "id" : "42",
+        "sourceId" : "2",
+        "tags" : "Relationship"
+      }, {
+        "description" : "uses to create models based on metamodels",
+        "destinationId" : "3",
+        "id" : "43",
+        "linkedRelationshipId" : "42",
+        "sourceId" : "2"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "softwareSystems" : [ {
+      "containers" : [ {
+        "description" : "Client for model creation based on metamodels",
+        "documentation" : { },
+        "id" : "4",
+        "name" : "MMAR Modeling Client",
+        "properties" : {
+          "structurizr.dsl.identifier" : "modelingclient"
+        },
+        "relationships" : [ {
+          "description" : "Uses API for model operations",
+          "destinationId" : "28",
+          "id" : "32",
+          "sourceId" : "4",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Embedded data definitions",
+          "destinationId" : "30",
+          "id" : "36",
+          "sourceId" : "4",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,ModelingClient",
+        "technology" : "Aurelia/TypeScript/Three.js/Node.js"
+      }, {
+        "components" : [ {
+          "description" : "Manages the currently selected object and publishes events when selection changes",
+          "documentation" : { },
+          "id" : "6",
+          "name" : "Selected Object Service",
+          "properties" : {
+            "structurizr.dsl.identifier" : "selectedobjectservice"
+          },
+          "relationships" : [ {
+            "description" : "Requests object data",
+            "destinationId" : "7",
+            "id" : "26",
+            "sourceId" : "6",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Handles communication with the backend server",
+          "documentation" : { },
+          "id" : "7",
+          "name" : "Backend Service",
+          "properties" : {
+            "structurizr.dsl.identifier" : "backendservice"
+          },
+          "relationships" : [ {
+            "description" : "Updates object collections",
+            "destinationId" : "6",
+            "id" : "25",
+            "sourceId" : "7",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Uses API for metamodel operations",
+            "destinationId" : "28",
+            "id" : "37",
+            "sourceId" : "7",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, HttpClient"
+        }, {
+          "description" : "Provides utility functions for file conversion and other tasks",
+          "documentation" : { },
+          "id" : "8",
+          "name" : "Helper Service",
+          "properties" : {
+            "structurizr.dsl.identifier" : "helperservice"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript"
+        }, {
+          "description" : "Manages user authentication and information",
+          "documentation" : { },
+          "id" : "9",
+          "name" : "User Service",
+          "properties" : {
+            "structurizr.dsl.identifier" : "userservice"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript"
+        }, {
+          "description" : "Navigation tree for browsing model objects",
+          "documentation" : { },
+          "id" : "10",
+          "name" : "Left Navigation",
+          "properties" : {
+            "structurizr.dsl.identifier" : "leftnav"
+          },
+          "relationships" : [ {
+            "description" : "Updates selected object",
+            "destinationId" : "6",
+            "id" : "18",
+            "sourceId" : "10",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Main content area for displaying and editing objects",
+          "documentation" : { },
+          "id" : "11",
+          "name" : "Middle Body",
+          "properties" : {
+            "structurizr.dsl.identifier" : "middlebody"
+          },
+          "relationships" : [ {
+            "description" : "Observes selected object",
+            "destinationId" : "6",
+            "id" : "19",
+            "sourceId" : "11",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Context-specific navigation and options",
+          "documentation" : { },
+          "id" : "12",
+          "name" : "Right Navigation",
+          "properties" : {
+            "structurizr.dsl.identifier" : "rightnav"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Tab displaying general properties of objects",
+          "documentation" : { },
+          "id" : "13",
+          "name" : "General Tab",
+          "properties" : {
+            "structurizr.dsl.identifier" : "generaltab"
+          },
+          "relationships" : [ {
+            "description" : "Reads selected object properties",
+            "destinationId" : "6",
+            "id" : "20",
+            "sourceId" : "13",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Component for displaying and editing class objects",
+          "documentation" : { },
+          "id" : "14",
+          "name" : "General Tab Class",
+          "properties" : {
+            "structurizr.dsl.identifier" : "generaltabclass"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Component for displaying and editing file objects",
+          "documentation" : { },
+          "id" : "15",
+          "name" : "General Tab File",
+          "properties" : {
+            "structurizr.dsl.identifier" : "generaltabfile"
+          },
+          "relationships" : [ {
+            "description" : "Uses for file conversion",
+            "destinationId" : "8",
+            "id" : "21",
+            "sourceId" : "15",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Reads file data",
+            "destinationId" : "6",
+            "id" : "22",
+            "sourceId" : "15",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Component for displaying and editing relation class objects",
+          "documentation" : { },
+          "id" : "16",
+          "name" : "General Tab RelationClass",
+          "properties" : {
+            "structurizr.dsl.identifier" : "generaltabrelationclass"
+          },
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        }, {
+          "description" : "Dialog for uploading and replacing files",
+          "documentation" : { },
+          "id" : "17",
+          "name" : "Dialog Upload File",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dialoguploadfile"
+          },
+          "relationships" : [ {
+            "description" : "Uses for file conversion",
+            "destinationId" : "8",
+            "id" : "23",
+            "sourceId" : "17",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Updates file data",
+            "destinationId" : "6",
+            "id" : "24",
+            "sourceId" : "17",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "TypeScript, Aurelia"
+        } ],
+        "description" : "Desktop/Web Client for metamodel design",
+        "documentation" : { },
+        "id" : "5",
+        "name" : "MMAR Metamodeling Client",
+        "properties" : {
+          "structurizr.dsl.identifier" : "metamodelingclient"
+        },
+        "relationships" : [ {
+          "description" : "Embedded data definitions",
+          "destinationId" : "30",
+          "id" : "34",
+          "sourceId" : "5",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Uses API for metamodel operations",
+          "destinationId" : "28",
+          "id" : "38",
+          "linkedRelationshipId" : "37",
+          "sourceId" : "5"
+        } ],
+        "tags" : "Element,Container,MetamodelingClient",
+        "technology" : "Aurelia/TypeScript/Node.js"
+      }, {
+        "description" : "Client for visual representation design of metamodel elements",
+        "documentation" : { },
+        "id" : "27",
+        "name" : "MMAR VizRep Client",
+        "properties" : {
+          "structurizr.dsl.identifier" : "vizrepclient"
+        },
+        "relationships" : [ {
+          "description" : "Uses API for visualization config ops",
+          "destinationId" : "28",
+          "id" : "31",
+          "sourceId" : "27",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Embedded data definitions",
+          "destinationId" : "30",
+          "id" : "35",
+          "sourceId" : "27",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,VizRepClient",
+        "technology" : "Aurelia/TypeScript/Three.js/Node.js"
+      }, {
+        "description" : "Backend server providing REST APIs for MMAR clients",
+        "documentation" : { },
+        "id" : "28",
+        "name" : "MMAR API Server",
+        "properties" : {
+          "structurizr.dsl.identifier" : "apiserver"
+        },
+        "relationships" : [ {
+          "description" : "Reads/Writes metamodels, models, logs",
+          "destinationId" : "29",
+          "id" : "33",
+          "sourceId" : "28",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container,API_Server",
+        "technology" : "Express.js/Node.js"
+      }, {
+        "description" : "Database for persisting metamodels, models, and logs",
+        "documentation" : { },
+        "id" : "29",
+        "name" : "MMAR Database",
+        "properties" : {
+          "structurizr.dsl.identifier" : "database"
+        },
+        "tags" : "Element,Container,Database",
+        "technology" : "PostgreSQL"
+      }, {
+        "description" : "Shared data model library (domain classes for models/metamodels)",
+        "documentation" : { },
+        "id" : "30",
+        "name" : "Global Data Structure Library",
+        "properties" : {
+          "structurizr.dsl.identifier" : "globalds"
+        },
+        "tags" : "Element,Container,GlobalDS",
+        "technology" : "TypeScript"
+      } ],
+      "description" : "Toolset for designing & managing metamodels & models.",
+      "documentation" : { },
+      "id" : "3",
+      "location" : "Unspecified",
+      "name" : "MMAR",
+      "properties" : {
+        "structurizr.dsl.identifier" : "mmar"
+      },
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "MMAR Architecture",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlICJNTUFSIEFyY2hpdGVjdHVyZSIgIkM0IG1vZGVsIGZvciBNTUFSIFBsYXRmb3JtIiB7CiAgICAvLyAhaW5jbHVkZSBjb250YWluZXIuZHNsCiAgICBtb2RlbCB7CiAgICAgICAgLy8gUGVvcGxlIChleHRlcm5hbCB1c2VycykKICAgICAgICBDcmVhdG9yID0gcGVyc29uICJDcmVhdG9yIiAiTWV0YW1vZGVsIGRlc2lnbmVyIHdobyBkZWZpbmVzIG5ldyBtb2RlbGluZyBsYW5ndWFnZXMgKG1ldGFtb2RlbHMpLiIKICAgICAgICBFbmRfVXNlciA9IHBlcnNvbiAiRW5kIFVzZXIiICJNb2RlbCBkZXNpZ25lciB3aG8gY3JlYXRlcyBtb2RlbHMgYmFzZWQgb24gZGVmaW5lZCBtZXRhbW9kZWxzLiIKICAgICAgICAKCiAgICAgICAgLy8gU29mdHdhcmUgU3lzdGVtcyAoaGlnaC1sZXZlbCkKICAgICAgICBNTUFSID0gc29mdHdhcmVTeXN0ZW0gIk1NQVIiICJUb29sc2V0IGZvciBkZXNpZ25pbmcgJiBtYW5hZ2luZyBtZXRhbW9kZWxzICYgbW9kZWxzLiIgewogICAgICAgICAgICBNb2RlbGluZ0NsaWVudCA9IGNvbnRhaW5lciAiTU1BUiBNb2RlbGluZyBDbGllbnQiICJDbGllbnQgZm9yIG1vZGVsIGNyZWF0aW9uIGJhc2VkIG9uIG1ldGFtb2RlbHMiICJBdXJlbGlhL1R5cGVTY3JpcHQvVGhyZWUuanMvTm9kZS5qcyIgIk1vZGVsaW5nQ2xpZW50IiB7CiAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIAogICAgICAgICAgICB9CgogICAgICAgICAgICBNZXRhbW9kZWxpbmdDbGllbnQgPSBjb250YWluZXIgIk1NQVIgTWV0YW1vZGVsaW5nIENsaWVudCIgIkRlc2t0b3AvV2ViIENsaWVudCBmb3IgbWV0YW1vZGVsIGRlc2lnbiIgIkF1cmVsaWEvVHlwZVNjcmlwdC9Ob2RlLmpzIiAiTWV0YW1vZGVsaW5nQ2xpZW50IiB7CiAgICAgICAgICAgICAgICAvLyBDb3JlIHNlcnZpY2VzCiAgICAgICAgICAgICAgICBzZWxlY3RlZE9iamVjdFNlcnZpY2UgPSBjb21wb25lbnQgIlNlbGVjdGVkIE9iamVjdCBTZXJ2aWNlIiAiTWFuYWdlcyB0aGUgY3VycmVudGx5IHNlbGVjdGVkIG9iamVjdCBhbmQgcHVibGlzaGVzIGV2ZW50cyB3aGVuIHNlbGVjdGlvbiBjaGFuZ2VzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIGJhY2tlbmRTZXJ2aWNlID0gY29tcG9uZW50ICJCYWNrZW5kIFNlcnZpY2UiICJIYW5kbGVzIGNvbW11bmljYXRpb24gd2l0aCB0aGUgYmFja2VuZCBzZXJ2ZXIiICJUeXBlU2NyaXB0LCBIdHRwQ2xpZW50IgogICAgICAgICAgICAgICAgaGVscGVyU2VydmljZSA9IGNvbXBvbmVudCAiSGVscGVyIFNlcnZpY2UiICJQcm92aWRlcyB1dGlsaXR5IGZ1bmN0aW9ucyBmb3IgZmlsZSBjb252ZXJzaW9uIGFuZCBvdGhlciB0YXNrcyIgIlR5cGVTY3JpcHQiCiAgICAgICAgICAgICAgICB1c2VyU2VydmljZSA9IGNvbXBvbmVudCAiVXNlciBTZXJ2aWNlIiAiTWFuYWdlcyB1c2VyIGF1dGhlbnRpY2F0aW9uIGFuZCBpbmZvcm1hdGlvbiIgIlR5cGVTY3JpcHQiCiAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAvLyBVSSBDb21wb25lbnRzCiAgICAgICAgICAgICAgICBsZWZ0TmF2ID0gY29tcG9uZW50ICJMZWZ0IE5hdmlnYXRpb24iICJOYXZpZ2F0aW9uIHRyZWUgZm9yIGJyb3dzaW5nIG1vZGVsIG9iamVjdHMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgbWlkZGxlQm9keSA9IGNvbXBvbmVudCAiTWlkZGxlIEJvZHkiICJNYWluIGNvbnRlbnQgYXJlYSBmb3IgZGlzcGxheWluZyBhbmQgZWRpdGluZyBvYmplY3RzIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgIHJpZ2h0TmF2ID0gY29tcG9uZW50ICJSaWdodCBOYXZpZ2F0aW9uIiAiQ29udGV4dC1zcGVjaWZpYyBuYXZpZ2F0aW9uIGFuZCBvcHRpb25zIiAiVHlwZVNjcmlwdCwgQXVyZWxpYSIKICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIC8vIE1pZGRsZSBCb2R5IENvbXBvbmVudHMKICAgICAgICAgICAgICAgIGdlbmVyYWxUYWIgPSBjb21wb25lbnQgIkdlbmVyYWwgVGFiIiAiVGFiIGRpc3BsYXlpbmcgZ2VuZXJhbCBwcm9wZXJ0aWVzIG9mIG9iamVjdHMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgLy8gT2JqZWN0LXNwZWNpZmljIENvbXBvbmVudHMKICAgICAgICAgICAgICAgIGdlbmVyYWxUYWJDbGFzcyA9IGNvbXBvbmVudCAiR2VuZXJhbCBUYWIgQ2xhc3MiICJDb21wb25lbnQgZm9yIGRpc3BsYXlpbmcgYW5kIGVkaXRpbmcgY2xhc3Mgb2JqZWN0cyIgIlR5cGVTY3JpcHQsIEF1cmVsaWEiCiAgICAgICAgICAgICAgICBnZW5lcmFsVGFiRmlsZSA9IGNvbXBvbmVudCAiR2VuZXJhbCBUYWIgRmlsZSIgIkNvbXBvbmVudCBmb3IgZGlzcGxheWluZyBhbmQgZWRpdGluZyBmaWxlIG9iamVjdHMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgZ2VuZXJhbFRhYlJlbGF0aW9uY2xhc3MgPSBjb21wb25lbnQgIkdlbmVyYWwgVGFiIFJlbGF0aW9uQ2xhc3MiICJDb21wb25lbnQgZm9yIGRpc3BsYXlpbmcgYW5kIGVkaXRpbmcgcmVsYXRpb24gY2xhc3Mgb2JqZWN0cyIgIlR5cGVTY3JpcHQsIEF1cmVsaWEiCiAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAvLyBGaWxlLXNwZWNpZmljIENvbXBvbmVudHMKICAgICAgICAgICAgICAgIGRpYWxvZ1VwbG9hZEZpbGUgPSBjb21wb25lbnQgIkRpYWxvZyBVcGxvYWQgRmlsZSIgIkRpYWxvZyBmb3IgdXBsb2FkaW5nIGFuZCByZXBsYWNpbmcgZmlsZXMiICJUeXBlU2NyaXB0LCBBdXJlbGlhIgogICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgLy8gUmVsYXRpb25zaGlwcyBiZXR3ZWVuIGNvbXBvbmVudHMKICAgICAgICAgICAgICAgIGxlZnROYXYgLT4gc2VsZWN0ZWRPYmplY3RTZXJ2aWNlICJVcGRhdGVzIHNlbGVjdGVkIG9iamVjdCIKICAgICAgICAgICAgICAgIG1pZGRsZUJvZHkgLT4gc2VsZWN0ZWRPYmplY3RTZXJ2aWNlICJPYnNlcnZlcyBzZWxlY3RlZCBvYmplY3QiCiAgICAgICAgICAgICAgICBnZW5lcmFsVGFiIC0+IHNlbGVjdGVkT2JqZWN0U2VydmljZSAiUmVhZHMgc2VsZWN0ZWQgb2JqZWN0IHByb3BlcnRpZXMiCiAgICAgICAgICAgICAgICBnZW5lcmFsVGFiRmlsZSAtPiBoZWxwZXJTZXJ2aWNlICJVc2VzIGZvciBmaWxlIGNvbnZlcnNpb24iCiAgICAgICAgICAgICAgICBnZW5lcmFsVGFiRmlsZSAtPiBzZWxlY3RlZE9iamVjdFNlcnZpY2UgIlJlYWRzIGZpbGUgZGF0YSIKICAgICAgICAgICAgICAgIGRpYWxvZ1VwbG9hZEZpbGUgLT4gaGVscGVyU2VydmljZSAiVXNlcyBmb3IgZmlsZSBjb252ZXJzaW9uIgogICAgICAgICAgICAgICAgZGlhbG9nVXBsb2FkRmlsZSAtPiBzZWxlY3RlZE9iamVjdFNlcnZpY2UgIlVwZGF0ZXMgZmlsZSBkYXRhIgogICAgICAgICAgICAgICAgYmFja2VuZFNlcnZpY2UgLT4gc2VsZWN0ZWRPYmplY3RTZXJ2aWNlICJVcGRhdGVzIG9iamVjdCBjb2xsZWN0aW9ucyIKICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIC8vIFNlcnZpY2UgaW50ZXJhY3Rpb25zCiAgICAgICAgICAgICAgICBzZWxlY3RlZE9iamVjdFNlcnZpY2UgLT4gYmFja2VuZFNlcnZpY2UgIlJlcXVlc3RzIG9iamVjdCBkYXRhIgogICAgICAgICAgICB9CgogICAgICAgICAgICBWaXpSZXBDbGllbnQgPSBjb250YWluZXIgIk1NQVIgVml6UmVwIENsaWVudCIgIkNsaWVudCBmb3IgdmlzdWFsIHJlcHJlc2VudGF0aW9uIGRlc2lnbiBvZiBtZXRhbW9kZWwgZWxlbWVudHMiICJBdXJlbGlhL1R5cGVTY3JpcHQvVGhyZWUuanMvTm9kZS5qcyIgIlZpelJlcENsaWVudCIgewogICAgICAgICAgICAgICAgLy8gQ29tcG9uZW50cyBmb3IgdmlzdWFsaXphdGlvbiBkZXNpZ24gd291bGQgZ28gaGVyZQogICAgICAgICAgICB9CgogICAgICAgICAgICBBUElTZXJ2ZXIgPSBjb250YWluZXIgIk1NQVIgQVBJIFNlcnZlciIgIkJhY2tlbmQgc2VydmVyIHByb3ZpZGluZyBSRVNUIEFQSXMgZm9yIE1NQVIgY2xpZW50cyIgIkV4cHJlc3MuanMvTm9kZS5qcyIgIkFQSV9TZXJ2ZXIiIHsKICAgICAgICAgICAgICAgIC8vIEFQSSBjb21wb25lbnRzIHdvdWxkIGdvIGhlcmUgaWYgd2UgaGFkIG1vcmUgaW5mb3JtYXRpb24KICAgICAgICAgICAgfQoKICAgICAgICAgICAgRGF0YWJhc2UgPSBjb250YWluZXIgIk1NQVIgRGF0YWJhc2UiICJEYXRhYmFzZSBmb3IgcGVyc2lzdGluZyBtZXRhbW9kZWxzLCBtb2RlbHMsIGFuZCBsb2dzIiAiUG9zdGdyZVNRTCIgIkRhdGFiYXNlIgoKICAgICAgICAgICAgR2xvYmFsRFMgPSBjb250YWluZXIgIkdsb2JhbCBEYXRhIFN0cnVjdHVyZSBMaWJyYXJ5IiAiU2hhcmVkIGRhdGEgbW9kZWwgbGlicmFyeSAoZG9tYWluIGNsYXNzZXMgZm9yIG1vZGVscy9tZXRhbW9kZWxzKSIgIlR5cGVTY3JpcHQiICJHbG9iYWxEUyIgewogICAgICAgICAgICAgICAgLy8gR2xvYmFsIGRhdGEgc3RydWN0dXJlIGNvbXBvbmVudHMgd291bGQgZ28gaGVyZSBpZiB3ZSBoYWQgbW9yZSBpbmZvcm1hdGlvbgogICAgICAgICAgICB9CgogICAgICAgICAgICAvLyBDb250YWluZXIgUmVsYXRpb25zaGlwcwogICAgICAgICAgICAvLyBNZXRhbW9kZWxpbmdDbGllbnQgLT4gQVBJU2VydmVyICJVc2VzIEFQSSBmb3IgbWV0YW1vZGVsIG9wZXJhdGlvbnMiCiAgICAgICAgICAgIFZpelJlcENsaWVudCAtPiBBUElTZXJ2ZXIgIlVzZXMgQVBJIGZvciB2aXN1YWxpemF0aW9uIGNvbmZpZyBvcHMiCiAgICAgICAgICAgIE1vZGVsaW5nQ2xpZW50IC0+IEFQSVNlcnZlciAiVXNlcyBBUEkgZm9yIG1vZGVsIG9wZXJhdGlvbnMiCiAgICAgICAgICAgIEFQSVNlcnZlciAtPiBEYXRhYmFzZSAiUmVhZHMvV3JpdGVzIG1ldGFtb2RlbHMsIG1vZGVscywgbG9ncyIKICAgICAgICAgICAgTWV0YW1vZGVsaW5nQ2xpZW50IC0+IEdsb2JhbERTICJFbWJlZGRlZCBkYXRhIGRlZmluaXRpb25zIgogICAgICAgICAgICBWaXpSZXBDbGllbnQgLT4gR2xvYmFsRFMgIkVtYmVkZGVkIGRhdGEgZGVmaW5pdGlvbnMiCiAgICAgICAgICAgIE1vZGVsaW5nQ2xpZW50IC0+IEdsb2JhbERTICJFbWJlZGRlZCBkYXRhIGRlZmluaXRpb25zIgogICAgICAgICAgICBiYWNrZW5kU2VydmljZSAtPiBBUElTZXJ2ZXIgIlVzZXMgQVBJIGZvciBtZXRhbW9kZWwgb3BlcmF0aW9ucyIKICAgICAgICB9CgoKICAgICAgICAvLyBTb2Z0d2FyZSBTeXN0ZW0gUmVsYXRpb25zaGlwcwogICAgICAgIENyZWF0b3IgLT4gVml6UmVwQ2xpZW50ICJ1c2VzIHRvIGRlc2lnbiB2aXN1YWxpemF0aW9uIG9mIG1ldGFtb2RlbCBlbGVtZW50cyIKICAgICAgICBDcmVhdG9yIC0+IE1ldGFtb2RlbGluZ0NsaWVudCAidXNlcyB0byBjcmVhdGUgYW5kIG1hbmFnZSBtZXRhbW9kZWxzIgogICAgICAgIEVuZF9Vc2VyIC0+IE1vZGVsaW5nQ2xpZW50ICJ1c2VzIHRvIGNyZWF0ZSBtb2RlbHMgYmFzZWQgb24gbWV0YW1vZGVscyIKICAgICAgICAKICAgIH0KICAgIHZpZXdzIHsKICAgICAgICBzeXN0ZW1Db250ZXh0IE1NQVIgIlN5c3RlbUNvbnRleHREaWFncmFtIiB7CiAgICAgICAgICAgIGluY2x1ZGUgKiAKICAgICAgICAgICAgYXV0b0xheW91dCBscgogICAgICAgICAgICB0aXRsZSAiU3lzdGVtIENvbnRleHQ6IE1NQVIgTWV0YW1vZGVsaW5nIHZzLiBNb2RlbGluZyBTeXN0ZW1zIgogICAgICAgICAgICBkZXNjcmlwdGlvbiAiQ3JlYXRvcnMgYW5kIEVuZCBVc2VycyBpbnRlcmFjdCB3aXRoIHR3byBmYWNldHMgb2YgdGhlIE1NQVIgcGxhdGZvcm0uIENyZWF0b3JzIGRlc2lnbiBtZXRhbW9kZWxzIChhbmQgdGhlaXIgdmlzdWFsIHJlcHJlc2VudGF0aW9ucykgdXNpbmcgdGhlIE1ldGFtb2RlbGluZyBTeXN0ZW0sIHdoaWxlIEVuZCBVc2VycyBjcmVhdGUgbW9kZWxzIHVzaW5nIHRoZSBNb2RlbGluZyBTeXN0ZW0uIEJvdGggc3lzdGVtcyByZWx5IG9uIGEgY29tbW9uIE1NQVIgU2VydmVyIGFuZCBEYXRhYmFzZSBiYWNrZW5kLiIKICAgICAgICB9CiAgICAgICAgY29udGFpbmVyIE1NQVIgIkNvbnRhaW5lckRpYWdyYW0iIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIC8vIGF1dG9MYXlvdXQgbHIKICAgICAgICAgICAgdGl0bGUgIkNvbnRhaW5lciBEaWFncmFtOiBNTUFSIENsaWVudHMsIEJhY2tlbmQgYW5kIERhdGFiYXNlIgogICAgICAgICAgICBkZXNjcmlwdGlvbiAiVGhlIE1NQVIgcGxhdGZvcm0gY29uc2lzdHMgb2YgdGhyZWUgbWFpbiBjbGllbnRzIChNb2RlbGluZywgTWV0YW1vZGVsaW5nLCBhbmQgVml6UmVwKSB0aGF0IGNvbm5lY3QgdG8gYSBjb21tb24gYmFja2VuZCBzZXJ2ZXIuIFRoZSBzZXJ2ZXIgcHJvdmlkZXMgUkVTVCBBUElzIGZvciBtZXRhbW9kZWwgYW5kIG1vZGVsIG9wZXJhdGlvbnMsIHdoaWxlIHRoZSBkYXRhYmFzZSBzdG9yZXMgYWxsIHJlbGV2YW50IGRhdGEuIgogICAgICAgIH0KCiAgICAgICAgY29tcG9uZW50IE1ldGFtb2RlbGluZ0NsaWVudCAiQ29tcG9uZW50RGlhZ3JhbSIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b0xheW91dCBscgogICAgICAgICAgICB0aXRsZSAiQ29tcG9uZW50IERpYWdyYW06IE1NQVIgTWV0YW1vZGVsaW5nIENsaWVudCIKICAgICAgICAgICAgZGVzY3JpcHRpb24gIlRoZSBNTUFSIE1ldGFtb2RlbGluZyBDbGllbnQgY29uc2lzdHMgb2YgdmFyaW91cyBjb21wb25lbnRzIGZvciBtYW5hZ2luZyBzZWxlY3RlZCBvYmplY3RzLCBjb21tdW5pY2F0aW5nIHdpdGggdGhlIGJhY2tlbmQsIGFuZCBwcm92aWRpbmcgYSByaWNoIHVzZXIgaW50ZXJmYWNlIGZvciBtZXRhbW9kZWwgZGVzaWduLiIKICAgICAgICB9CgogICAgICAgIHRoZW1lIGRlZmF1bHQKICAgICAgICAKICAgICAgICBzdHlsZXMgewogICAgICAgICAgICBlbGVtZW50ICJQZXJzb24iIHsKICAgICAgICAgICAgICAgIHNoYXBlIFBlcnNvbgogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIlNvZnR3YXJlIFN5c3RlbSIgewogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjMTE2OGJkCiAgICAgICAgICAgICAgICBjb2xvciAjZmZmZmZmCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiQ29udGFpbmVyIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICM0MzhkZDUKICAgICAgICAgICAgICAgIGNvbG9yICNmZmZmZmYKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJDb21wb25lbnQiIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzg1YmJmMAogICAgICAgICAgICAgICAgY29sb3IgIzAwMDAwMAogICAgICAgICAgICB9CgogICAgICAgICAgICBlbGVtZW50ICJEYXRhYmFzZSIgewogICAgICAgICAgICAgICAgc2hhcGUgQ3lsaW5kZXIKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzg1YmJmMAogICAgICAgICAgICAgICAgY29sb3IgIzAwMDAwMAogICAgICAgICAgICB9CgogICAgICAgICAgICBlbGVtZW50ICJBUElfU2VydmVyIiB7CiAgICAgICAgICAgICAgICBzaGFwZSBQaXBlCiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICM4NWJiZjAKICAgICAgICAgICAgICAgIGNvbG9yICMwMDAwMDAKICAgICAgICAgICAgfQoKICAgICAgICAgICAgZWxlbWVudCAiR2xvYmFsRFMiIHsKICAgICAgICAgICAgICAgIHNoYXBlIENvbXBvbmVudAogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjODViYmYwCiAgICAgICAgICAgICAgICBjb2xvciAjMDAwMDAwCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIGVsZW1lbnQgIk1ldGFtb2RlbGluZ0NsaWVudCIgewogICAgICAgICAgICAgICAgc2hhcGUgV2ViQnJvd3NlcgogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjZjBhZDRlCiAgICAgICAgICAgICAgICBjb2xvciAjZmZmZmZmCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIGVsZW1lbnQgIk1vZGVsaW5nQ2xpZW50IiB7CiAgICAgICAgICAgICAgICBzaGFwZSBXZWJCcm93c2VyCiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICM1YmMwZGUKICAgICAgICAgICAgICAgIGNvbG9yICNmZmZmZmYKICAgICAgICAgICAgfQoKICAgICAgICAgICAgZWxlbWVudCAiVml6UmVwQ2xpZW50IiB7CiAgICAgICAgICAgICAgICBzaGFwZSBXZWJCcm93c2VyCiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICNkOTUzNGYKICAgICAgICAgICAgICAgIGNvbG9yICNmZmZmZmYKICAgICAgICAgICAgfQogICAgICAgIH0KCiAgICB9Cn0="
+  },
+  "views" : {
+    "componentViews" : [ {
+      "automaticLayout" : {
+        "applied" : true,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "containerId" : "5",
+      "description" : "The MMAR Metamodeling Client consists of various components for managing selected objects, communicating with the backend, and providing a rich user interface for metamodel design.",
+      "dimensions" : {
+        "height" : 5611,
+        "width" : 3120
+      },
+      "elements" : [ {
+        "id" : "6",
+        "x" : 969,
+        "y" : 1971
+      }, {
+        "id" : "7",
+        "x" : 1719,
+        "y" : 1971
+      }, {
+        "id" : "8",
+        "x" : 969,
+        "y" : 3771
+      }, {
+        "id" : "9",
+        "x" : 219,
+        "y" : 4971
+      }, {
+        "id" : "10",
+        "x" : 219,
+        "y" : 171
+      }, {
+        "id" : "11",
+        "x" : 219,
+        "y" : 771
+      }, {
+        "id" : "12",
+        "x" : 219,
+        "y" : 1371
+      }, {
+        "id" : "13",
+        "x" : 219,
+        "y" : 1971
+      }, {
+        "id" : "14",
+        "x" : 219,
+        "y" : 2571
+      }, {
+        "id" : "15",
+        "x" : 219,
+        "y" : 3171
+      }, {
+        "id" : "16",
+        "x" : 219,
+        "y" : 3771
+      }, {
+        "id" : "17",
+        "x" : 219,
+        "y" : 4371
+      }, {
+        "id" : "28",
+        "x" : 2469,
+        "y" : 1971
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "key" : "ComponentDiagram",
+      "order" : 3,
+      "relationships" : [ {
+        "id" : "18",
+        "vertices" : [ {
+          "x" : 669,
+          "y" : 621
+        } ]
+      }, {
+        "id" : "19",
+        "vertices" : [ {
+          "x" : 669,
+          "y" : 1221
+        } ]
+      }, {
+        "id" : "20"
+      }, {
+        "id" : "21"
+      }, {
+        "id" : "22",
+        "vertices" : [ {
+          "x" : 669,
+          "y" : 3021
+        } ]
+      }, {
+        "id" : "23"
+      }, {
+        "id" : "24",
+        "vertices" : [ {
+          "x" : 669,
+          "y" : 4221
+        } ]
+      }, {
+        "id" : "25",
+        "vertices" : [ {
+          "x" : 1569,
+          "y" : 1971
+        } ]
+      }, {
+        "id" : "26",
+        "vertices" : [ {
+          "x" : 1569,
+          "y" : 2271
+        } ]
+      }, {
+        "id" : "37"
+      } ],
+      "title" : "Component Diagram: MMAR Metamodeling Client"
+    } ],
+    "configuration" : {
+      "branding" : { },
+      "lastSavedView" : "ComponentDiagram",
+      "metadataSymbols" : "SquareBrackets",
+      "styles" : {
+        "elements" : [ {
+          "shape" : "Person",
+          "tag" : "Person"
+        }, {
+          "background" : "#1168bd",
+          "color" : "#ffffff",
+          "tag" : "Software System"
+        }, {
+          "background" : "#438dd5",
+          "color" : "#ffffff",
+          "tag" : "Container"
+        }, {
+          "background" : "#85bbf0",
+          "color" : "#000000",
+          "tag" : "Component"
+        }, {
+          "background" : "#85bbf0",
+          "color" : "#000000",
+          "shape" : "Cylinder",
+          "tag" : "Database"
+        }, {
+          "background" : "#85bbf0",
+          "color" : "#000000",
+          "shape" : "Pipe",
+          "tag" : "API_Server"
+        }, {
+          "background" : "#85bbf0",
+          "color" : "#000000",
+          "shape" : "Component",
+          "tag" : "GlobalDS"
+        }, {
+          "background" : "#f0ad4e",
+          "color" : "#ffffff",
+          "shape" : "WebBrowser",
+          "tag" : "MetamodelingClient"
+        }, {
+          "background" : "#5bc0de",
+          "color" : "#ffffff",
+          "shape" : "WebBrowser",
+          "tag" : "ModelingClient"
+        }, {
+          "background" : "#d9534f",
+          "color" : "#ffffff",
+          "shape" : "WebBrowser",
+          "tag" : "VizRepClient"
+        } ]
+      },
+      "terminology" : { },
+      "themes" : [ "https://static.structurizr.com/themes/default/theme.json" ]
+    },
+    "containerViews" : [ {
+      "description" : "The MMAR platform consists of three main clients (Modeling, Metamodeling, and VizRep) that connect to a common backend server. The server provides REST APIs for metamodel and model operations, while the database stores all relevant data.",
+      "dimensions" : {
+        "height" : 2011,
+        "width" : 3128
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 100,
+        "y" : 360
+      }, {
+        "id" : "2",
+        "x" : 100,
+        "y" : 1280
+      }, {
+        "id" : "4",
+        "x" : 835,
+        "y" : 1300
+      }, {
+        "id" : "5",
+        "x" : 835,
+        "y" : 175
+      }, {
+        "id" : "27",
+        "x" : 840,
+        "y" : 760
+      }, {
+        "id" : "28",
+        "x" : 1995,
+        "y" : 1030
+      }, {
+        "id" : "29",
+        "x" : 2645,
+        "y" : 1020
+      }, {
+        "id" : "30",
+        "x" : 1970,
+        "y" : 165
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "ContainerDiagram",
+      "order" : 2,
+      "relationships" : [ {
+        "id" : "31"
+      }, {
+        "id" : "32"
+      }, {
+        "id" : "33"
+      }, {
+        "id" : "34"
+      }, {
+        "id" : "35"
+      }, {
+        "id" : "36"
+      }, {
+        "id" : "38"
+      }, {
+        "id" : "39"
+      }, {
+        "id" : "41"
+      }, {
+        "id" : "42"
+      } ],
+      "softwareSystemId" : "3",
+      "title" : "Container Diagram: MMAR Clients, Backend and Database"
+    } ],
+    "systemContextViews" : [ {
+      "automaticLayout" : {
+        "applied" : true,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "description" : "Creators and End Users interact with two facets of the MMAR platform. Creators design metamodels (and their visual representations) using the Metamodeling System, while End Users create models using the Modeling System. Both systems rely on a common MMAR Server and Database backend.",
+      "dimensions" : {
+        "height" : 1500,
+        "width" : 3736
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 1293,
+        "y" : 151
+      }, {
+        "id" : "2",
+        "x" : 1293,
+        "y" : 851
+      }, {
+        "id" : "3",
+        "x" : 1993,
+        "y" : 551
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "SystemContextDiagram",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "40"
+      }, {
+        "id" : "43"
+      } ],
+      "softwareSystemId" : "3",
+      "title" : "System Context: MMAR Metamodeling vs. Modeling Systems"
+    } ]
+  }
+}
