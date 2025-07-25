@@ -679,30 +679,35 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
 
         component MetamodelingClient "MetamodelingClientComponents" {
             include *
+            autoLayout lr
             title "Component Diagram: MMAR Metamodeling Client"
             description "The MMAR Metamodeling Client consists of various components for managing selected objects, communicating with the backend, and providing a rich user interface for metamodel design."
         }
         
         component APIServer "APIServerComponents" {
             include *
+            autoLayout lr
             title "Component Diagram: MMAR API Server"
             description "The MMAR API Server consists of controllers that handle HTTP requests, connection classes for database operations, and shared services. The architecture follows a layered design with controllers, data access, and service layers."
         }
         
         component ModelingClient "ModelingClientComponents" {
             include *
+            autoLayout lr
             title "Component Diagram: MMAR Modeling Client"
             description "The MMAR Modeling Client consists of services for model manipulation, UI components for visualization and interaction, and dialog components for specific operations."
         }
         
         component GlobalDS "GlobalDSComponents" {
             include *
+            autoLayout lr
             title "Component Diagram: MMAR Global Data Structure"
             description "The MMAR Global Data Structure library defines domain models for both metamodels and model instances. It provides type definitions that are used consistently across all MMAR components."
         }
 
         component VizRepClient "VizRepClientComponents" {
             include *
+            autoLayout lr
             title "Component Diagram: MMAR VizRep Client"
             description "The MMAR VizRep Client provides components for designing visual representations of metamodel elements, including 3D visualization, interaction handling, and state management."
         }
@@ -727,10 +732,6 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             element "Container" {
                 background #438dd5
                 color #ffffff
-            }
-            element "Component" {
-                background #85bbf0
-                color #000000
             }
 
             element "Database" {
@@ -767,6 +768,21 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
                 shape WebBrowser
                 background #d9534f
                 color #ffffff
+            }
+
+            element "Element" {
+                color #0773af
+                stroke #0773af
+                strokeWidth 7
+                shape roundedbox
+            }
+
+            element "Boundary" {
+                strokeWidth 5
+            }
+
+            relationship "Relationship" {
+                thickness 4
             }
         }
 
