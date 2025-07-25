@@ -292,9 +292,237 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
                 metaFilesController -> errorHandlerMiddleware "Handles upload/download errors through"
             }
 
-            Database = container "MMAR Database" "Database for persisting metamodels, models, and logs" "PostgreSQL" "Database"
+            Database = container "MMAR Database" "Database for persisting metamodels, models, and logs" "PostgreSQL" "Database" {
+                // Schemas
+                publicSchema = component "Public Schema" "Main schema containing metamodel and model data structures" "PostgreSQL Schema"
+                loggingSchema = component "Logging Schema" "Schema dedicated to audit logging and change tracking" "PostgreSQL Schema"
+                
+                // Core Metamodel Tables
+                metaobjectTable = component "Metaobject Table" "Base table for all metamodel elements with common properties like uuid, name, description, timestamps, and spatial coordinates" "PostgreSQL Table"
+                classTable = component "Class Table" "Stores metamodel class definitions with properties for reusability and abstraction" "PostgreSQL Table"
+                relationclassTable = component "Relationclass Table" "Defines metamodel relationships between classes with role-based connections and optional bendpoint classes" "PostgreSQL Table"
+                attributeTable = component "Attribute Table" "Stores metamodel attribute definitions including multi-valued flags, default values, constraints, and type references" "PostgreSQL Table"
+                attributeTypeTable = component "Attribute Type Table" "Defines data types for attributes with predefined types and regex validation patterns" "PostgreSQL Table"
+                roleTable = component "Role Table" "Stores role definitions for relationship endpoints in metamodel connections" "PostgreSQL Table"
+                portTable = component "Port Table" "Defines connection points for classes and scenes in metamodel structures" "PostgreSQL Table"
+                sceneTypeTable = component "Scene Type Table" "Stores metamodel scene type definitions for organizing and structuring models" "PostgreSQL Table"
+                procedureTable = component "Procedure Table" "Stores algorithmic procedure definitions that can be associated with scene types" "PostgreSQL Table"
+                fileTable = component "File Table" "Stores binary file data with MIME type information linked to metamodel objects" "PostgreSQL Table"
+                
+                // Instance/Model Tables
+                instanceObjectTable = component "Instance Object Table" "Base table for all model instances with spatial coordinates, geometry, visibility, and custom variables" "PostgreSQL Table"
+                classInstanceTable = component "Class Instance Table" "Stores model instances of metamodel classes with references to aggregator, decomposable, and relation class types" "PostgreSQL Table"
+                relationclassInstanceTable = component "Relationclass Instance Table" "Stores model instances of metamodel relationships with role instance connections and line point data" "PostgreSQL Table"
+                attributeInstanceTable = component "Attribute Instance Table" "Stores model attribute values with propagation flags and references to assigned instances" "PostgreSQL Table"
+                roleInstanceTable = component "Role Instance Table" "Stores model role assignments with references to connected class, port, scene, attribute, and relationclass instances" "PostgreSQL Table"
+                portInstanceTable = component "Port Instance Table" "Stores model port instances connected to specific class or scene instances" "PostgreSQL Table"
+                sceneInstanceTable = component "Scene Instance Table" "Stores model scene instances conforming to metamodel scene type definitions" "PostgreSQL Table"
+                
+                // Association/Reference Tables
+                classHasAttributesTable = component "Class Has Attributes Table" "Associates metamodel classes with their attributes, including UI sequence and component information" "PostgreSQL Table"
+                portHasAttributesTable = component "Port Has Attributes Table" "Associates metamodel ports with their attributes, including UI sequence and component information" "PostgreSQL Table"
+                sceneHasAttributesTable = component "Scene Has Attributes Table" "Associates metamodel scene types with their attributes, including UI sequence and component information" "PostgreSQL Table"
+                containsClassesTable = component "Contains Classes Table" "Defines which metamodel classes can be contained within specific scene types" "PostgreSQL Table"
+                isSubclassOfTable = component "Is Subclass Of Table" "Establishes inheritance relationships between metamodel classes" "PostgreSQL Table"
+                isSubSceneTable = component "Is Sub Scene Table" "Establishes hierarchical relationships between metamodel scene types" "PostgreSQL Table"
+                roleClassReferenceTable = component "Role Class Reference Table" "Associates metamodel roles with classes including cardinality constraints (min/max)" "PostgreSQL Table"
+                rolePortReferenceTable = component "Role Port Reference Table" "Associates metamodel roles with ports including cardinality constraints" "PostgreSQL Table"
+                roleSceneReferenceTable = component "Role Scene Reference Table" "Associates metamodel roles with scene types including cardinality constraints" "PostgreSQL Table"
+                roleRelationclassReferenceTable = component "Role Relationclass Reference Table" "Associates metamodel roles with relation classes including cardinality constraints" "PostgreSQL Table"
+                hasReferenceRoleTable = component "Has Reference Role Table" "Links metamodel attribute types to roles for reference-type attributes" "PostgreSQL Table"
+                hasTableAttributeTable = component "Has Table Attribute Table" "Defines table-structured attributes with column sequences and attribute type references" "PostgreSQL Table"
+                hasAlgorithmTable = component "Has Algorithm Table" "Associates metamodel scene types with algorithmic procedures for automated processing" "PostgreSQL Table"
+                
+                // Aggregation and Decomposition Tables
+                aggregatorClassTable = component "Aggregator Class Table" "Marks metamodel classes as aggregators that can contain other classes or relation classes" "PostgreSQL Table"
+                decomposableClassTable = component "Decomposable Class Table" "Marks metamodel classes as decomposable into scenes, classes, or aggregator classes" "PostgreSQL Table"
+                containsAggregClassesTable = component "Contains Aggreg Classes Table" "Defines which classes can be contained within aggregator classes" "PostgreSQL Table"
+                containsAggregRelationclassesTable = component "Contains Aggreg Relationclasses Table" "Defines which relation classes can be contained within aggregator classes" "PostgreSQL Table"
+                decomposableIntoClassesTable = component "Decomposable Into Classes Table" "Defines target classes for decomposable class transformation" "PostgreSQL Table"
+                decomposableIntoAggregatorClassesTable = component "Decomposable Into Aggregator Classes Table" "Defines target aggregator classes for decomposable class transformation" "PostgreSQL Table"
+                decomposableIntoScenesTable = component "Decomposable Into Scenes Table" "Defines target scene types for decomposable class transformation" "PostgreSQL Table"
+                classAggregationReferenceTable = component "Class Aggregation Reference Table" "Links model class instances in aggregation relationships" "PostgreSQL Table"
+                classDecompositionReferenceTable = component "Class Decomposition Reference Table" "Links model class instances in decomposition relationships" "PostgreSQL Table"
+                sceneDecompositionReferenceTable = component "Scene Decomposition Reference Table" "Links model class instances to their decomposed scene instances" "PostgreSQL Table"
+                assignedToSceneTable = component "Assigned To Scene Table" "Associates model class instances with scene instances for organization" "PostgreSQL Table"
+                
+                // Attribute Propagation Tables
+                attributePropagatingRelationclassTable = component "Attribute Propagating Relationclass Table" "Marks relation classes as capable of propagating attributes across connections" "PostgreSQL Table"
+                selectedPropagationAttributesTable = component "Selected Propagation Attributes Table" "Configures which attributes are propagated by relation classes with durability and mutability settings" "PostgreSQL Table"
+                propagationAttributeTable = component "Propagation Attribute Table" "Stores propagation-specific properties for attribute instances including durability and mutability values" "PostgreSQL Table"
+                
+                // User Management Tables
+                usersTable = component "Users Table" "Stores user account information including usernames, hashed passwords, salts, and authentication tokens" "PostgreSQL Table"
+                userGroupTable = component "User Group Table" "Defines user groups for organizing users and managing permissions" "PostgreSQL Table"
+                hasUserUserGroupTable = component "Has User User Group Table" "Associates users with user groups for membership management" "PostgreSQL Table"
+                
+                // Permission/Rights Tables
+                hasRightTable = component "Has Right Table" "Central permission table granting various access rights to user groups for metamodel objects and model instances" "PostgreSQL Table"
+                hasReadRightTable = component "Has Read Right Table" "Legacy table for read permissions (superseded by has_right table)" "PostgreSQL Table"
+                hasWriteRightTable = component "Has Write Right Table" "Legacy table for write permissions (superseded by has_right table)" "PostgreSQL Table"
+                hasDeleteRightTable = component "Has Delete Right Table" "Legacy table for delete permissions (superseded by has_right table)" "PostgreSQL Table"
+                
+                // Constraint and Validation Tables
+                genericConstraintTable = component "Generic Constraint Table" "Stores custom constraints and validation rules for metamodel objects" "PostgreSQL Table"
+                sceneGroupTable = component "Scene Group Table" "Organizes scene types into hierarchical groups with optional parent-child relationships" "PostgreSQL Table"
+                
+                // Logging Tables
+                tHistoryTable = component "T History Table" "Audit log table tracking all create, update, and delete operations with transaction information and affected UUIDs" "PostgreSQL Table"
+                
+                // Functions and Triggers
+                changeTriggerFunction = component "Change Trigger Function" "PL/pgSQL function that logs all data changes to the history table for audit purposes" "PostgreSQL Function"
+                deleteInstanceParentFunction = component "Delete Instance Parent Function" "PL/pgSQL function that cascades deletion of parent instance objects when child instances are removed" "PostgreSQL Function"
+                deleteMetaobjectByUuidFunction = component "Delete Metaobject By UUID Function" "PL/pgSQL function that securely deletes metamodel objects with permission checking and transaction logging" "PostgreSQL Function"
+                
+                // Schema Relationships
+                publicSchema -> metaobjectTable "Contains core metamodel object definitions"
+                publicSchema -> classTable "Contains metamodel class definitions"
+                publicSchema -> relationclassTable "Contains metamodel relationship definitions"
+                publicSchema -> attributeTable "Contains metamodel attribute definitions"
+                publicSchema -> attributeTypeTable "Contains attribute type definitions"
+                publicSchema -> roleTable "Contains role definitions"
+                publicSchema -> portTable "Contains port definitions"
+                publicSchema -> sceneTypeTable "Contains scene type definitions"
+                publicSchema -> procedureTable "Contains procedure definitions"
+                publicSchema -> fileTable "Contains file storage"
+                publicSchema -> instanceObjectTable "Contains model instance objects"
+                publicSchema -> classInstanceTable "Contains model class instances"
+                publicSchema -> relationclassInstanceTable "Contains model relationship instances"
+                publicSchema -> attributeInstanceTable "Contains model attribute values"
+                publicSchema -> roleInstanceTable "Contains model role assignments"
+                publicSchema -> portInstanceTable "Contains model port instances"
+                publicSchema -> sceneInstanceTable "Contains model scene instances"
+                publicSchema -> usersTable "Contains user account data"
+                publicSchema -> userGroupTable "Contains user group definitions"
+                publicSchema -> hasRightTable "Contains permission assignments"
+                loggingSchema -> tHistoryTable "Contains audit log entries"
+                
+                // Core Metamodel Relationships
+                metaobjectTable -> classTable "Provides base properties for class definitions through inheritance"
+                metaobjectTable -> relationclassTable "Provides base properties for relationship definitions through inheritance"
+                metaobjectTable -> attributeTable "Provides base properties for attribute definitions through inheritance"
+                metaobjectTable -> attributeTypeTable "Provides base properties for attribute type definitions through inheritance"
+                metaobjectTable -> roleTable "Provides base properties for role definitions through inheritance"
+                metaobjectTable -> portTable "Provides base properties for port definitions through inheritance"
+                metaobjectTable -> sceneTypeTable "Provides base properties for scene type definitions through inheritance"
+                metaobjectTable -> procedureTable "Provides base properties for procedure definitions through inheritance"
+                metaobjectTable -> fileTable "Provides base properties for file objects through inheritance"
+                metaobjectTable -> usersTable "Provides base properties for user objects through inheritance"
+                metaobjectTable -> userGroupTable "Provides base properties for user group objects through inheritance"
+                
+                // Attribute System Relationships
+                attributeTable -> attributeTypeTable "References attribute type definitions for validation and behavior"
+                attributeTable -> classHasAttributesTable "Defines attributes belonging to specific classes"
+                attributeTable -> portHasAttributesTable "Defines attributes belonging to specific ports"
+                attributeTable -> sceneHasAttributesTable "Defines attributes belonging to specific scene types"
+                attributeTable -> hasTableAttributeTable "Defines table-structured attributes with column specifications"
+                attributeTypeTable -> hasReferenceRoleTable "Defines reference relationships for reference-type attributes"
+                
+                // Class System Relationships
+                classTable -> relationclassTable "Serves as base for relationship class definitions"
+                classTable -> aggregatorClassTable "Marks classes as aggregators for containment relationships"
+                classTable -> decomposableClassTable "Marks classes as decomposable into other structures"
+                classTable -> isSubclassOfTable "Establishes inheritance hierarchies between classes"
+                classTable -> containsClassesTable "Defines class containment within scene types"
+                classTable -> portTable "Defines connection points available on classes"
+                classTable -> roleClassReferenceTable "Associates classes with roles for relationship endpoints"
+                
+                // Relationship System Relationships
+                relationclassTable -> roleTable "References 'from' and 'to' roles for relationship endpoints"
+                relationclassTable -> attributePropagatingRelationclassTable "Marks relationships as attribute propagators"
+                relationclassTable -> containsAggregClassesTable "Defines containment within aggregator classes"
+                relationclassTable -> roleRelationclassReferenceTable "Associates relationships with roles"
+                roleTable -> roleClassReferenceTable "Associates roles with target classes and cardinality constraints"
+                roleTable -> rolePortReferenceTable "Associates roles with target ports and cardinality constraints"
+                roleTable -> roleSceneReferenceTable "Associates roles with target scene types and cardinality constraints"
+                roleTable -> hasReferenceRoleTable "Defines roles for reference-type attributes"
+                
+                // Scene System Relationships
+                sceneTypeTable -> containsClassesTable "Defines classes that can be contained within scenes"
+                sceneTypeTable -> isSubSceneTable "Establishes hierarchical relationships between scene types"
+                sceneTypeTable -> hasAlgorithmTable "Associates scenes with algorithmic procedures"
+                sceneTypeTable -> decomposableIntoScenesTable "Defines scenes as decomposition targets"
+                sceneTypeTable -> sceneGroupTable "Organizes scene types into hierarchical groups"
+                procedureTable -> hasAlgorithmTable "Provides algorithmic definitions for scene type associations"
+                
+                // Instance/Model Relationships
+                instanceObjectTable -> classInstanceTable "Provides base properties for class instances through inheritance"
+                instanceObjectTable -> relationclassInstanceTable "Provides base properties for relationship instances through inheritance"
+                instanceObjectTable -> attributeInstanceTable "Provides base properties for attribute instances through inheritance"
+                instanceObjectTable -> roleInstanceTable "Provides base properties for role instances through inheritance"
+                instanceObjectTable -> portInstanceTable "Provides base properties for port instances through inheritance"
+                instanceObjectTable -> sceneInstanceTable "Provides base properties for scene instances through inheritance"
+                
+                // Instance to Metamodel Conformance
+                classInstanceTable -> classTable "Conforms to class definitions and inherits properties"
+                relationclassInstanceTable -> relationclassTable "Conforms to relationship definitions"
+                attributeInstanceTable -> attributeTable "Conforms to attribute definitions and stores values"
+                roleInstanceTable -> roleTable "Conforms to role definitions and establishes connections"
+                portInstanceTable -> portTable "Conforms to port definitions"
+                sceneInstanceTable -> sceneTypeTable "Conforms to scene type definitions"
+                
+                // Instance Interconnections
+                relationclassInstanceTable -> roleInstanceTable "Connects relationship instances through 'from' and 'to' role instances"
+                roleInstanceTable -> classInstanceTable "References connected class instances"
+                roleInstanceTable -> portInstanceTable "References connected port instances"
+                roleInstanceTable -> sceneInstanceTable "References connected scene instances"
+                roleInstanceTable -> attributeInstanceTable "References connected attribute instances"
+                roleInstanceTable -> relationclassInstanceTable "References connected relationship instances"
+                portInstanceTable -> classInstanceTable "Connects to specific class instances"
+                portInstanceTable -> sceneInstanceTable "Connects to specific scene instances"
+                attributeInstanceTable -> classInstanceTable "Assigns attribute values to class instances"
+                attributeInstanceTable -> portInstanceTable "Assigns attribute values to port instances"
+                attributeInstanceTable -> sceneInstanceTable "Assigns attribute values to scene instances"
+                attributeInstanceTable -> roleInstanceTable "Assigns attribute values through role propagation"
+                
+                // Aggregation and Decomposition Instance Relationships
+                classInstanceTable -> aggregatorClassTable "References aggregator class types for containment"
+                classInstanceTable -> decomposableClassTable "References decomposable class types for transformation"
+                classInstanceTable -> classAggregationReferenceTable "Establishes aggregation relationships between instances"
+                classInstanceTable -> classDecompositionReferenceTable "Establishes decomposition relationships between instances"
+                classInstanceTable -> sceneDecompositionReferenceTable "Links decomposed class instances to scene instances"
+                classInstanceTable -> assignedToSceneTable "Assigns class instances to organizational scene instances"
+                sceneInstanceTable -> assignedToSceneTable "Contains assigned class instances for organization"
+                sceneInstanceTable -> sceneDecompositionReferenceTable "Contains decomposed class instances"
+                
+                // Attribute Propagation Relationships
+                attributePropagatingRelationclassTable -> selectedPropagationAttributesTable "Configures which attributes to propagate with durability/mutability settings"
+                attributeInstanceTable -> propagationAttributeTable "Stores propagation-specific properties for propagated attributes"
+                selectedPropagationAttributesTable -> attributeTable "References attributes selected for propagation"
+                
+                // User and Permission Relationships
+                usersTable -> hasUserUserGroupTable "Associates users with group memberships"
+                userGroupTable -> hasUserUserGroupTable "Associates groups with user memberships"
+                userGroupTable -> hasRightTable "Grants various access rights to user groups"
+                hasRightTable -> metaobjectTable "Controls access to metamodel objects"
+                hasRightTable -> instanceObjectTable "Controls access to model instances"
+                usersTable -> hasReadRightTable "Legacy read permission assignments"
+                usersTable -> hasWriteRightTable "Legacy write permission assignments"
+                usersTable -> hasDeleteRightTable "Legacy delete permission assignments"
+                
+                // Constraint and Validation Relationships
+                genericConstraintTable -> metaobjectTable "Applies custom constraints to metamodel objects"
+                sceneGroupTable -> sceneTypeTable "Organizes scene types into hierarchical structures"
+                
+                // Logging and Audit Relationships
+                changeTriggerFunction -> tHistoryTable "Logs all data changes for audit trail"
+                metaobjectTable -> changeTriggerFunction "Triggers change logging on data modifications"
+                instanceObjectTable -> changeTriggerFunction "Triggers change logging on data modifications"
+                deleteInstanceParentFunction -> instanceObjectTable "Cascades deletion of parent objects when children are removed"
+                deleteMetaobjectByUuidFunction -> metaobjectTable "Securely deletes metamodel objects with permission verification"
+                deleteMetaobjectByUuidFunction -> hasRightTable "Verifies user permissions before allowing deletion"
+                deleteMetaobjectByUuidFunction -> tHistoryTable "Logs deletion operations for audit purposes"
+                
+                // Aggregation Container Relationships
+                aggregatorClassTable -> containsAggregClassesTable "Defines which classes can be contained"
+                aggregatorClassTable -> containsAggregRelationclassesTable "Defines which relation classes can be contained"
+                aggregatorClassTable -> decomposableIntoAggregatorClassesTable "Serves as decomposition target"
+                decomposableClassTable -> decomposableIntoClassesTable "Defines decomposition target classes"
+                decomposableClassTable -> decomposableIntoAggregatorClassesTable "Defines decomposition target aggregators"
+                decomposableClassTable -> decomposableIntoScenesTable "Defines decomposition target scenes"
+            }
 
-            GlobalDS = container "Global Data Structure Library" "Shared data model library (domain classes for models/metamodels)" "TypeScript" "GlobalDS" {
+            GlobalDS = container "MMAR Global Data Structure Library" "Shared data model library (domain classes for models/metamodels)" "TypeScript" "GlobalDS" {
                 // Main component
                 dsIndex = component "Data Structure Index" "Main entry point exposing all data structures" "TypeScript"
                 
@@ -412,6 +640,21 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             metaRelationClassesController -> metamodelRelationClasses "Maps API requests to relation definitions"
             metaAttributesController -> metamodelAttributes "Maps API requests to attribute definitions"
             metaPortsController -> metamodelPorts "Maps API requests to port definitions"
+            
+            // API Server to Database Relationships
+            databaseService -> publicSchema "Connects to main data schema"
+            databaseService -> loggingSchema "Connects to audit logging schema"
+            metaObjectsConnection -> metaobjectTable "Performs CRUD operations on metamodel objects"
+            metaClassesConnection -> classTable "Performs CRUD operations on metamodel classes"
+            metaRelationClassesConnection -> relationclassTable "Performs CRUD operations on metamodel relationships"
+            metaAttributesConnection -> attributeTable "Performs CRUD operations on metamodel attributes"
+            metaPortsConnection -> portTable "Performs CRUD operations on metamodel ports"
+            metaSceneTypesConnection -> sceneTypeTable "Performs CRUD operations on metamodel scene types"
+            metaFilesConnection -> fileTable "Performs CRUD operations on file storage"
+            usersConnection -> usersTable "Performs CRUD operations on user accounts"
+            usersConnection -> userGroupTable "Performs CRUD operations on user groups"
+            usersConnection -> hasUserUserGroupTable "Manages user-group associations"
+            usersConnection -> hasRightTable "Manages permission assignments"
         }
 
 
@@ -462,6 +705,13 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             include *
             title "Component Diagram: MMAR VizRep Client"
             description "The MMAR VizRep Client provides components for designing visual representations of metamodel elements, including 3D visualization, interaction handling, and state management."
+        }
+        
+        component Database "DatabaseComponents" {
+            include *
+            autoLayout lr
+            title "Component Diagram: MMAR Database"
+            description "The MMAR Database consists of PostgreSQL schemas, tables, and functions that store metamodel definitions, model instances, user data, and audit logs. The design supports complex metamodeling concepts including inheritance, aggregation, decomposition, and attribute propagation."
         }
 
         theme default
