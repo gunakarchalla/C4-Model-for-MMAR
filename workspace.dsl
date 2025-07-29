@@ -6,43 +6,49 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
         
 
         // Software Systems (high-level)
-        MMAR = softwareSystem "MMAR" "Toolset for designing & managing metamodels & models." {
-            ModelingClient = container "MMAR Modeling Client" "Client for model creation based on metamodels" "Aurelia/TypeScript/Three.js/Node.js" "ModelingClient" {
-                // Core Services
-                fetchHelperService = component "FetchHelper Service" "Handles communication with the backend server" "TypeScript"
-                loggerService = component "Logger Service" "Centralized logging system for tracking operations and errors" "TypeScript"
-                instanceUtilityService = component "Instance Utility Service" "Manages model instances and their operations" "TypeScript"
-                metaUtilityService = component "Meta Utility Service" "Provides utilities for working with metamodel elements" "TypeScript"
-                hybridAlgorithmsService = component "Hybrid Algorithms Service" "Handles execution of special algorithms across instances" "TypeScript"
-                mSelectedObjectService = component "Global Selected Object Service" "Manages the currently selected object and its state" "TypeScript"
-                stateObjectService = component "Global State Object Service" "Manages application state and state transitions" "TypeScript"
-                dialogHelperService = component "Dialog Helper Service" "Manages dialog creation and interaction" "TypeScript"
+
+            ModelingClient = softwareSystem "MMAR Modeling Client" "Client for model creation based on metamodels" "ModelingClient"{
+                mCoreServices = container "Core Services" "Handles core functionalities for model creation"{
+                    // Core Services
+                    fetchHelperService = component "FetchHelper Service" "Handles communication with the backend server" "TypeScript"
+                    loggerService = component "Logger Service" "Centralized logging system for tracking operations and errors" "TypeScript"
+                    instanceUtilityService = component "Instance Utility Service" "Manages model instances and their operations" "TypeScript"
+                    metaUtilityService = component "Meta Utility Service" "Provides utilities for working with metamodel elements" "TypeScript"
+                    hybridAlgorithmsService = component "Hybrid Algorithms Service" "Handles execution of special algorithms across instances" "TypeScript"
+                    mSelectedObjectService = component "Global Selected Object Service" "Manages the currently selected object and its state" "TypeScript"
+                    stateObjectService = component "Global State Object Service" "Manages application state and state transitions" "TypeScript"
+                    dialogHelperService = component "Dialog Helper Service" "Manages dialog creation and interaction" "TypeScript"
+                }
                 
-                // UI Components
-                mLeftNav = component "Left Navigation" "Navigation panel for browsing model objects" "TypeScript, Aurelia"
-                mMiddleBody = component "Middle Body" "Main content area for displaying and editing 3D models" "TypeScript, Aurelia"
-                mRightNav = component "Right Navigation" "Panel for context-specific options and properties" "TypeScript, Aurelia"
-                topNavBar = component "Top Navigation Bar" "Main application navigation and actions" "TypeScript, Aurelia"
-                attributeWindow = component "Attribute Window" "Window for editing object attributes" "TypeScript, Aurelia"
-                threeCanvas = component "Three Canvas" "3D canvas for model visualization and interaction" "TypeScript, Three.js"
-                logWindow = component "Log Window" "Window displaying application logs and messages" "TypeScript, Aurelia"
-                stateWindow = component "State Window" "Window for managing state transitions" "TypeScript, Aurelia"
-                classButtonGroup = component "Class Button Group" "UI component for selecting classes" "TypeScript, Aurelia"
-                relationClassButtonGroup = component "Relation Class Button Group" "UI component for selecting relation classes" "TypeScript, Aurelia"
+                mUIComponents = container "UI Components" "Contains reusable UI components for the application" "TypeScript, Aurelia" {
+                    // UI Components
+                    mLeftNav = component "Left Navigation" "Navigation panel for browsing model objects" "TypeScript, Aurelia"
+                    mMiddleBody = component "Middle Body" "Main content area for displaying and editing 3D models" "TypeScript, Aurelia"
+                    mRightNav = component "Right Navigation" "Panel for context-specific options and properties" "TypeScript, Aurelia"
+                    topNavBar = component "Top Navigation Bar" "Main application navigation and actions" "TypeScript, Aurelia"
+                    attributeWindow = component "Attribute Window" "Window for editing object attributes" "TypeScript, Aurelia"
+                    threeCanvas = component "Three Canvas" "3D canvas for model visualization and interaction" "TypeScript, Three.js"
+                    logWindow = component "Log Window" "Window displaying application logs and messages" "TypeScript, Aurelia"
+                    stateWindow = component "State Window" "Window for managing state transitions" "TypeScript, Aurelia"
+                    classButtonGroup = component "Class Button Group" "UI component for selecting classes" "TypeScript, Aurelia"
+                    relationClassButtonGroup = component "Relation Class Button Group" "UI component for selecting relation classes" "TypeScript, Aurelia"
+                }
                 
-                // Dialog Components
-                mDialogUploadFile = component "Dialog Upload File" "Dialog for uploading files to the model" "TypeScript, Aurelia"
-                dialogUploadImage = component "Dialog Upload Image" "Dialog for uploading images" "TypeScript, Aurelia"
-                dialogUploadGltf = component "Dialog Upload GLTF" "Dialog for uploading 3D models" "TypeScript, Aurelia"
-                dialogAttributeWindow = component "Dialog Attribute Window" "Dialog for editing attributes" "TypeScript, Aurelia"
-                dialogReferenceAttribute = component "Dialog Reference Attribute" "Dialog for editing reference attributes" "TypeScript, Aurelia"
-                dialogTableAttribute = component "Dialog Table Attribute" "Dialog for editing table attributes" "TypeScript, Aurelia"
-                dialogCreateNewScene = component "Dialog Create New Scene" "Dialog for creating new scenes" "TypeScript, Aurelia"
-                dialogCopyScene = component "Dialog Copy Scene" "Dialog for copying scenes" "TypeScript, Aurelia"
-                dialogSaveAs = component "Dialog Save As" "Dialog for saving models" "TypeScript, Aurelia"
-                dialogImportModel = component "Dialog Import Model" "Dialog for importing models" "TypeScript, Aurelia"
-                dialogImportMetamodel = component "Dialog Import Metamodel" "Dialog for importing metamodels" "TypeScript, Aurelia"
-                dialogAlgorithm = component "Dialog Algorithm" "Dialog for configuring and running algorithms" "TypeScript, Aurelia"
+                mDialogComponents = container "Dialog Components" "Contains reusable dialog components for user interactions" "TypeScript, Aurelia" {
+                    // Dialog Components
+                    mDialogUploadFile = component "Dialog Upload File" "Dialog for uploading files to the model" "TypeScript, Aurelia"
+                    dialogUploadImage = component "Dialog Upload Image" "Dialog for uploading images" "TypeScript, Aurelia"
+                    dialogUploadGltf = component "Dialog Upload GLTF" "Dialog for uploading 3D models" "TypeScript, Aurelia"
+                    dialogAttributeWindow = component "Dialog Attribute Window" "Dialog for editing attributes" "TypeScript, Aurelia"
+                    dialogReferenceAttribute = component "Dialog Reference Attribute" "Dialog for editing reference attributes" "TypeScript, Aurelia"
+                    dialogTableAttribute = component "Dialog Table Attribute" "Dialog for editing table attributes" "TypeScript, Aurelia"
+                    dialogCreateNewScene = component "Dialog Create New Scene" "Dialog for creating new scenes" "TypeScript, Aurelia"
+                    dialogCopyScene = component "Dialog Copy Scene" "Dialog for copying scenes" "TypeScript, Aurelia"
+                    dialogSaveAs = component "Dialog Save As" "Dialog for saving models" "TypeScript, Aurelia"
+                    dialogImportModel = component "Dialog Import Model" "Dialog for importing models" "TypeScript, Aurelia"
+                    dialogImportMetamodel = component "Dialog Import Metamodel" "Dialog for importing metamodels" "TypeScript, Aurelia"
+                    dialogAlgorithm = component "Dialog Algorithm" "Dialog for configuring and running algorithms" "TypeScript, Aurelia"
+                }
                 
                 // Service relationships
                 hybridAlgorithmsService -> instanceUtilityService "Uses to apply algorithms to instances"
@@ -70,28 +76,34 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
                 attributeWindow -> dialogTableAttribute "Opens for table attribute editing"
             }
 
-            MetamodelingClient = container "MMAR Metamodeling Client" "Desktop/Web Client for metamodel design" "Aurelia/TypeScript/Node.js" "MetamodelingClient" {
-                // Core services
-                mmSelectedObjectService = component "Selected Object Service" "Manages the currently selected object and publishes events when selection changes" "TypeScript, Aurelia"
-                backendService = component "Backend Service" "Handles communication with the backend server" "TypeScript, HttpClient"
-                helperService = component "Helper Service" "Provides utility functions for file conversion and other tasks" "TypeScript"
-                userService = component "User Service" "Manages user authentication and information" "TypeScript"
-                    
-                // UI Components
-                mmLeftNav = component "Left Navigation" "Navigation tree for browsing model objects" "TypeScript, Aurelia"
-                mmMiddleBody = component "Middle Body" "Main content area for displaying and editing objects" "TypeScript, Aurelia"
-                mmRightNav = component "Right Navigation" "Context-specific navigation and options" "TypeScript, Aurelia"
-                    
-                // Middle Body Components
-                generalTab = component "General Tab" "Tab displaying general properties of objects" "TypeScript, Aurelia"
-                    
-                // Object-specific Components
-                generalTabClass = component "General Tab Class" "Component for displaying and editing class objects" "TypeScript, Aurelia"
-                generalTabFile = component "General Tab File" "Component for displaying and editing file objects" "TypeScript, Aurelia"
-                generalTabRelationclass = component "General Tab RelationClass" "Component for displaying and editing relation class objects" "TypeScript, Aurelia"
-                    
-                // File-specific Components
-                mmDialogUploadFile = component "Dialog Upload File" "Dialog for uploading and replacing files" "TypeScript, Aurelia"
+            MetamodelingClient = softwareSystem "MMAR Metamodeling Client" "Desktop/Web Client for metamodel design" "MetamodelingClient" {
+
+                mmCoreServices = container "Core Services" "Handles core functionalities for metamodel design" {
+                    // Core services
+                    mmSelectedObjectService = component "Selected Object Service" "Manages the currently selected object and publishes events when selection changes" "TypeScript, Aurelia"
+                    backendService = component "Backend Service" "Handles communication with the backend server" "TypeScript, HttpClient"
+                    helperService = component "Helper Service" "Provides utility functions for file conversion and other tasks" "TypeScript"
+                    userService = component "User Service" "Manages user authentication and information" "TypeScript"
+                }
+                
+                mmUIComponents = container "UI Components" "Contains reusable UI components for the application" "TypeScript, Aurelia" {
+                    // UI Components
+                    mmLeftNav = component "Left Navigation" "Navigation tree for browsing model objects" "TypeScript, Aurelia"
+                    mmMiddleBody = component "Middle Body" "Main content area for displaying and editing objects" "TypeScript, Aurelia"
+                    mmRightNav = component "Right Navigation" "Context-specific navigation and options" "TypeScript, Aurelia"
+                        
+                    // Middle Body Components
+                    generalTab = component "General Tab" "Tab displaying general properties of objects" "TypeScript, Aurelia"
+                        
+                    // Object-specific Components
+                    generalTabClass = component "General Tab Class" "Component for displaying and editing class objects" "TypeScript, Aurelia"
+                    generalTabFile = component "General Tab File" "Component for displaying and editing file objects" "TypeScript, Aurelia"
+                    generalTabRelationclass = component "General Tab RelationClass" "Component for displaying and editing relation class objects" "TypeScript, Aurelia"
+                        
+                    // File-specific Components
+                    mmDialogUploadFile = component "Dialog Upload File" "Dialog for uploading and replacing files" "TypeScript, Aurelia"
+                } 
+                
                     
                 // Relationships between components
                 mmLeftNav -> mmSelectedObjectService "Updates selected object"
@@ -107,62 +119,76 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
                 mmSelectedObjectService -> backendService "Requests object data"
             }
 
-            VizRepClient = container "MMAR VizRep Client" "Client for visual representation design of metamodel elements" "Aurelia/TypeScript/Three.js/Node.js" "VizRepClient" {
-                // Core Services
-                vFetchHelperService = component "FetchHelper Service" "Handles communication with the backend server" "TypeScript"
-                vLoggerService = component "Logger Service" "Centralized logging system for tracking operations and errors" "TypeScript"
-                vInstanceUtilityService = component "Instance Utility Service" "Manages VizRep instances and their operations" "TypeScript"
-                vMetaUtilityService = component "Meta Utility Service" "Provides utilities for working with metamodel elements" "TypeScript"
-                expressionUtilityService = component "Expression Utility Service" "Evaluates and processes dynamic expressions" "TypeScript"
-                vDialogHelperService = component "Dialog Helper Service" "Manages dialog creation and interaction" "TypeScript"
-                lineUpdateService = component "Line Update Service" "Manages updates to connection lines between objects" "TypeScript"
+            VizRepClient = softwareSystem "MMAR VizRep Client" "Client for visual representation design of metamodel elements" "VizRepClient" {
+                vCoreServices = container "Core Services" "Handles core functionalities for visual representation design" {
+                    // Core Services
+                    vFetchHelperService = component "FetchHelper Service" "Handles communication with the backend server" "TypeScript"
+                    vLoggerService = component "Logger Service" "Centralized logging system for tracking operations and errors" "TypeScript"
+                    vInstanceUtilityService = component "Instance Utility Service" "Manages VizRep instances and their operations" "TypeScript"
+                    vMetaUtilityService = component "Meta Utility Service" "Provides utilities for working with metamodel elements" "TypeScript"
+                    expressionUtilityService = component "Expression Utility Service" "Evaluates and processes dynamic expressions" "TypeScript"
+                    vDialogHelperService = component "Dialog Helper Service" "Manages dialog creation and interaction" "TypeScript"
+                    lineUpdateService = component "Line Update Service" "Manages updates to connection lines between objects" "TypeScript"
+                }
+                
+                stateManagement = container "State Management" "Manages global state and selected object across the application" "TypeScript, Aurelia" {
+                    // State Management
+                    vGlobalSelectedObjectService = component "Global Selected Object Service" "Manages the currently selected object state" "TypeScript"
+                    globalStateObjectService = component "Global State Object Service" "Manages application state and state transitions" "TypeScript"
+                    globalClassObjectService = component "Global Class Object Service" "Manages metamodel class definitions" "TypeScript"
+                    globalRelationClassObjectService = component "Global Relation Class Object Service" "Manages relation class definitions" "TypeScript"
+                }
+                
+                3DVisualizationServices = container "3D Visualization Services" "Provides services for 3D model visualization and interaction" "TypeScript, Three.js" {
+                    // 3D Visualization Services
+                    graphicContextService = component "Graphic Context Service" "Manages 3D scene and rendering context" "TypeScript, Three.js"
+                    rayHelperService = component "Ray Helper Service" "Handles raycasting for 3D object selection" "TypeScript, Three.js"
+                    animatorService = component "Animator Service" "Manages animations and transitions" "TypeScript"
+                    transformControlService = component "Transform Control Service" "Handles 3D object transformation controls" "TypeScript, Three.js"
+                }
     
-                // State Management
-                vGlobalSelectedObjectService = component "Global Selected Object Service" "Manages the currently selected object state" "TypeScript"
-                globalStateObjectService = component "Global State Object Service" "Manages application state and state transitions" "TypeScript"
-                globalClassObjectService = component "Global Class Object Service" "Manages metamodel class definitions" "TypeScript"
-                globalRelationClassObjectService = component "Global Relation Class Object Service" "Manages relation class definitions" "TypeScript"
-    
-                // 3D Visualization Services
-                graphicContextService = component "Graphic Context Service" "Manages 3D scene and rendering context" "TypeScript, Three.js"
-                rayHelperService = component "Ray Helper Service" "Handles raycasting for 3D object selection" "TypeScript, Three.js"
-                animatorService = component "Animator Service" "Manages animations and transitions" "TypeScript"
-                transformControlService = component "Transform Control Service" "Handles 3D object transformation controls" "TypeScript, Three.js"
-    
-                // Interaction Handlers
-                interactionHandlerService = component "Interaction Handler Service" "Coordinates user interactions with 3D objects" "TypeScript"
-                mouseObjectService = component "Mouse Object Service" "Handles mouse interactions and events" "TypeScript"
-                keyboardHandlerService = component "Keyboard Handler Service" "Manages keyboard shortcuts and events" "TypeScript"
-                resizeService = component "Resize Service" "Handles application resizing events" "TypeScript"
-                instanceCreationService = component "Instance Creation Handler" "Manages the creation of new object instances" "TypeScript"
-    
-                // UI Components
-                vThreeCanvas = component "Three Canvas" "3D canvas for visualization design" "TypeScript, Three.js, Aurelia"
-                vLeftNav = component "Left Navigation" "Navigation panel for browsing metamodel elements" "TypeScript, Aurelia"
-                vRightNav = component "Right Navigation" "Panel for VizRep properties and options" "TypeScript, Aurelia"
-                vTopNavBar = component "Top Navigation Bar" "Main application navigation and actions" "TypeScript, Aurelia"
-                vMiddleBody = component "Middle Body" "Main content area for designing visual representations" "TypeScript, Aurelia"
-                vAttributeWindow = component "Attribute Window" "Window for editing object attributes" "TypeScript, Aurelia"
-                codeEditor = component "Code Editor" "Editor for VizRep scripts and expressions" "TypeScript, Aurelia"
-                objectList = component "Object List" "List of metamodel objects for visualization" "TypeScript, Aurelia"
-                vLogWindow = component "Log Window" "Window displaying application logs" "TypeScript, Aurelia"
-                vStateWindow = component "State Window" "Window for managing state transitions" "TypeScript, Aurelia"
-                toolbarContainer = component "Toolbar Container" "Container for tool buttons and actions" "TypeScript, Aurelia"
-                mainBodyTabBar = component "Main Body Tab Bar" "Navigation tabs for main content area" "TypeScript, Aurelia"
-                objectCard = component "Object Card" "Card representation of individual objects" "TypeScript, Aurelia"
-                previewButtons = component "Preview Buttons" "Buttons for previewing visual representations" "TypeScript, Aurelia"
-                menuEntry = component "Menu Entry" "Menu item component" "TypeScript, Aurelia"
-    
-                // Dialogs
-                vDialogAttributeWindow = component "Dialog Attribute Window" "Dialog for editing attributes" "TypeScript, Aurelia"
-                dialogLoadingWindow = component "Dialog Loading Window" "Dialog showing loading progress" "TypeScript, Aurelia"
-                userManagementDialog = component "User Management Dialog" "Dialog for managing user permissions" "TypeScript, Aurelia"
-    
-                // Initializers
-                initiator = component "Initiator" "Handles application initialization" "TypeScript"
-                sceneInitiator = component "Scene Initiator" "Initializes 3D scene and objects" "TypeScript"
-                arInitiator = component "AR Initiator" "Initializes augmented reality features" "TypeScript"
-    
+                interactionHandlers = container "Interaction Handlers" "Manages user interactions with 3D objects and UI components" "TypeScript, Aurelia" {
+                    // Interaction Handlers
+                    interactionHandlerService = component "Interaction Handler Service" "Coordinates user interactions with 3D objects" "TypeScript"
+                    mouseObjectService = component "Mouse Object Service" "Handles mouse interactions and events" "TypeScript"
+                    keyboardHandlerService = component "Keyboard Handler Service" "Manages keyboard shortcuts and events" "TypeScript"
+                    resizeService = component "Resize Service" "Handles application resizing events" "TypeScript"
+                    instanceCreationService = component "Instance Creation Handler" "Manages the creation of new object instances" "TypeScript"
+                }
+                
+                vUIComponents = container "UI Components" "Contains reusable UI components for the application" "TypeScript, Aurelia" {
+                    // UI Components
+                    vThreeCanvas = component "Three Canvas" "3D canvas for visualization design" "TypeScript, Three.js, Aurelia"
+                    vLeftNav = component "Left Navigation" "Navigation panel for browsing metamodel elements" "TypeScript, Aurelia"
+                    vRightNav = component "Right Navigation" "Panel for VizRep properties and options" "TypeScript, Aurelia"
+                    vTopNavBar = component "Top Navigation Bar" "Main application navigation and actions" "TypeScript, Aurelia"
+                    vMiddleBody = component "Middle Body" "Main content area for designing visual representations" "TypeScript, Aurelia"
+                    vAttributeWindow = component "Attribute Window" "Window for editing object attributes" "TypeScript, Aurelia"
+                    codeEditor = component "Code Editor" "Editor for VizRep scripts and expressions" "TypeScript, Aurelia"
+                    objectList = component "Object List" "List of metamodel objects for visualization" "TypeScript, Aurelia"
+                    vLogWindow = component "Log Window" "Window displaying application logs" "TypeScript, Aurelia"
+                    vStateWindow = component "State Window" "Window for managing state transitions" "TypeScript, Aurelia"
+                    toolbarContainer = component "Toolbar Container" "Container for tool buttons and actions" "TypeScript, Aurelia"
+                    mainBodyTabBar = component "Main Body Tab Bar" "Navigation tabs for main content area" "TypeScript, Aurelia"
+                    objectCard = component "Object Card" "Card representation of individual objects" "TypeScript, Aurelia"
+                    previewButtons = component "Preview Buttons" "Buttons for previewing visual representations" "TypeScript, Aurelia"
+                    menuEntry = component "Menu Entry" "Menu item component" "TypeScript, Aurelia"
+                }
+                
+                vDialogComponents = container "Dialog Components" "Contains reusable dialog components for user interactions" "TypeScript, Aurelia" {
+                    // Dialog Components
+                    vDialogAttributeWindow = component "Dialog Attribute Window" "Dialog for editing attributes" "TypeScript, Aurelia"
+                    dialogLoadingWindow = component "Dialog Loading Window" "Dialog showing loading progress" "TypeScript, Aurelia"
+                    userManagementDialog = component "User Management Dialog" "Dialog for managing user permissions" "TypeScript, Aurelia"
+                }
+
+                initializers = container "Initializers" "Handles application initialization and setup" "TypeScript, Aurelia" {
+                    // Initializers
+                    initiator = component "Initiator" "Handles application initialization" "TypeScript"
+                    sceneInitiator = component "Scene Initiator" "Initializes 3D scene and objects" "TypeScript"
+                    arInitiator = component "AR Initiator" "Initializes augmented reality features" "TypeScript"
+                }    
+
                 // Core Service Relationships
                 vFetchHelperService -> vLoggerService "Logs API requests and responses"
                 vInstanceUtilityService -> vFetchHelperService "Makes API requests for instance operations"
@@ -218,38 +244,46 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
                 arInitiator -> graphicContextService "Extends scene with AR capabilities"
             }
 
-            APIServer = container "MMAR API Server" "Backend server providing REST APIs for MMAR clients" "Express.js/Node.js" "API_Server" {
-                // Controller layer
-                metaObjectsController = component "Metamodel Objects Controller" "Handles REST API requests for base metamodel objects" "TypeScript, Express.js"
-                metaClassesController = component "Metamodel Classes Controller" "Handles REST API requests for metamodel classes" "TypeScript, Express.js"
-                metaRelationClassesController = component "Metamodel Relation Classes Controller" "Handles REST API requests for relation classes" "TypeScript, Express.js"
-                metaAttributesController = component "Metamodel Attributes Controller" "Handles REST API requests for metamodel attributes" "TypeScript, Express.js"
-                metaPortsController = component "Metamodel Ports Controller" "Handles REST API requests for metamodel ports" "TypeScript, Express.js" 
-                metaSceneTypesController = component "Metamodel Scene Types Controller" "Handles REST API requests for scene types" "TypeScript, Express.js"
-                metaFilesController = component "Metamodel Files Controller" "Handles REST API requests for file operations" "TypeScript, Express.js"
-                usersController = component "Users Controller" "Handles REST API requests for user management" "TypeScript, Express.js"
-                userGroupsController = component "User Groups Controller" "Handles REST API requests for user group management" "TypeScript, Express.js"
+            APIServer = softwareSystem "MMAR API Server" "Backend server providing REST APIs for MMAR clients" "API_Server" {
+                controllerLayer = container "Controller Layer" "Handles REST API requests and responses" "TypeScript, Express.js" {
+                    // Controller layer
+                    metaObjectsController = component "Metamodel Objects Controller" "Handles REST API requests for base metamodel objects" "TypeScript, Express.js"
+                    metaClassesController = component "Metamodel Classes Controller" "Handles REST API requests for metamodel classes" "TypeScript, Express.js"
+                    metaRelationClassesController = component "Metamodel Relation Classes Controller" "Handles REST API requests for relation classes" "TypeScript, Express.js"
+                    metaAttributesController = component "Metamodel Attributes Controller" "Handles REST API requests for metamodel attributes" "TypeScript, Express.js"
+                    metaPortsController = component "Metamodel Ports Controller" "Handles REST API requests for metamodel ports" "TypeScript, Express.js"
+                    metaSceneTypesController = component "Metamodel Scene Types Controller" "Handles REST API requests for scene types" "TypeScript, Express.js"
+                    metaFilesController = component "Metamodel Files Controller" "Handles REST API requests for file operations" "TypeScript, Express.js"
+                    usersController = component "Users Controller" "Handles REST API requests for user management" "TypeScript, Express.js"
+                    userGroupsController = component "User Groups Controller" "Handles REST API requests for user group management" "TypeScript, Express.js"
+                }
                 
-                // Data access layer
-                metaObjectsConnection = component "Metamodel Objects Connection" "Implements CRUD operations for metamodel objects" "TypeScript, PostgreSQL client"
-                metaClassesConnection = component "Metamodel Classes Connection" "Implements CRUD operations for metamodel classes" "TypeScript, PostgreSQL client"
-                metaRelationClassesConnection = component "Metamodel Relation Classes Connection" "Implements CRUD operations for relation classes" "TypeScript, PostgreSQL client"
-                metaAttributesConnection = component "Metamodel Attributes Connection" "Implements CRUD operations for attributes" "TypeScript, PostgreSQL client"
-                metaPortsConnection = component "Metamodel Ports Connection" "Implements CRUD operations for ports" "TypeScript, PostgreSQL client"
-                metaSceneTypesConnection = component "Metamodel Scene Types Connection" "Implements CRUD operations for scene types" "TypeScript, PostgreSQL client"
-                metaFilesConnection = component "Metamodel Files Connection" "Implements CRUD operations for files" "TypeScript, PostgreSQL client"
-                usersConnection = component "Users Connection" "Implements CRUD operations for users" "TypeScript, PostgreSQL client"
+                dataAccessLayer = container "Data Access Layer" "Implements CRUD operations for metamodel and model data" "TypeScript, PostgreSQL client" {
+                    // Data access layer
+                    metaObjectsConnection = component "Metamodel Objects Connection" "Implements CRUD operations for metamodel objects" "TypeScript, PostgreSQL client"
+                    metaClassesConnection = component "Metamodel Classes Connection" "Implements CRUD operations for metamodel classes" "TypeScript, PostgreSQL client"
+                    metaRelationClassesConnection = component "Metamodel Relation Classes Connection" "Implements CRUD operations for relation classes" "TypeScript, PostgreSQL client"
+                    metaAttributesConnection = component "Metamodel Attributes Connection" "Implements CRUD operations for attributes" "TypeScript, PostgreSQL client"
+                    metaPortsConnection = component "Metamodel Ports Connection" "Implements CRUD operations for ports" "TypeScript, PostgreSQL client"
+                    metaSceneTypesConnection = component "Metamodel Scene Types Connection" "Implements CRUD operations for scene types" "TypeScript, PostgreSQL client"
+                    metaFilesConnection = component "Metamodel Files Connection" "Implements CRUD operations for files" "TypeScript, PostgreSQL client"
+                    usersConnection = component "Users Connection" "Implements CRUD operations for users" "TypeScript, PostgreSQL client"
+                }
                 
-                // Service layer
-                imageService = component "Image Service" "Handles image processing like compression" "TypeScript, Sharp"
-                objectFilterService = component "Object Filter Service" "Filters response objects based on query parameters" "TypeScript"
-                authService = component "Authentication Service" "Handles user authentication and authorization" "TypeScript, JWT"
-                databaseService = component "Database Connection Service" "Manages database connection pools" "TypeScript, pg"
-                
-                // Middleware
-                errorHandlerMiddleware = component "Error Handler Middleware" "Processes and formats API errors" "TypeScript, Express.js"
-                authMiddleware = component "Authentication Middleware" "Verifies user authentication tokens" "TypeScript, Express.js"
-                
+                serviceLayer = container "Service Layer" "Provides business logic and utility services" "TypeScript" {
+                    // Service layer
+                    imageService = component "Image Service" "Handles image processing like compression" "TypeScript, Sharp"
+                    objectFilterService = component "Object Filter Service" "Filters response objects based on query parameters" "TypeScript"
+                    authService = component "Authentication Service" "Handles user authentication and authorization" "TypeScript, JWT"
+                    databaseService = component "Database Connection Service" "Manages database connection pools" "TypeScript, pg"
+                }
+
+                middlewareLayer = container "Middleware Layer" "Handles cross-cutting concerns" "TypeScript" {
+                    // Middleware
+                    errorHandlerMiddleware = component "Error Handler Middleware" "Processes and formats API errors" "TypeScript, Express.js"
+                    authMiddleware = component "Authentication Middleware" "Verifies user authentication tokens" "TypeScript, Express.js"
+                }
+
                 // Controller to Connection relationships
                 metaObjectsController -> metaObjectsConnection "Performs CRUD operations via"
                 metaClassesController -> metaClassesConnection "Delegates data management to"
@@ -292,87 +326,107 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
                 metaFilesController -> errorHandlerMiddleware "Handles upload/download errors through"
             }
 
-            Database = container "MMAR Database" "Database for persisting metamodels, models, and logs" "PostgreSQL" "Database" {
-                // Schemas
-                publicSchema = component "Public Schema" "Main schema containing metamodel and model data structures" "PostgreSQL Schema"
-                loggingSchema = component "Logging Schema" "Schema dedicated to audit logging and change tracking" "PostgreSQL Schema"
+            Database = softwareSystem "MMAR Database" "Database for persisting metamodels, models, and logs" "Database" {
+                schemaLayer = container "Schema Layer" "Defines database schemas for metamodel and model data" "PostgreSQL" {
+                    // Schemas
+                    publicSchema = component "Public Schema" "Main schema containing metamodel and model data structures" "PostgreSQL Schema"
+                    loggingSchema = component "Logging Schema" "Schema dedicated to audit logging and change tracking" "PostgreSQL Schema"
+                }
                 
-                // Core Metamodel Tables
-                metaobjectTable = component "Metaobject Table" "Base table for all metamodel elements with common properties like uuid, name, description, timestamps, and spatial coordinates" "PostgreSQL Table"
-                classTable = component "Class Table" "Stores metamodel class definitions with properties for reusability and abstraction" "PostgreSQL Table"
-                relationclassTable = component "Relationclass Table" "Defines metamodel relationships between classes with role-based connections and optional bendpoint classes" "PostgreSQL Table"
-                attributeTable = component "Attribute Table" "Stores metamodel attribute definitions including multi-valued flags, default values, constraints, and type references" "PostgreSQL Table"
-                attributeTypeTable = component "Attribute Type Table" "Defines data types for attributes with predefined types and regex validation patterns" "PostgreSQL Table"
-                roleTable = component "Role Table" "Stores role definitions for relationship endpoints in metamodel connections" "PostgreSQL Table"
-                portTable = component "Port Table" "Defines connection points for classes and scenes in metamodel structures" "PostgreSQL Table"
-                sceneTypeTable = component "Scene Type Table" "Stores metamodel scene type definitions for organizing and structuring models" "PostgreSQL Table"
-                procedureTable = component "Procedure Table" "Stores algorithmic procedure definitions that can be associated with scene types" "PostgreSQL Table"
-                fileTable = component "File Table" "Stores binary file data with MIME type information linked to metamodel objects" "PostgreSQL Table"
+                coreMetamodelTables = container "Core Metamodel Tables" "Contains base tables for metamodel definitions" "PostgreSQL" {
+                    // Core Metamodel Tables
+                    metaobjectTable = component "Metaobject Table" "Base table for all metamodel elements with common properties like uuid, name, description, timestamps, and spatial coordinates" "PostgreSQL Table"
+                    classTable = component "Class Table" "Stores metamodel class definitions with properties for reusability and abstraction" "PostgreSQL Table"
+                    relationclassTable = component "Relationclass Table" "Defines metamodel relationships between classes with role-based connections and optional bendpoint classes" "PostgreSQL Table"
+                    attributeTable = component "Attribute Table" "Stores metamodel attribute definitions including multi-valued flags, default values, constraints, and type references" "PostgreSQL Table"
+                    attributeTypeTable = component "Attribute Type Table" "Defines data types for attributes with predefined types and regex validation patterns" "PostgreSQL Table"
+                    roleTable = component "Role Table" "Stores role definitions for relationship endpoints in metamodel connections" "PostgreSQL Table"
+                    portTable = component "Port Table" "Defines connection points for classes and scenes in metamodel structures" "PostgreSQL Table"
+                    sceneTypeTable = component "Scene Type Table" "Stores metamodel scene type definitions for organizing and structuring models" "PostgreSQL Table"
+                    procedureTable = component "Procedure Table" "Stores algorithmic procedure definitions that can be associated with scene types" "PostgreSQL Table"
+                    fileTable = component "File Table" "Stores binary file data with MIME type information linked to metamodel objects" "PostgreSQL Table"
+                }
+
                 
-                // Instance/Model Tables
-                instanceObjectTable = component "Instance Object Table" "Base table for all model instances with spatial coordinates, geometry, visibility, and custom variables" "PostgreSQL Table"
-                classInstanceTable = component "Class Instance Table" "Stores model instances of metamodel classes with references to aggregator, decomposable, and relation class types" "PostgreSQL Table"
-                relationclassInstanceTable = component "Relationclass Instance Table" "Stores model instances of metamodel relationships with role instance connections and line point data" "PostgreSQL Table"
-                attributeInstanceTable = component "Attribute Instance Table" "Stores model attribute values with propagation flags and references to assigned instances" "PostgreSQL Table"
-                roleInstanceTable = component "Role Instance Table" "Stores model role assignments with references to connected class, port, scene, attribute, and relationclass instances" "PostgreSQL Table"
-                portInstanceTable = component "Port Instance Table" "Stores model port instances connected to specific class or scene instances" "PostgreSQL Table"
-                sceneInstanceTable = component "Scene Instance Table" "Stores model scene instances conforming to metamodel scene type definitions" "PostgreSQL Table"
+                instanceModelTables = container "Instance/Model Tables" "Contains tables for model instances and their relationships" "PostgreSQL" {
+                    // Instance/Model Tables
+                    instanceObjectTable = component "Instance Object Table" "Base table for all model instances with spatial coordinates, geometry, visibility, and custom variables" "PostgreSQL Table"
+                    classInstanceTable = component "Class Instance Table" "Stores model instances of metamodel classes with references to aggregator, decomposable, and relation class types" "PostgreSQL Table"
+                    relationclassInstanceTable = component "Relationclass Instance Table" "Stores model instances of metamodel relationships with role instance connections and line point data" "PostgreSQL Table"
+                    attributeInstanceTable = component "Attribute Instance Table" "Stores model attribute values with propagation flags and references to assigned instances" "PostgreSQL Table"
+                    roleInstanceTable = component "Role Instance Table" "Stores model role assignments with references to connected class, port, scene, attribute, and relationclass instances" "PostgreSQL Table"
+                    portInstanceTable = component "Port Instance Table" "Stores model port instances connected to specific class or scene instances" "PostgreSQL Table"
+                    sceneInstanceTable = component "Scene Instance Table" "Stores model scene instances conforming to metamodel scene type definitions" "PostgreSQL Table"
+                }
+
+                associationReferenceTables = container "Association/Reference Tables" "Contains tables for managing associations and references between metamodel elements" "PostgreSQL" {
+                    // Association/Reference Tables
+                    classHasAttributesTable = component "Class Has Attributes Table" "Associates metamodel classes with their attributes, including UI sequence and component information" "PostgreSQL Table"
+                    portHasAttributesTable = component "Port Has Attributes Table" "Associates metamodel ports with their attributes, including UI sequence and component information" "PostgreSQL Table"
+                    sceneHasAttributesTable = component "Scene Has Attributes Table" "Associates metamodel scene types with their attributes, including UI sequence and component information" "PostgreSQL Table"
+                    containsClassesTable = component "Contains Classes Table" "Defines which metamodel classes can be contained within specific scene types" "PostgreSQL Table"
+                    isSubclassOfTable = component "Is Subclass Of Table" "Establishes inheritance relationships between metamodel classes" "PostgreSQL Table"
+                    isSubSceneTable = component "Is Sub Scene Table" "Establishes hierarchical relationships between metamodel scene types" "PostgreSQL Table"
+                    roleClassReferenceTable = component "Role Class Reference Table" "Associates metamodel roles with classes including cardinality constraints (min/max)" "PostgreSQL Table"
+                    rolePortReferenceTable = component "Role Port Reference Table" "Associates metamodel roles with ports including cardinality constraints" "PostgreSQL Table"
+                    roleSceneReferenceTable = component "Role Scene Reference Table" "Associates metamodel roles with scene types including cardinality constraints" "PostgreSQL Table"
+                    roleRelationclassReferenceTable = component "Role Relationclass Reference Table" "Associates metamodel roles with relation classes including cardinality constraints" "PostgreSQL Table"
+                    hasReferenceRoleTable = component "Has Reference Role Table" "Links metamodel attribute types to roles for reference-type attributes" "PostgreSQL Table"
+                    hasTableAttributeTable = component "Has Table Attribute Table" "Defines table-structured attributes with column sequences and attribute type references" "PostgreSQL Table"
+                    hasAlgorithmTable = component "Has Algorithm Table" "Associates metamodel scene types with algorithmic procedures for automated processing" "PostgreSQL Table"
+                }
                 
-                // Association/Reference Tables
-                classHasAttributesTable = component "Class Has Attributes Table" "Associates metamodel classes with their attributes, including UI sequence and component information" "PostgreSQL Table"
-                portHasAttributesTable = component "Port Has Attributes Table" "Associates metamodel ports with their attributes, including UI sequence and component information" "PostgreSQL Table"
-                sceneHasAttributesTable = component "Scene Has Attributes Table" "Associates metamodel scene types with their attributes, including UI sequence and component information" "PostgreSQL Table"
-                containsClassesTable = component "Contains Classes Table" "Defines which metamodel classes can be contained within specific scene types" "PostgreSQL Table"
-                isSubclassOfTable = component "Is Subclass Of Table" "Establishes inheritance relationships between metamodel classes" "PostgreSQL Table"
-                isSubSceneTable = component "Is Sub Scene Table" "Establishes hierarchical relationships between metamodel scene types" "PostgreSQL Table"
-                roleClassReferenceTable = component "Role Class Reference Table" "Associates metamodel roles with classes including cardinality constraints (min/max)" "PostgreSQL Table"
-                rolePortReferenceTable = component "Role Port Reference Table" "Associates metamodel roles with ports including cardinality constraints" "PostgreSQL Table"
-                roleSceneReferenceTable = component "Role Scene Reference Table" "Associates metamodel roles with scene types including cardinality constraints" "PostgreSQL Table"
-                roleRelationclassReferenceTable = component "Role Relationclass Reference Table" "Associates metamodel roles with relation classes including cardinality constraints" "PostgreSQL Table"
-                hasReferenceRoleTable = component "Has Reference Role Table" "Links metamodel attribute types to roles for reference-type attributes" "PostgreSQL Table"
-                hasTableAttributeTable = component "Has Table Attribute Table" "Defines table-structured attributes with column sequences and attribute type references" "PostgreSQL Table"
-                hasAlgorithmTable = component "Has Algorithm Table" "Associates metamodel scene types with algorithmic procedures for automated processing" "PostgreSQL Table"
+                aggregationDecompositionTables = container "Aggregation and Decomposition Tables" "Contains tables for managing aggregation and decomposition relationships between metamodel classes and scenes" "PostgreSQL" {
+                    // Aggregation and Decomposition Tables
+                    aggregatorClassTable = component "Aggregator Class Table" "Marks metamodel classes as aggregators that can contain other classes or relation classes" "PostgreSQL Table"
+                    decomposableClassTable = component "Decomposable Class Table" "Marks metamodel classes as decomposable into scenes, classes, or aggregator classes" "PostgreSQL Table"
+                    containsAggregClassesTable = component "Contains Aggreg Classes Table" "Defines which classes can be contained within aggregator classes" "PostgreSQL Table"
+                    containsAggregRelationclassesTable = component "Contains Aggreg Relationclasses Table" "Defines which relation classes can be contained within aggregator classes" "PostgreSQL Table"
+                    decomposableIntoClassesTable = component "Decomposable Into Classes Table" "Defines target classes for decomposable class transformation" "PostgreSQL Table"
+                    decomposableIntoAggregatorClassesTable = component "Decomposable Into Aggregator Classes Table" "Defines target aggregator classes for decomposable class transformation" "PostgreSQL Table"
+                    decomposableIntoScenesTable = component "Decomposable Into Scenes Table" "Defines target scene types for decomposable class transformation" "PostgreSQL Table"
+                    classAggregationReferenceTable = component "Class Aggregation Reference Table" "Links model class instances in aggregation relationships" "PostgreSQL Table"
+                    classDecompositionReferenceTable = component "Class Decomposition Reference Table" "Links model class instances in decomposition relationships" "PostgreSQL Table"
+                    sceneDecompositionReferenceTable = component "Scene Decomposition Reference Table" "Links model class instances to their decomposed scene instances" "PostgreSQL Table"
+                    assignedToSceneTable = component "Assigned To Scene Table" "Associates model class instances with scene instances for organization" "PostgreSQL Table"
+                }
                 
-                // Aggregation and Decomposition Tables
-                aggregatorClassTable = component "Aggregator Class Table" "Marks metamodel classes as aggregators that can contain other classes or relation classes" "PostgreSQL Table"
-                decomposableClassTable = component "Decomposable Class Table" "Marks metamodel classes as decomposable into scenes, classes, or aggregator classes" "PostgreSQL Table"
-                containsAggregClassesTable = component "Contains Aggreg Classes Table" "Defines which classes can be contained within aggregator classes" "PostgreSQL Table"
-                containsAggregRelationclassesTable = component "Contains Aggreg Relationclasses Table" "Defines which relation classes can be contained within aggregator classes" "PostgreSQL Table"
-                decomposableIntoClassesTable = component "Decomposable Into Classes Table" "Defines target classes for decomposable class transformation" "PostgreSQL Table"
-                decomposableIntoAggregatorClassesTable = component "Decomposable Into Aggregator Classes Table" "Defines target aggregator classes for decomposable class transformation" "PostgreSQL Table"
-                decomposableIntoScenesTable = component "Decomposable Into Scenes Table" "Defines target scene types for decomposable class transformation" "PostgreSQL Table"
-                classAggregationReferenceTable = component "Class Aggregation Reference Table" "Links model class instances in aggregation relationships" "PostgreSQL Table"
-                classDecompositionReferenceTable = component "Class Decomposition Reference Table" "Links model class instances in decomposition relationships" "PostgreSQL Table"
-                sceneDecompositionReferenceTable = component "Scene Decomposition Reference Table" "Links model class instances to their decomposed scene instances" "PostgreSQL Table"
-                assignedToSceneTable = component "Assigned To Scene Table" "Associates model class instances with scene instances for organization" "PostgreSQL Table"
+                attributePropagationTables = container "Attribute Propagation Tables" "Contains tables for managing attribute propagation across connections" "PostgreSQL" {
+                    attributePropagatingRelationclassTable = component "Attribute Propagating Relationclass Table" "Marks relation classes as capable of propagating attributes across connections" "PostgreSQL Table"
+                    selectedPropagationAttributesTable = component "Selected Propagation Attributes Table" "Configures which attributes are propagated by relation classes with durability and mutability settings" "PostgreSQL Table"
+                    propagationAttributeTable = component "Propagation Attribute Table" "Stores propagation-specific properties for attribute instances including durability and mutability values" "PostgreSQL Table"
+                }
+
+                userManagementTables = container "User Management Tables" "Contains tables for managing user accounts, groups, and permissions" "PostgreSQL" {
+                    usersTable = component "Users Table" "Stores user account information including usernames, hashed passwords, salts, and authentication tokens" "PostgreSQL Table"
+                    userGroupTable = component "User Group Table" "Defines user groups for organizing users and managing permissions" "PostgreSQL Table"
+                    hasUserUserGroupTable = component "Has User User Group Table" "Associates users with user groups for membership management" "PostgreSQL Table"
+                }
+
+                permissionRightsTables = container "Permission/Rights Tables" "Contains tables for managing user permissions and access rights" "PostgreSQL" {
+                    hasRightTable = component "Has Right Table" "Central permission table granting various access rights to user groups for metamodel objects and model instances" "PostgreSQL Table"
+                    hasReadRightTable = component "Has Read Right Table" "Legacy table for read permissions (superseded by has_right table)" "PostgreSQL Table"
+                    hasWriteRightTable = component "Has Write Right Table" "Legacy table for write permissions (superseded by has_right table)" "PostgreSQL Table"
+                    hasDeleteRightTable = component "Has Delete Right Table" "Legacy table for delete permissions (superseded by has_right table)" "PostgreSQL Table"
+                }
                 
-                // Attribute Propagation Tables
-                attributePropagatingRelationclassTable = component "Attribute Propagating Relationclass Table" "Marks relation classes as capable of propagating attributes across connections" "PostgreSQL Table"
-                selectedPropagationAttributesTable = component "Selected Propagation Attributes Table" "Configures which attributes are propagated by relation classes with durability and mutability settings" "PostgreSQL Table"
-                propagationAttributeTable = component "Propagation Attribute Table" "Stores propagation-specific properties for attribute instances including durability and mutability values" "PostgreSQL Table"
+                constraintValidationTables = container "Constraint and Validation Tables" "Contains tables for managing custom constraints and validation rules" "PostgreSQL" {
+                    // Constraint and Validation Tables
+                    genericConstraintTable = component "Generic Constraint Table" "Stores custom constraints and validation rules for metamodel objects" "PostgreSQL Table"
+                    sceneGroupTable = component "Scene Group Table" "Organizes scene types into hierarchical groups with optional parent-child relationships" "PostgreSQL Table"
+                }
                 
-                // User Management Tables
-                usersTable = component "Users Table" "Stores user account information including usernames, hashed passwords, salts, and authentication tokens" "PostgreSQL Table"
-                userGroupTable = component "User Group Table" "Defines user groups for organizing users and managing permissions" "PostgreSQL Table"
-                hasUserUserGroupTable = component "Has User User Group Table" "Associates users with user groups for membership management" "PostgreSQL Table"
-                
-                // Permission/Rights Tables
-                hasRightTable = component "Has Right Table" "Central permission table granting various access rights to user groups for metamodel objects and model instances" "PostgreSQL Table"
-                hasReadRightTable = component "Has Read Right Table" "Legacy table for read permissions (superseded by has_right table)" "PostgreSQL Table"
-                hasWriteRightTable = component "Has Write Right Table" "Legacy table for write permissions (superseded by has_right table)" "PostgreSQL Table"
-                hasDeleteRightTable = component "Has Delete Right Table" "Legacy table for delete permissions (superseded by has_right table)" "PostgreSQL Table"
-                
-                // Constraint and Validation Tables
-                genericConstraintTable = component "Generic Constraint Table" "Stores custom constraints and validation rules for metamodel objects" "PostgreSQL Table"
-                sceneGroupTable = component "Scene Group Table" "Organizes scene types into hierarchical groups with optional parent-child relationships" "PostgreSQL Table"
                 
                 // Logging Tables
-                tHistoryTable = component "T History Table" "Audit log table tracking all create, update, and delete operations with transaction information and affected UUIDs" "PostgreSQL Table"
+                tHistoryTable = container "T History Table" "Audit log table tracking all create, update, and delete operations with transaction information and affected UUIDs" "PostgreSQL Table"
                 
-                // Functions and Triggers
-                changeTriggerFunction = component "Change Trigger Function" "PL/pgSQL function that logs all data changes to the history table for audit purposes" "PostgreSQL Function"
-                deleteInstanceParentFunction = component "Delete Instance Parent Function" "PL/pgSQL function that cascades deletion of parent instance objects when child instances are removed" "PostgreSQL Function"
-                deleteMetaobjectByUuidFunction = component "Delete Metaobject By UUID Function" "PL/pgSQL function that securely deletes metamodel objects with permission checking and transaction logging" "PostgreSQL Function"
+                funcctionsAndTriggers = container "Functions and Triggers" "Contains PL/pgSQL functions and triggers for auditing and cascading operations" "PostgreSQL" {
+                    // Functions and Triggers
+                    changeTriggerFunction = component "Change Trigger Function" "PL/pgSQL function that logs all data changes to the history table for audit purposes" "PostgreSQL Function"
+                    deleteInstanceParentFunction = component "Delete Instance Parent Function" "PL/pgSQL function that cascades deletion of parent instance objects when child instances are removed" "PostgreSQL Function"
+                    deleteMetaobjectByUuidFunction = component "Delete Metaobject By UUID Function" "PL/pgSQL function that securely deletes metamodel objects with permission checking and transaction logging" "PostgreSQL Function"
+                }
+                
                 
                 // Schema Relationships
                 publicSchema -> metaobjectTable "Contains core metamodel object definitions"
@@ -522,12 +576,12 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
                 decomposableClassTable -> decomposableIntoScenesTable "Defines decomposition target scenes"
             }
 
-            GlobalDS = container "MMAR Global Data Structure Library" "Shared data model library (domain classes for models/metamodels)" "TypeScript" "GlobalDS" {
+            GlobalDS = softwareSystem "MMAR Global Data Structure Library" "Shared data model library (domain classes for models/metamodels)" "GlobalDS" {
                 // Main component
-                dsIndex = component "Data Structure Index" "Main entry point exposing all data structures" "TypeScript"
+                dsIndex = container "Data Structure Index" "Main entry point exposing all data structures" "TypeScript"
                 
                 // Instance model components
-                instanceModels = group "Instance Models" {
+                instanceModels = container "Instance Models" {
                     instanceObjects = component "Instance Objects" "Data structures for model objects" "TypeScript"
                     instanceClasses = component "Instance Classes" "Data structures for model class instances" "TypeScript"
                     instanceRelationClasses = component "Instance Relation Classes" "Data structures for model relation instances" "TypeScript"
@@ -539,7 +593,7 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
                 }
                 
                 // Meta model components
-                metaModels = group "Meta Models" {
+                metaModels = container "Meta Models" {
                     metamodelCore = component "Metamodel Core" "Core metamodel structures and base classes" "TypeScript"
                     metamodelClasses = component "Metamodel Classes" "Data structures for metamodel class definitions" "TypeScript"
                     metamodelRelationClasses = component "Metamodel Relation Classes" "Data structures for metamodel relation definitions" "TypeScript"
@@ -655,7 +709,7 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
             usersConnection -> userGroupTable "Performs CRUD operations on user groups"
             usersConnection -> hasUserUserGroupTable "Manages user-group associations"
             usersConnection -> hasRightTable "Manages permission assignments"
-        }
+        
 
 
         // Software System Relationships
@@ -665,91 +719,303 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
         
     }
     views {
-        systemContext MMAR "SystemContextDiagram" {
-            include * 
+        
+        systemContext APIServer "SystemContextDiagram" {
+            include * Creator End_User
             autoLayout lr
-            title "System Context: MMAR Metamodeling vs. Modeling Systems"
-            description "Creators and End Users interact with two facets of the MMAR platform. Creators design metamodels (and their visual representations) using the Metamodeling System, while End Users create models using the Modeling System. Both systems rely on a common MMAR Server and Database backend."
-        }
-        container MMAR "ContainerDiagram" {
-            include *
-            title "Container Diagram: MMAR Clients, Backend and Database"
+            title "MMAR Clients, Backend and Database"
             description "The MMAR platform consists of three main clients (Modeling, Metamodeling, and VizRep) that connect to a common backend server. The server provides REST APIs for metamodel and model operations, while the database stores all relevant data."
         }
 
-        component MetamodelingClient "MetamodelingClientComponents" {
+        container MetamodelingClient "MetamodelingClient" {
             include *
             autoLayout lr
-            title "Component Diagram: MMAR Metamodeling Client"
+            title "MMAR Metamodeling Client"
             description "The MMAR Metamodeling Client consists of various components for managing selected objects, communicating with the backend, and providing a rich user interface for metamodel design."
         }
         
-        component APIServer "APIServerComponents" {
+        container APIServer "APIServer" {
             include *
             autoLayout lr
-            title "Component Diagram: MMAR API Server"
+            title "MMAR API Server"
             description "The MMAR API Server consists of controllers that handle HTTP requests, connection classes for database operations, and shared services. The architecture follows a layered design with controllers, data access, and service layers."
         }
         
-        component ModelingClient "ModelingClientComponents" {
+        container ModelingClient "ModelingClient" {
             include *
             autoLayout lr
-            title "Component Diagram: MMAR Modeling Client"
+            title "MMAR Modeling Client"
             description "The MMAR Modeling Client consists of services for model manipulation, UI components for visualization and interaction, and dialog components for specific operations."
         }
         
-        component GlobalDS "GlobalDSComponents" {
+        container GlobalDS "GlobalDS" {
             include *
             autoLayout lr
-            title "Component Diagram: MMAR Global Data Structure"
+            title "MMAR Global Data Structure"
             description "The MMAR Global Data Structure library defines domain models for both metamodels and model instances. It provides type definitions that are used consistently across all MMAR components."
         }
 
-        component VizRepClient "VizRepClientComponents" {
+        container VizRepClient "VizRepClient" {
             include *
             autoLayout lr
-            title "Component Diagram: MMAR VizRep Client"
+            title "MMAR VizRep Client"
             description "The MMAR VizRep Client provides components for designing visual representations of metamodel elements, including 3D visualization, interaction handling, and state management."
         }
         
-        component Database "DatabaseComponents" {
+        container Database "Database" {
             include *
             autoLayout lr
             title "Component Diagram: MMAR Database"
             description "The MMAR Database consists of PostgreSQL schemas, tables, and functions that store metamodel definitions, model instances, user data, and audit logs. The design supports complex metamodeling concepts including inheritance, aggregation, decomposition, and attribute propagation."
         }
 
+        // Component diagrams for all containers with components
+        
+        // ModelingClient component diagrams
+        component mCoreServices "mCoreServices_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Modeling Client - Core Services Components"
+            description "Core services components for the MMAR Modeling Client including helper services, selected object management, and backend communication."
+        }
+        
+        component mUIComponents "mUIComponents_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Modeling Client - UI Components"
+            description "UI components for the MMAR Modeling Client including navigation, canvas, and interactive elements."
+        }
+        
+        component mDialogComponents "mDialogComponents_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Modeling Client - Dialog Components"
+            description "Dialog components for the MMAR Modeling Client including attribute windows and helper dialogs."
+        }
+
+        // MetamodelingClient component diagrams
+        component mmCoreServices "mmCoreServices_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Metamodeling Client - Core Services Components"
+            description "Core services components for the MMAR Metamodeling Client including file handling and object management."
+        }
+        
+        component mmUIComponents "mmUIComponents_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Metamodeling Client - UI Components"
+            description "UI components for the MMAR Metamodeling Client including tabs, dialogs, and interactive elements."
+        }
+
+        // VizRepClient component diagrams
+        component vCoreServices "vCoreServices_Components" {
+            include *
+            autoLayout lr
+            title "MMAR VizRep Client - Core Services Components"
+            description "Core services components for the MMAR VizRep Client including utility services and API communication."
+        }
+        
+        component stateManagement "stateManagement_Components" {
+            include *
+            autoLayout lr
+            title "MMAR VizRep Client - State Management Components"
+            description "State management components for the MMAR VizRep Client including global state and object selection services."
+        }
+        
+        component 3DVisualizationServices "3DVisualizationServices_Components" {
+            include *
+            autoLayout lr
+            title "MMAR VizRep Client - 3D Visualization Services Components"
+            description "3D visualization services components for the MMAR VizRep Client including graphics context and animation services."
+        }
+        
+        component interactionHandlers "interactionHandlers_Components" {
+            include *
+            autoLayout lr
+            title "MMAR VizRep Client - Interaction Handlers Components"
+            description "Interaction handlers components for the MMAR VizRep Client including mouse, keyboard, and object interaction services."
+        }
+        
+        component vUIComponents "vUIComponents_Components" {
+            include *
+            autoLayout lr
+            title "MMAR VizRep Client - UI Components"
+            description "UI components for the MMAR VizRep Client including navigation, canvas, and interactive elements."
+        }
+        
+        component vDialogComponents "vDialogComponents_Components" {
+            include *
+            autoLayout lr
+            title "MMAR VizRep Client - Dialog Components"
+            description "Dialog components for the MMAR VizRep Client including attribute windows and management dialogs."
+        }
+        
+        component initializers "initializers_Components" {
+            include *
+            autoLayout lr
+            title "MMAR VizRep Client - Initializers Components"
+            description "Initialization components for the MMAR VizRep Client including application and scene setup."
+        }
+
+        // APIServer component diagrams
+        component controllerLayer "controllerLayer_Components" {
+            include *
+            autoLayout lr
+            title "MMAR API Server - Controller Layer Components"
+            description "Controller layer components for the MMAR API Server including REST API controllers for metamodel operations."
+        }
+        
+        component dataAccessLayer "dataAccessLayer_Components" {
+            include *
+            autoLayout lr
+            title "MMAR API Server - Data Access Layer Components"
+            description "Data access layer components for the MMAR API Server including database connection services for CRUD operations."
+        }
+        
+        component serviceLayer "serviceLayer_Components" {
+            include *
+            autoLayout lr
+            title "MMAR API Server - Service Layer Components"
+            description "Service layer components for the MMAR API Server including business logic and utility services."
+        }
+        
+        component middlewareLayer "middlewareLayer_Components" {
+            include *
+            autoLayout lr
+            title "MMAR API Server - Middleware Layer Components"
+            description "Middleware layer components for the MMAR API Server including authentication and error handling."
+        }
+
+        // Database component diagrams
+        component schemaLayer "schemaLayer_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Database - Schema Layer Components"
+            description "Schema layer components for the MMAR Database including public and logging schemas."
+        }
+        
+        component coreMetamodelTables "coreMetamodelTables_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Database - Core Metamodel Tables Components"
+            description "Core metamodel tables components for the MMAR Database including base metamodel definitions."
+        }
+        
+        component instanceModelTables "instanceModelTables_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Database - Instance/Model Tables Components"
+            description "Instance/model tables components for the MMAR Database including model instances and relationships."
+        }
+        
+        component associationReferenceTables "associationReferenceTables_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Database - Association/Reference Tables Components"
+            description "Association/reference tables components for the MMAR Database including element associations and references."
+        }
+        
+        component aggregationDecompositionTables "aggregationDecompositionTables_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Database - Aggregation and Decomposition Tables Components"
+            description "Aggregation and decomposition tables components for the MMAR Database including class and scene relationships."
+        }
+        
+        component attributePropagationTables "attributePropagationTables_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Database - Attribute Propagation Tables Components"
+            description "Attribute propagation tables components for the MMAR Database including propagation rules and configurations."
+        }
+        
+        component userManagementTables "userManagementTables_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Database - User Management Tables Components"
+            description "User management tables components for the MMAR Database including user accounts and groups."
+        }
+        
+        component permissionRightsTables "permissionRightsTables_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Database - Permission/Rights Tables Components"
+            description "Permission/rights tables components for the MMAR Database including access control and permissions."
+        }
+        
+        component constraintValidationTables "constraintValidationTables_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Database - Constraint and Validation Tables Components"
+            description "Constraint and validation tables components for the MMAR Database including custom constraints and validation rules."
+        }
+        
+        component funcctionsAndTriggers "funcctionsAndTriggers_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Database - Functions and Triggers Components"
+            description "Functions and triggers components for the MMAR Database including PL/pgSQL functions and audit triggers."
+        }
+        
+        component tHistoryTable "tHistoryTable_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Database - T History Table"
+            description "Audit log table component for the MMAR Database tracking all create, update, and delete operations with transaction information."
+        }
+
+        // GlobalDS component diagrams
+        component dsIndex "dsIndex_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Global Data Structure - Index Components"
+            description "Data structure index components for the MMAR Global Data Structure library providing entry points to all data structures."
+        }
+        
+        component instanceModels "instanceModels_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Global Data Structure - Instance Models Components"
+            description "Instance models components for the MMAR Global Data Structure library including model data structures."
+        }
+        
+        component metaModels "metaModels_Components" {
+            include *
+            autoLayout lr
+            title "MMAR Global Data Structure - Meta Models Components"
+            description "Meta models components for the MMAR Global Data Structure library including metamodel data structures."
+        }
+        
+
         theme default
         
         styles {
             element "Person" {
                 shape Person
-            }
-            element "Software System" {
-                background #1168bd
+                background #9c2a1b
                 color #ffffff
-            }
-            element "Container" {
-                background #438dd5
-                color #ffffff
+                stroke #041a22
             }
 
             element "Database" {
                 shape Cylinder
-                background #85bbf0
-                color #000000
+                background #63d440
+                color #ffffff
             }
 
             element "API_Server" {
                 shape Pipe
-                background #85bbf0
-                color #000000
+                background #5bc0de
+                color #ffffff
+                stroke #041a22
             }
 
             element "GlobalDS" {
                 shape Component
-                background #85bbf0
-                color #000000
+                background #5232c5
+                stroke #041a22
+                color #ffffff
             }
 
             element "MetamodelingClient" {
@@ -770,9 +1036,14 @@ workspace "MMAR Architecture" "C4 model for MMAR Platform" {
                 color #ffffff
             }
 
-            element "Element" {
-                color #0773af
-                stroke #0773af
+            element "Container" {
+                background #438dd5
+                color #ffffff
+            }
+
+            element "Component" {
+                color #ffffff
+                background #0773af
                 strokeWidth 7
                 shape roundedbox
             }
